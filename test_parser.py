@@ -3,9 +3,9 @@ from app.parser_excel import parse_excel_files, save_formulas_to_txt
 
 # Укажи свои пути к файлам
 file_paths = [
-    r"data/input/Расчет реактансов по сетевым районам 2016.xls",
-    r"data/input/ЭКСПЕРТ.xls",
-    r"data/input/ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls"
+    r"data/input/Расчет реактансов по сетевым районам 2016.xlsx",
+    r"data/input/ЭКСПЕРТ.xlsx",
+    r"data/input/ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xlsx"
 ]
 
 # Парсим формулы

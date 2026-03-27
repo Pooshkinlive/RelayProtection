@@ -1,5 +1,10 @@
+# run.py
 import uvicorn
-from app.main import app
+import os
 
 if __name__ == "__main__":
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    # Создаем директории если их нет
+    os.makedirs("data/input", exist_ok=True)
+    os.makedirs("data/output", exist_ok=True)
+    
+    uvicorn.run("app.main:app", host="127.0.0.1", port=8000, reload=True)
