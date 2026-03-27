@@ -1,0 +1,63 @@
+Sub ExportWorkbookLogic()
+    Dim wb1 As Workbook, wb2 As Workbook, wb3 As Workbook
+    Dim filePath As String
+    Dim fNum As Integer
+    ' === УКАЖИТЕ СВОИ ПУТИ К ФАЙЛАМ === '
+    Set wb1 = Workbooks.Open("E:\AI Projects\RelayProtection\rza_calculator\data\Расчет реактансов по сетевым районам 2016.xls")
+    Set wb2 = Workbooks.Open("E:\AI Projects\RelayProtection\rza_calculator\data\ЭКСПЕРТ.xls")
+    Set wb3 = Workbooks.Open("E:\AI Projects\RelayProtection\rza_calculator\data\ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls")
+filePath = Environ("USERPROFILE") & "\Desktop\Full_System_Logic.txt"
+    fNum = FreeFile
+    Open filePath For Output As #fNum
+
+    ProcessWorkbook wb1, fNum
+    ProcessWorkbook wb2, fNum
+    ProcessWorkbook wb3, fNum
+
+    Close #fNum
+    MsgBox "Экспорт завершен. Файл сохранен: " & filePath
+End Sub
+
+Sub ProcessWorkbook(wb As Workbook, fNum As Integer)
+    Dim ws As Worksheet
+    Dim cell As Range
+    Dim formulaCells As Range
+
+    For Each ws In wb.Worksheets
+        On Error Resume Next
+        Set formulaCells = ws.UsedRange.SpecialCells(xlCellTypeFormulas)
+        On Error GoTo 0
+
+        If Not formulaCells Is Nothing Then
+            For Each cell In formulaCells
+                Dim line As String
+                line = "[Book]: " & wb.Name & " [Sheet]: " & ws.Name & " [Cell]: " & cell.Address & _
+                       " [Value]: " & SafeValue(cell.Value) & _
+                       " [Formula]: " & cell.formula
+
+                If HasExternalLink(cell.formula) Then
+                    line = line & " [EXTERNAL LINK]"
+                End If
+
+                Print #fNum, line
+            Next cell
+        End If
+    Next ws
+End Sub
+
+Function SafeValue(val As Variant) As String
+    On Error Resume Next
+    If IsError(val) Then
+        SafeValue = "[" & CStr(val) & "]"
+    Else
+        SafeValue = CStr(val)
+    End If
+    On Error GoTo 0
+End Function
+
+Function HasExternalLink(formula As String) As Boolean
+    HasExternalLink = (InStr(formula, "[") > 0 And InStr(formula, "]") > 0) Or _
+                      (InStr(formula, ".xlsx") > 0) Or _
+                      (InStr(formula, ".xls") > 0)
+End Function
+

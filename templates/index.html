@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RZA Calculator</title>
+</head>
+<body>
+    <h1>Калькулятор уставок РЗА</h1>
+    
+    <form action="/upload/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".xlsx,.xls">
+        <input type="submit" value="Загрузить Excel файл">
+    </form>
+    
+    <button onclick="calculate()">Рассчитать уставки</button>
+    <button onclick="exportResults()">Экспортировать результаты</button>
+    
+    <div id="results"></div>
+    
+    <script>
+        async function calculate() {
+            const response = await fetch('/calculate/');
+            const result = await response.json();
+            document.getElementById('results').innerHTML = 
+                '<p>Расчеты выполнены: ' + result.status + '</p>';
+        }
+        
+        async function exportResults() {
+            const response = await fetch('/export/');
+            // Обработка экспорта
+        }
+    </script>
+</body>
+</html>
