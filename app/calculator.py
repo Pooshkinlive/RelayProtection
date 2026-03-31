@@ -1,37 +1,51 @@
-# app/calculator.py
-from app.parser_excel import parse_excel_files
-import pandas as pd
-import numpy as np
-from typing import List, Dict
-import logging
+from typing import Dict, Any, Optional
+from sqlalchemy.orm import Session
+from app.models import Cell, Sheet, Workbook, InputParameter
+from app.database import get_db
 
-class RZACalculator:
-    def __init__(self, db_path: str = "rza_settings.db"):
-        self.db_path = db_path
-        self.parsed_formulas = []
-    
-    def process_excel_files(self, file_paths: List[str]) -> List[Dict]:
-        """Обрабатывает Excel файлы и сохраняет формулы"""
-        self.parsed_formulas = parse_excel_files(file_paths)
-        return self.parsed_formulas
-    
-    def find_rza_formulas(self) -> List[Dict]:
-        """Находит формулы, относящиеся к расчетам РЗА"""
-        rza_formulas = []
-        keywords = ['ток', 'уставк', 'время', 'срабатыван', 'защит']
-        
-        for formula_info in self.parsed_formulas:
-            formula_lower = formula_info['formula'].lower()
-            # Проверяем на ключевые слова или типичные формулы РЗА
-            if any(keyword in formula_lower for keyword in keywords) or \
-               any(op in formula_info['formula'] for op in ['*', '/', '+', '-']):
-                rza_formulas.append(formula_info)
-        
-        return rza_formulas
-    
-    def calculate_overcurrent_protection(self, current_max: float, 
-                                       k_n: float = 1.2, 
-                                       k_r: float = 1.1, 
-                                       k_z: float = 0.9) -> float:
-        """Расчет уставки тока срабатывания МТЗ"""
-        return (k_n * k_r * current_max) / k_z
+def get_cell_value(db: Session, sheet_name: str, cell_addr: str, workbook_filename: str = None) -> Optional[float]:
+    """Получить числовое значение ячейки по имени листа и адресу"""
+    query = db.query(Cell).join(Sheet).join(Workbook)
+    if workbook_filename:
+        query = query.filter(Workbook.filename == workbook_filename)
+    cell = query.filter(Sheet.sheet_name == sheet_name, Cell.address == cell_addr).first()
+    return cell.value_numeric if cell and cell.value_numeric is not None else None
+
+def calculate_mto(db: Session, inputs: Dict[str, float]) -> Dict[str, Any]:
+    """Расчёт МТО на основе данных из Excel"""
+    # Пример: K24 = '1'!B44 * L20
+    i_relay = get_cell_value(db, "1", "B44")  # ток срабатывания реле
+    k_otst = get_cell_value(db, "Расчет", "L20")  # коэффициент отстройки
+
+    if i_relay and k_otst:
+        setting_calc = i_relay * k_otst
+    else:
+        setting_calc = inputs.get("SET_MTO_RAW", 1000.0)
+
+    # I_kz_min за ТР (K35)
+    i_kz_min = get_cell_value(db, "Расчет", "K35")
+    sensitivity = i_kz_min / setting_calc if i_kz_min and setting_calc else 0.0
+
+    return {
+        "setting_raw": inputs.get("SET_MTO_RAW"),
+        "setting_calc": setting_calc,
+        "i_kz_min": i_kz_min,
+        "sensitivity": round(sensitivity, 3),  # ✅ Запятая добавлена
+        "ok": sensitivity >= 1.2
+    }
+
+def calculate_mtz(db: Session, inputs: Dict[str, float]) -> Dict[str, Any]:
+    i_relay = get_cell_value(db, "1", "J10")
+    k_n = get_cell_value(db, "Расчет", "L19")
+    setting_calc = i_relay * k_n if i_relay and k_n else inputs.get("SET_MTZ_RAW", 400.0)
+
+    i_kz_min = get_cell_value(db, "Расчет", "K35")
+    sensitivity = i_kz_min / setting_calc if i_kz_min and setting_calc else 0.0
+
+    return {
+        "setting_raw": inputs.get("SET_MTZ_RAW"),
+        "setting_calc": setting_calc,
+        "i_kz_min": i_kz_min,
+        "sensitivity": round(sensitivity, 3),  # ✅ Исправлено и здесь тоже
+        "ok": sensitivity >= 1.5
+    }

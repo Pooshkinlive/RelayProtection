@@ -13009,70 +13009,70 @@
 [Book]: ЭКСПЕРТ.xls [Sheet]: Автоматы [Cell]: $E$12 [Value]: --- [Formula]: ="---"
 [Book]: ЭКСПЕРТ.xls [Sheet]: Автоматы [Cell]: $F$12 [Value]: --- [Formula]: ="---"
 [Book]: ЭКСПЕРТ.xls [Sheet]: Автоматы [Cell]: $G$12 [Value]: --- [Formula]: ="---"
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$5 [Value]: 1,31934545943005 [Formula]: =VLOOKUP(C5,[ЭКСПЕРТ.xls]Реактансы!$A$2:$D$450,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$5 [Value]: 1,31277099630788 [Formula]: =VLOOKUP(C5,[ЭКСПЕРТ.xls]Реактансы!$A$2:$D$450,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$5 [Value]: 0,73 [Formula]: =VLOOKUP(C5,[ЭКСПЕРТ.xls]Реактансы!$A$2:$D$450,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$5 [Value]: 0,575 [Formula]: =VLOOKUP(C5,[ЭКСПЕРТ.xls]Реактансы!$A$2:$D$450,4) [EXTERNAL LINK]
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$6 [Value]: --- [Formula]: =IF(VLOOKUP(C5,[ЭКСПЕРТ.xls]Реактансы!$A$2:$K$450,10)>0,VLOOKUP(C5,[ЭКСПЕРТ.xls]Реактансы!$A$2:$K$450,10),"---") [EXTERNAL LINK]
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$6 [Value]: --- [Formula]: =IF(VLOOKUP(C5,[ЭКСПЕРТ.xls]Реактансы!$A$2:$K$450,11)>0,VLOOKUP(C5,[ЭКСПЕРТ.xls]Реактансы!$A$2:$K$450,11),"---") [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$9 [Value]: 0 [Formula]: =VLOOKUP(C9,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$9 [Value]: 0 [Formula]: =VLOOKUP(C9,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$10 [Value]: 0 [Formula]: =VLOOKUP(C10,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$10 [Value]: 0 [Formula]: =VLOOKUP(C10,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$9 [Value]: 0 [Formula]: =SUM(I4:K9)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$9 [Value]: 0,131 [Formula]: =VLOOKUP(C9,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$9 [Value]: 0,4 [Formula]: =VLOOKUP(C9,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$10 [Value]: 8,66666666666667E-02 [Formula]: =VLOOKUP(C10,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$10 [Value]: 2,66666666666667E-02 [Formula]: =VLOOKUP(C10,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$9 [Value]: 65 [Formula]: =SUM(I4:K9)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $M$9 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $J$10 [Value]: 0 [Formula]: =L9/10.38
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $J$11 [Value]: 0 [Formula]: =0.7*J10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$12 [Value]: 0 [Formula]: =VLOOKUP(C12,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$12 [Value]: 0 [Formula]: =VLOOKUP(C12,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$13 [Value]: 0 [Formula]: =VLOOKUP(C13,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$13 [Value]: 0 [Formula]: =VLOOKUP(C13,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$15 [Value]: 0 [Formula]: =VLOOKUP(C15,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$15 [Value]: 0 [Formula]: =VLOOKUP(C15,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$16 [Value]: 0 [Formula]: =VLOOKUP(C16,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$16 [Value]: 0 [Formula]: =VLOOKUP(C16,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$18 [Value]: 0 [Formula]: =VLOOKUP(C18,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$18 [Value]: 0 [Formula]: =VLOOKUP(C18,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$19 [Value]: 0 [Formula]: =VLOOKUP(C19,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$19 [Value]: 0 [Formula]: =VLOOKUP(C19,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $D$20 [Value]: 0 [Formula]: =SUM(D9:D19)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$19 [Value]: 3,5 [Formula]: =VLOOKUP(K16,[ЭКСПЕРТ.xls]Реле!$A$1:$D$10,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$20 [Value]: 1,3 [Formula]: =VLOOKUP(K16,[ЭКСПЕРТ.xls]Реле!$A$1:$D$10,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $J$10 [Value]: 6,26204238921002 [Formula]: =L9/10.38
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $J$11 [Value]: 4,38342967244701 [Formula]: =0.7*J10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$12 [Value]: 0,073 [Formula]: =VLOOKUP(C12,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$12 [Value]: 0,4 [Formula]: =VLOOKUP(C12,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$13 [Value]: 0,123333333333333 [Formula]: =VLOOKUP(C13,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$13 [Value]: 2,76666666666667E-02 [Formula]: =VLOOKUP(C13,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$15 [Value]: 0,073 [Formula]: =VLOOKUP(C15,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$15 [Value]: 0,4 [Formula]: =VLOOKUP(C15,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$16 [Value]: 0,123333333333333 [Formula]: =VLOOKUP(C16,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$16 [Value]: 2,76666666666667E-02 [Formula]: =VLOOKUP(C16,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$18 [Value]: 0,72 [Formula]: =VLOOKUP(C18,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$18 [Value]: 0,299 [Formula]: =VLOOKUP(C18,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$19 [Value]: 4,06666666666667E-02 [Formula]: =VLOOKUP(C19,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$19 [Value]: 2,46666666666667E-02 [Formula]: =VLOOKUP(C19,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $D$20 [Value]: 52 [Formula]: =SUM(D9:D19)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$19 [Value]: 3 [Formula]: =VLOOKUP(K16,[ЭКСПЕРТ.xls]Реле!$A$1:$D$10,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$20 [Value]: 1,15 [Formula]: =VLOOKUP(K16,[ЭКСПЕРТ.xls]Реле!$A$1:$D$10,3) [EXTERNAL LINK]
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$24 [Value]: --- [Formula]: =IFERROR('1'!P44*L20,"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$24 [Value]: 2376,91180395473 [Formula]: =IFERROR('1'!B44*L20,"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$25 [Value]: 0 [Formula]: =J10*L19
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$26 [Value]: 0,67 [Formula]: =VLOOKUP(D26,[ЭКСПЕРТ.xls]Трансформаторы!$A$1:$C$12,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$28 [Value]: 0 [Formula]: =VLOOKUP(C28,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$28 [Value]: 0 [Formula]: =VLOOKUP(C28,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$29 [Value]: 0 [Formula]: =VLOOKUP(C29,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$29 [Value]: 0 [Formula]: =VLOOKUP(C29,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$31 [Value]: 0 [Formula]: =VLOOKUP(C31,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$31 [Value]: 0 [Formula]: =VLOOKUP(C31,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$32 [Value]: 0 [Formula]: =VLOOKUP(C32,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$32 [Value]: 0 [Formula]: =VLOOKUP(C32,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$31 [Value]: 0 [Formula]: =J11*1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$32 [Value]: 150 [Formula]: =J12*1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$34 [Value]: 0 [Formula]: =VLOOKUP(C34,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$34 [Value]: 0 [Formula]: =VLOOKUP(C34,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$35 [Value]: 0 [Formula]: =VLOOKUP(C35,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$35 [Value]: 0 [Formula]: =VLOOKUP(C35,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$24 [Value]: 264,46612458509 [Formula]: =IFERROR('1'!B44*L20,"---")
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$25 [Value]: 18,7861271676301 [Formula]: =J10*L19
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$26 [Value]: 9,68 [Formula]: =VLOOKUP(D26,[ЭКСПЕРТ.xls]Трансформаторы!$A$1:$C$12,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$28 [Value]: 0,159 [Formula]: =VLOOKUP(C28,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$28 [Value]: 0,4 [Formula]: =VLOOKUP(C28,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$29 [Value]: 6,46666666666667E-02 [Formula]: =VLOOKUP(C29,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$29 [Value]: 0,026 [Formula]: =VLOOKUP(C29,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$31 [Value]: 0,06 [Formula]: =VLOOKUP(C31,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$31 [Value]: 0,4 [Formula]: =VLOOKUP(C31,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$32 [Value]: 6,46666666666667E-02 [Formula]: =VLOOKUP(C32,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$32 [Value]: 0,026 [Formula]: =VLOOKUP(C32,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$31 [Value]: 6,57514450867052 [Formula]: =J11*1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$32 [Value]: 33 [Formula]: =J12*1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$34 [Value]: 0,72 [Formula]: =VLOOKUP(C34,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$34 [Value]: 0,299 [Formula]: =VLOOKUP(C34,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$35 [Value]: 0,051 [Formula]: =VLOOKUP(C35,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$35 [Value]: 2,53333333333333E-02 [Formula]: =VLOOKUP(C35,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$34 [Value]: Кратности нет [Formula]: =VLOOKUP(K16,[ЭКСПЕРТ.xls]Реле!$A$1:$E$9,5) [EXTERNAL LINK]
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$34 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$35 [Value]: 1599,66971079203 [Formula]: ='1'!D30
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$35 [Value]: 74,8863755007537 [Formula]: ='1'!D30
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$35 [Value]: --- [Formula]: =IFERROR('1'!R30,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$36 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$36 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$37 [Value]: 2399,50456618805 [Formula]: ='1'!B30
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$37 [Value]: 112,32956325113 [Formula]: ='1'!B30
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$37 [Value]: --- [Formula]: =IFERROR('1'!P30,"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$37 [Value]: 0 [Formula]: =VLOOKUP(C37,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$37 [Value]: 0 [Formula]: =VLOOKUP(C37,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$38 [Value]: 0 [Formula]: =VLOOKUP(C38,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$38 [Value]: 0 [Formula]: =VLOOKUP(C38,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $D$39 [Value]: 0 [Formula]: =SUM(D28:D38)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$37 [Value]: 0,363 [Formula]: =VLOOKUP(C37,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$37 [Value]: 0,284 [Formula]: =VLOOKUP(C37,[ЭКСПЕРТ.xls]Провода!$A$1:$E$27,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$38 [Value]: 6,46666666666667E-02 [Formula]: =VLOOKUP(C38,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,3) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$38 [Value]: 0,026 [Formula]: =VLOOKUP(C38,[ЭКСПЕРТ.xls]Кабели!$A$1:$E$68,4) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $D$39 [Value]: 12,3 [Formula]: =SUM(D28:D38)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $H$44 [Value]: Т.Т. соответствует нагрузке [Formula]: =IF(K43>=J12,'1'!A69,'1'!A70)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $I$44 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $J$44 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $K$44 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $L$44 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $D$47 [Value]: 27.03.2026 [Formula]: =TODAY()
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $D$47 [Value]: 30.03.2026 [Formula]: =TODAY()
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $E$47 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $F$47 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Расчет [Cell]: $G$47 [Value]:  [Formula]: 
@@ -13088,13 +13088,13 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $C$9 [Value]: ф.6кВ №20 [Formula]: =Расчет!C3
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$11 [Value]: 300 [Formula]: =Расчет!K43
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$13 [Value]: 15 [Formula]: =Расчет!J28
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$15 [Value]: РТ40 [Formula]: =VLOOKUP(Расчет!$K$16,[ЭКСПЕРТ.xls]Реле!$A$2:$F$10,6) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$16 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$17 [Value]: 0 [Formula]: =Расчет!K26/Расчет!K43*5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$15 [Value]: цифровое [Formula]: =VLOOKUP(Расчет!$K$16,[ЭКСПЕРТ.xls]Реле!$A$2:$F$10,6) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$16 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$17 [Value]: 16,3333333333333 [Formula]: =Расчет!K26/Расчет!K43*5
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$18 [Value]: 0 [Formula]: =Расчет!J27
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$21 [Value]: РТ40 [Formula]: =VLOOKUP(Расчет!$K$16,[ЭКСПЕРТ.xls]Реле!$A$2:$F$10,6) [EXTERNAL LINK]
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$22 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$23 [Value]: 0 [Formula]: =Расчет!K33/Расчет!K43*5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$21 [Value]: цифровое [Formula]: =VLOOKUP(Расчет!$K$16,[ЭКСПЕРТ.xls]Реле!$A$2:$F$10,6) [EXTERNAL LINK]
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$22 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$23 [Value]: 1,24666666666667 [Formula]: =Расчет!K33/Расчет!K43*5
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $H$24 [Value]: 0,5 [Formula]: =Расчет!J34
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$24 [Value]: Кратности нет [Formula]: =Расчет!K34
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: Телефонограмма [Cell]: $I$27 [Value]: 0 [Formula]: =Расчет!K40
@@ -13143,35 +13143,35 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$13 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$14 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$15 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$9 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10>=B9,B9,K9)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$9 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10=B9,B9,K9)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$9 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10<B9,Расчет!D9+Расчет!D10,I9)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$9 [Value]: 0 [Formula]: =IF(K9<=0,0,K9)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$9 [Value]: 5,2 [Formula]: =IF(Расчет!D9+Расчет!D10>=B9,B9,K9)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$9 [Value]: 5,2 [Formula]: =IF(Расчет!D9+Расчет!D10=B9,B9,K9)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$9 [Value]: 5,2 [Formula]: =IF(Расчет!D9+Расчет!D10<B9,Расчет!D9+Расчет!D10,I9)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$9 [Value]: 5,2 [Formula]: =IF(K9<=0,0,K9)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$11 [Value]: 0 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J11)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$11 [Value]: 0 [Formula]: =IF(B9<=Расчет!D9+Расчет!D10,0,K11)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$11 [Value]: 0 [Formula]: =IF(B9>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B9-(Расчет!D9+Расчет!D10))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$11 [Value]: -19,8 [Formula]: =IF(B9>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B9-(Расчет!D9+Расчет!D10))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$11 [Value]: 0 [Formula]: =IF(K11<=0,0,K11)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$13 [Value]: 0 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J13)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$13 [Value]: 0 [Formula]: =IF(B9<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K13)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$13 [Value]: 0 [Formula]: =IF(B9>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B9-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$13 [Value]: -24,8 [Formula]: =IF(B9>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B9-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$13 [Value]: 0 [Formula]: =IF(K13<=0,0,K13)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$15 [Value]: 0 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J15)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$15 [Value]: 0 [Formula]: =IF(B9>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B9-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$15 [Value]: -33,8 [Formula]: =IF(B9>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B9-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$15 [Value]: 0 [Formula]: =IF(K15<=0,0,K15)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$15 [Value]: 0 [Formula]: =IF(B9<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K15)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$16 [Value]: 1,31277099630788 [Formula]: =SQRT((SUMSQ(L9*(Расчет!E9+Расчет!E10)+L11*(Расчет!E12+Расчет!E13)+L13*(Расчет!E15+Расчет!E16)+L15*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L9*(Расчет!F9+Расчет!F10)+L11*(Расчет!F12+Расчет!F13)+L13*(Расчет!F15+Расчет!F16)+L15*(Расчет!F18+Расчет!F19))))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$16 [Value]: 3,01424876139239 [Formula]: =SQRT((SUMSQ(L9*(Расчет!E9+Расчет!E10)+L11*(Расчет!E12+Расчет!E13)+L13*(Расчет!E15+Расчет!E16)+L15*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L9*(Расчет!F9+Расчет!F10)+L11*(Расчет!F12+Расчет!F13)+L13*(Расчет!F15+Расчет!F16)+L15*(Расчет!F18+Расчет!F19))))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$17 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ(L9*(Расчет!E9+Расчет!E10)+L11*(Расчет!E12+Расчет!E13)+L13*(Расчет!E15+Расчет!E16)+L15*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F6+L9*(Расчет!F9+Расчет!F10)+L11*(Расчет!F12+Расчет!F13)+L13*(Расчет!F15+Расчет!F16)+L15*(Расчет!F18+Расчет!F19)))),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$8 [Value]: 0 [Formula]: =0*Расчет!D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$9 [Value]: 0 [Formula]: =0.1*Расчет!D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$10 [Value]: 0 [Formula]: =0.2*Расчет!D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$11 [Value]: 0 [Formula]: =0.3*Расчет!D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$12 [Value]: 0 [Formula]: =0.4*Расчет!D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$13 [Value]: 0 [Formula]: =0.5*Расчет!D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$14 [Value]: 0 [Formula]: =0.6*Расчет!D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$15 [Value]: 0 [Formula]: =0.7*Расчет!D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$16 [Value]: 0 [Formula]: =0.8*Расчет!D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$17 [Value]: 0 [Formula]: =0.9*Расчет!D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$18 [Value]: 0 [Formula]: =1*Расчет!D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$9 [Value]: 5,2 [Formula]: =0.1*Расчет!D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$10 [Value]: 10,4 [Formula]: =0.2*Расчет!D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$11 [Value]: 15,6 [Formula]: =0.3*Расчет!D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$12 [Value]: 20,8 [Formula]: =0.4*Расчет!D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$13 [Value]: 26 [Formula]: =0.5*Расчет!D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$14 [Value]: 31,2 [Formula]: =0.6*Расчет!D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$15 [Value]: 36,4 [Formula]: =0.7*Расчет!D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$16 [Value]: 41,6 [Formula]: =0.8*Расчет!D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$17 [Value]: 46,8 [Formula]: =0.9*Расчет!D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$18 [Value]: 52 [Formula]: =1*Расчет!D20
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$19 [Value]: True [Formula]: =IF(L20+L22+L24+L26=B10,TRUE,FALSE)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$20 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$21 [Value]:  [Formula]: 
@@ -13180,35 +13180,35 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$24 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$25 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$26 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$20 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10>=B10,B10,K20)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$20 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10=B10,B10,K20)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$20 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10<B10,Расчет!D9+Расчет!D10,I20)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$20 [Value]: 0 [Formula]: =IF(K20<=0,0,K20)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$20 [Value]: 10,4 [Formula]: =IF(Расчет!D9+Расчет!D10>=B10,B10,K20)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$20 [Value]: 10,4 [Formula]: =IF(Расчет!D9+Расчет!D10=B10,B10,K20)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$20 [Value]: 10,4 [Formula]: =IF(Расчет!D9+Расчет!D10<B10,Расчет!D9+Расчет!D10,I20)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$20 [Value]: 10,4 [Formula]: =IF(K20<=0,0,K20)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$22 [Value]: 0 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J22)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$22 [Value]: 0 [Formula]: =IF(B10<=Расчет!D9+Расчет!D10,0,K22)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$22 [Value]: 0 [Formula]: =IF(B10>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B10-(Расчет!D9+Расчет!D10))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$22 [Value]: -14,6 [Formula]: =IF(B10>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B10-(Расчет!D9+Расчет!D10))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$22 [Value]: 0 [Formula]: =IF(K22<=0,0,K22)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$24 [Value]: 0 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J24)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$24 [Value]: 0 [Formula]: =IF(B10<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K24)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$24 [Value]: 0 [Formula]: =IF(B10>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B10-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$24 [Value]: -19,6 [Formula]: =IF(B10>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B10-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$24 [Value]: 0 [Formula]: =IF(K24<=0,0,K24)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$26 [Value]: 0 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J26)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$26 [Value]: 0 [Formula]: =IF(B10>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B10-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$26 [Value]: -28,6 [Formula]: =IF(B10>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B10-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$26 [Value]: 0 [Formula]: =IF(K26<=0,0,K26)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$26 [Value]: 0 [Formula]: =IF(B10<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K26)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$27 [Value]: 1,31277099630788 [Formula]: =SQRT((SUMSQ(L20*(Расчет!E9+Расчет!E10)+L22*(Расчет!E12+Расчет!E13)+L24*(Расчет!E15+Расчет!E16)+L26*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L20*(Расчет!F9+Расчет!F10)+L22*(Расчет!F12+Расчет!F13)+L24*(Расчет!F15+Расчет!F16)+L26*(Расчет!F18+Расчет!F19))))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$27 [Value]: 5,49981581954241 [Formula]: =SQRT((SUMSQ(L20*(Расчет!E9+Расчет!E10)+L22*(Расчет!E12+Расчет!E13)+L24*(Расчет!E15+Расчет!E16)+L26*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L20*(Расчет!F9+Расчет!F10)+L22*(Расчет!F12+Расчет!F13)+L24*(Расчет!F15+Расчет!F16)+L26*(Расчет!F18+Расчет!F19))))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$28 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ(L20*(Расчет!E9+Расчет!E10)+L22*(Расчет!E12+Расчет!E13)+L24*(Расчет!E15+Расчет!E16)+L26*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F6+L20*(Расчет!F9+Расчет!F10)+L22*(Расчет!F12+Расчет!F13)+L24*(Расчет!F15+Расчет!F16)+L26*(Расчет!F18+Расчет!F19)))),"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$20 [Value]: 1599,66971079203 [Formula]: =B20/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$21 [Value]: 1599,66971079203 [Formula]: =B21/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$22 [Value]: 1599,66971079203 [Formula]: =B22/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$23 [Value]: 1599,66971079203 [Formula]: =B23/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$24 [Value]: 1599,66971079203 [Formula]: =B24/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$25 [Value]: 1599,66971079203 [Formula]: =B25/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$26 [Value]: 1599,66971079203 [Formula]: =B26/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$27 [Value]: 1599,66971079203 [Formula]: =B27/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$28 [Value]: 1599,66971079203 [Formula]: =B28/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$29 [Value]: 1599,66971079203 [Formula]: =B29/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$30 [Value]: 1599,66971079203 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$20 [Value]: 3652,17391304348 [Formula]: =B20/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$21 [Value]: 696,691005366768 [Formula]: =B21/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$22 [Value]: 381,830968327722 [Formula]: =B22/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$23 [Value]: 262,875151562471 [Formula]: =B23/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$24 [Value]: 200,414751865204 [Formula]: =B24/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$25 [Value]: 162,037623379658 [Formula]: =B25/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$26 [Value]: 136,305485196141 [Formula]: =B26/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$27 [Value]: 117,625337126845 [Formula]: =B27/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$28 [Value]: 101,278794404239 [Formula]: =B28/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$29 [Value]: 86,4791671067573 [Formula]: =B29/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $D$30 [Value]: 74,8863755007537 [Formula]: =B30/1.5
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$30 [Value]: True [Formula]: =IF(L31+L33+L35+L37=B11,TRUE,FALSE)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$31 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$32 [Value]:  [Formula]: 
@@ -13228,46 +13228,46 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$28 [Value]: [Error 2042] [Formula]: =IFERROR(P28/1.5,NA())
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$29 [Value]: [Error 2042] [Formula]: =IFERROR(P29/1.5,NA())
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$30 [Value]: [Error 2042] [Formula]: =IFERROR(P30/1.5,NA())
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$31 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10>=B11,B11,K31)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$31 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10=B11,B11,K31)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$31 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10<B11,Расчет!D9+Расчет!D10,I31)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$31 [Value]: 0 [Formula]: =IF(K31<=0,0,K31)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$31 [Value]: 15,6 [Formula]: =IF(Расчет!D9+Расчет!D10>=B11,B11,K31)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$31 [Value]: 15,6 [Formula]: =IF(Расчет!D9+Расчет!D10=B11,B11,K31)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$31 [Value]: 15,6 [Formula]: =IF(Расчет!D9+Расчет!D10<B11,Расчет!D9+Расчет!D10,I31)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$31 [Value]: 15,6 [Formula]: =IF(K31<=0,0,K31)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$33 [Value]: 0 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J33)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$33 [Value]: 0 [Formula]: =IF(B11<=Расчет!D9+Расчет!D10,0,K33)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$33 [Value]: 0 [Formula]: =IF(B11>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B11-(Расчет!D9+Расчет!D10))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$33 [Value]: -9,4 [Formula]: =IF(B11>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B11-(Расчет!D9+Расчет!D10))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$33 [Value]: 0 [Formula]: =IF(K33<=0,0,K33)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$35 [Value]: 0 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J35)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$35 [Value]: 0 [Formula]: =IF(B11<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K35)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$35 [Value]: 0 [Formula]: =IF(B11>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B11-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$35 [Value]: -14,4 [Formula]: =IF(B11>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B11-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$35 [Value]: 0 [Formula]: =IF(K35<=0,0,K35)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$37 [Value]: 0 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J37)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$37 [Value]: 0 [Formula]: =IF(B11>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B11-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$37 [Value]: -23,4 [Formula]: =IF(B11>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B11-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$37 [Value]: 0 [Formula]: =IF(K37<=0,0,K37)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$37 [Value]: 0 [Formula]: =IF(B11<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K37)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$38 [Value]: 1,31277099630788 [Formula]: =SQRT((SUMSQ(L31*(Расчет!E9+Расчет!E10)+L33*(Расчет!E12+Расчет!E13)+L35*(Расчет!E15+Расчет!E16)+L37*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L31*(Расчет!F9+Расчет!F10)+L33*(Расчет!F12+Расчет!F13)+L35*(Расчет!F15+Расчет!F16)+L37*(Расчет!F18+Расчет!F19))))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$38 [Value]: 7,98858312593666 [Formula]: =SQRT((SUMSQ(L31*(Расчет!E9+Расчет!E10)+L33*(Расчет!E12+Расчет!E13)+L35*(Расчет!E15+Расчет!E16)+L37*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L31*(Расчет!F9+Расчет!F10)+L33*(Расчет!F12+Расчет!F13)+L35*(Расчет!F15+Расчет!F16)+L37*(Расчет!F18+Расчет!F19))))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$39 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ(L31*(Расчет!E9+Расчет!E10)+L33*(Расчет!E12+Расчет!E13)+L35*(Расчет!E15+Расчет!E16)+L37*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F6+L31*(Расчет!F9+Расчет!F10)+L33*(Расчет!F12+Расчет!F13)+L35*(Расчет!F15+Расчет!F16)+L37*(Расчет!F18+Расчет!F19)))),"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$20 [Value]: 2399,50456618805 [Formula]: =6300/(2*Расчет!F5)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$21 [Value]: 2399,50456618805 [Formula]: =6300/(2*J16)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$22 [Value]: 2399,50456618805 [Formula]: =6300/(2*J27)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$23 [Value]: 2399,50456618805 [Formula]: =6300/(2*J38)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$24 [Value]: 2399,50456618805 [Formula]: =6300/(2*J49)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$25 [Value]: 2399,50456618805 [Formula]: =6300/(2*J60)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$26 [Value]: 2399,50456618805 [Formula]: =6300/(2*J71)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$27 [Value]: 2399,50456618805 [Formula]: =6300/(2*J82)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$28 [Value]: 2399,50456618805 [Formula]: =6300/(2*J93)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$29 [Value]: 2399,50456618805 [Formula]: =6300/(2*J104)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$30 [Value]: 2399,50456618805 [Formula]: =6300/(2*J115)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$31 [Value]: 1599,66971079203 [Formula]: =B30/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$32 [Value]: 1599,66971079203 [Formula]: =B30/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$33 [Value]: 1599,66971079203 [Formula]: =B30/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$34 [Value]: 1599,66971079203 [Formula]: =B30/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$35 [Value]: 1599,66971079203 [Formula]: =B30/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$36 [Value]: 1599,66971079203 [Formula]: =B30/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$37 [Value]: 1599,66971079203 [Formula]: =B30/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$38 [Value]: 1599,66971079203 [Formula]: =B30/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$39 [Value]: 1599,66971079203 [Formula]: =B30/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$40 [Value]: 1599,66971079203 [Formula]: =B30/1.5
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$41 [Value]: 1599,66971079203 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$20 [Value]: 5478,26086956522 [Formula]: =6300/(2*Расчет!F5)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$21 [Value]: 1045,03650805015 [Formula]: =6300/(2*J16)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$22 [Value]: 572,746452491583 [Formula]: =6300/(2*J27)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$23 [Value]: 394,312727343707 [Formula]: =6300/(2*J38)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$24 [Value]: 300,622127797806 [Formula]: =6300/(2*J49)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$25 [Value]: 243,056435069488 [Formula]: =6300/(2*J60)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$26 [Value]: 204,458227794212 [Formula]: =6300/(2*J71)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$27 [Value]: 176,438005690267 [Formula]: =6300/(2*J82)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$28 [Value]: 151,918191606358 [Formula]: =6300/(2*J93)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$29 [Value]: 129,718750660136 [Formula]: =6300/(2*J104)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$30 [Value]: 112,32956325113 [Formula]: =6300/(2*J115)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$31 [Value]: 74,8863755007537 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$32 [Value]: 74,8863755007537 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$33 [Value]: 74,8863755007537 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$34 [Value]: 74,8863755007537 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$35 [Value]: 74,8863755007537 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$36 [Value]: 74,8863755007537 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$37 [Value]: 74,8863755007537 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$38 [Value]: 74,8863755007537 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$39 [Value]: 74,8863755007537 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$40 [Value]: 74,8863755007537 [Formula]: =B30/1.5
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$41 [Value]: 74,8863755007537 [Formula]: =B30/1.5
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$41 [Value]: True [Formula]: =IF(L42+L44+L46+L48=B12,TRUE,FALSE)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$42 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$43 [Value]:  [Formula]: 
@@ -13298,23 +13298,23 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$39 [Value]: --- [Formula]: =IFERROR(P30/1.5,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$40 [Value]: --- [Formula]: =IFERROR(P30/1.5,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$41 [Value]: --- [Formula]: =IFERROR(P30/1.5,"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$42 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10>=B12,B12,K42)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$42 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10=B12,B12,K42)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$42 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10<B12,Расчет!D9+Расчет!D10,I42)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$42 [Value]: 0 [Formula]: =IF(K42<=0,0,K42)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$42 [Value]: 20,8 [Formula]: =IF(Расчет!D9+Расчет!D10>=B12,B12,K42)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$42 [Value]: 20,8 [Formula]: =IF(Расчет!D9+Расчет!D10=B12,B12,K42)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$42 [Value]: 20,8 [Formula]: =IF(Расчет!D9+Расчет!D10<B12,Расчет!D9+Расчет!D10,I42)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$42 [Value]: 20,8 [Formula]: =IF(K42<=0,0,K42)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$44 [Value]: 0 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J44)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$44 [Value]: 0 [Formula]: =IF(B12<=Расчет!D9+Расчет!D10,0,K44)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$44 [Value]: 0 [Formula]: =IF(B12>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B12-(Расчет!D9+Расчет!D10))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$44 [Value]: -4,2 [Formula]: =IF(B12>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B12-(Расчет!D9+Расчет!D10))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$44 [Value]: 0 [Formula]: =IF(K44<=0,0,K44)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$46 [Value]: 0 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J46)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$46 [Value]: 0 [Formula]: =IF(B12<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K46)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$46 [Value]: 0 [Formula]: =IF(B12>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B12-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$46 [Value]: -9,2 [Formula]: =IF(B12>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B12-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$46 [Value]: 0 [Formula]: =IF(K46<=0,0,K46)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$48 [Value]: 0 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J48)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$48 [Value]: 0 [Formula]: =IF(B12>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B12-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$48 [Value]: -18,2 [Formula]: =IF(B12>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B12-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$48 [Value]: 0 [Formula]: =IF(K48<=0,0,K48)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$48 [Value]: 0 [Formula]: =IF(B12<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K48)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$49 [Value]: 1,31277099630788 [Formula]: =SQRT((SUMSQ(L42*(Расчет!E9+Расчет!E10)+L44*(Расчет!E12+Расчет!E13)+L46*(Расчет!E15+Расчет!E16)+L48*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L42*(Расчет!F9+Расчет!F10)+L44*(Расчет!F12+Расчет!F13)+L46*(Расчет!F15+Расчет!F16)+L48*(Расчет!F18+Расчет!F19))))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$49 [Value]: 10,4782705886462 [Formula]: =SQRT((SUMSQ(L42*(Расчет!E9+Расчет!E10)+L44*(Расчет!E12+Расчет!E13)+L46*(Расчет!E15+Расчет!E16)+L48*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L42*(Расчет!F9+Расчет!F10)+L44*(Расчет!F12+Расчет!F13)+L46*(Расчет!F15+Расчет!F16)+L48*(Расчет!F18+Расчет!F19))))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$50 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ(L42*(Расчет!E9+Расчет!E10)+L44*(Расчет!E12+Расчет!E13)+L46*(Расчет!E15+Расчет!E16)+L48*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F6+L42*(Расчет!F9+Расчет!F10)+L44*(Расчет!F12+Расчет!F13)+L46*(Расчет!F15+Расчет!F16)+L48*(Расчет!F18+Расчет!F19)))),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$52 [Value]: True [Formula]: =IF(L53+L55+L57+L59=B13,TRUE,FALSE)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$53 [Value]:  [Formula]: 
@@ -13324,26 +13324,26 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$57 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$58 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$59 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$53 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10>=B13,B13,K53)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$53 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10=B13,B13,K53)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$53 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10<B13,Расчет!D9+Расчет!D10,I53)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$53 [Value]: 0 [Formula]: =IF(K53<=0,0,K53)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$44 [Value]: 1828,39369534979 [Formula]: =IFERROR(6300/(SQRT(3)*J118),"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$45 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$46 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$47 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$48 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$49 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$50 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$51 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$52 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$53 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$54 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$55 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$55 [Value]: 0 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J55)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$55 [Value]: 0 [Formula]: =IF(B13<=Расчет!D9+Расчет!D10,0,K55)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$55 [Value]: 0 [Formula]: =IF(B13>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B13-(Расчет!D9+Расчет!D10))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$55 [Value]: 0 [Formula]: =IF(K55<=0,0,K55)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$53 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10>=B13,B13,K53)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$53 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10=B13,B13,K53)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$53 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10<B13,Расчет!D9+Расчет!D10,I53)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$53 [Value]: 25 [Formula]: =IF(K53<=0,0,K53)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$44 [Value]: 229,970543117469 [Formula]: =IFERROR(6300/(SQRT(3)*J118),"---")
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$45 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$46 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$47 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$48 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$49 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$50 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$51 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$52 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$53 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$54 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$55 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$55 [Value]: 1 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J55)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$55 [Value]: 1 [Formula]: =IF(B13<=Расчет!D9+Расчет!D10,0,K55)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$55 [Value]: 1 [Formula]: =IF(B13>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B13-(Расчет!D9+Расчет!D10))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$55 [Value]: 1 [Formula]: =IF(K55<=0,0,K55)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$44 [Value]: --- [Formula]: =IFERROR(6300/(SQRT(3)*J119),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$45 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$26)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$46 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$26)
@@ -13358,13 +13358,13 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$55 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$26)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$57 [Value]: 0 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J57)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$57 [Value]: 0 [Formula]: =IF(B13<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K57)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$57 [Value]: 0 [Formula]: =IF(B13>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B13-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$57 [Value]: -4 [Formula]: =IF(B13>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B13-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$57 [Value]: 0 [Formula]: =IF(K57<=0,0,K57)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$59 [Value]: 0 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J59)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$59 [Value]: 0 [Formula]: =IF(B13>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B13-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$59 [Value]: -13 [Formula]: =IF(B13>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B13-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$59 [Value]: 0 [Formula]: =IF(K59<=0,0,K59)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$59 [Value]: 0 [Formula]: =IF(B13<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K59)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$60 [Value]: 1,31277099630788 [Formula]: =SQRT((SUMSQ(L53*(Расчет!E9+Расчет!E10)+L55*(Расчет!E12+Расчет!E13)+L57*(Расчет!E15+Расчет!E16)+L59*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L53*(Расчет!F9+Расчет!F10)+L55*(Расчет!F12+Расчет!F13)+L57*(Расчет!F15+Расчет!F16)+L59*(Расчет!F18+Расчет!F19))))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$60 [Value]: 12,9599531034817 [Formula]: =SQRT((SUMSQ(L53*(Расчет!E9+Расчет!E10)+L55*(Расчет!E12+Расчет!E13)+L57*(Расчет!E15+Расчет!E16)+L59*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L53*(Расчет!F9+Расчет!F10)+L55*(Расчет!F12+Расчет!F13)+L57*(Расчет!F15+Расчет!F16)+L59*(Расчет!F18+Расчет!F19))))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$61 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ(L53*(Расчет!E9+Расчет!E10)+L55*(Расчет!E12+Расчет!E13)+L57*(Расчет!E15+Расчет!E16)+L59*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F6+L53*(Расчет!F9+Расчет!F10)+L55*(Расчет!F12+Расчет!F13)+L57*(Расчет!F15+Расчет!F16)+L59*(Расчет!F18+Расчет!F19)))),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$63 [Value]: True [Formula]: =IF(L64+L66+L68+L70=B14,TRUE,FALSE)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$64 [Value]:  [Formula]: 
@@ -13374,25 +13374,25 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$68 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$69 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$70 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$64 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10>=B14,B14,K64)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$64 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10=B14,B14,K64)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$64 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10<B14,Расчет!D9+Расчет!D10,I64)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$64 [Value]: 0 [Formula]: =IF(K64<=0,0,K64)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$66 [Value]: 0 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J66)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$66 [Value]: 0 [Formula]: =IF(B14<=Расчет!D9+Расчет!D10,0,K66)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$66 [Value]: 0 [Formula]: =IF(B14>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B14-(Расчет!D9+Расчет!D10))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$66 [Value]: 0 [Formula]: =IF(K66<=0,0,K66)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$57 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$58 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$59 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$60 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$61 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$62 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$63 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$64 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$65 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$66 [Value]: 0 [Formula]: =Расчет!K33
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$67 [Value]: 0 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$64 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10>=B14,B14,K64)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$64 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10=B14,B14,K64)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$64 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10<B14,Расчет!D9+Расчет!D10,I64)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$64 [Value]: 25 [Formula]: =IF(K64<=0,0,K64)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$66 [Value]: 5 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J66)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$66 [Value]: 5 [Formula]: =IF(B14<=Расчет!D9+Расчет!D10,0,K66)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$66 [Value]: 5 [Formula]: =IF(B14>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B14-(Расчет!D9+Расчет!D10))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$66 [Value]: 5 [Formula]: =IF(K66<=0,0,K66)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$57 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$58 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$59 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$60 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$61 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$62 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$63 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$64 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$65 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$66 [Value]: 74,8 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$67 [Value]: 74,8 [Formula]: =Расчет!K33
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$57 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$33)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$58 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$33)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$59 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$33)
@@ -13404,15 +13404,15 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$65 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$33)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$66 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$33)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $P$67 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$33)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$68 [Value]: 0 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J68)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$68 [Value]: 0 [Formula]: =IF(B14<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K68)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$68 [Value]: 0 [Formula]: =IF(B14>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B14-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$68 [Value]: 0 [Formula]: =IF(K68<=0,0,K68)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$68 [Value]: 1,2 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J68)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$68 [Value]: 1,2 [Formula]: =IF(B14<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K68)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$68 [Value]: 1,2 [Formula]: =IF(B14>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B14-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$68 [Value]: 1,2 [Formula]: =IF(K68<=0,0,K68)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$70 [Value]: 0 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J70)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$70 [Value]: 0 [Formula]: =IF(B14>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B14-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$70 [Value]: -7,8 [Formula]: =IF(B14>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B14-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$70 [Value]: 0 [Formula]: =IF(K70<=0,0,K70)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$70 [Value]: 0 [Formula]: =IF(B14<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K70)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$71 [Value]: 1,31277099630788 [Formula]: =SQRT((SUMSQ(L64*(Расчет!E9+Расчет!E10)+L66*(Расчет!E12+Расчет!E13)+L68*(Расчет!E15+Расчет!E16)+L70*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L64*(Расчет!F9+Расчет!F10)+L66*(Расчет!F12+Расчет!F13)+L68*(Расчет!F15+Расчет!F16)+L70*(Расчет!F18+Расчет!F19))))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$71 [Value]: 15,4065700069087 [Formula]: =SQRT((SUMSQ(L64*(Расчет!E9+Расчет!E10)+L66*(Расчет!E12+Расчет!E13)+L68*(Расчет!E15+Расчет!E16)+L70*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L64*(Расчет!F9+Расчет!F10)+L66*(Расчет!F12+Расчет!F13)+L68*(Расчет!F15+Расчет!F16)+L70*(Расчет!F18+Расчет!F19))))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$72 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ(L64*(Расчет!E9+Расчет!E10)+L66*(Расчет!E12+Расчет!E13)+L68*(Расчет!E15+Расчет!E16)+L70*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F6+L64*(Расчет!F9+Расчет!F10)+L66*(Расчет!F12+Расчет!F13)+L68*(Расчет!F15+Расчет!F16)+L70*(Расчет!F18+Расчет!F19)))),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$74 [Value]: True [Formula]: =IF(L75+L77+L79+L81=B15,TRUE,FALSE)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$75 [Value]:  [Formula]: 
@@ -13422,23 +13422,23 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$79 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$80 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$81 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$75 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10>=B15,B15,K75)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$75 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10=B15,B15,K75)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$75 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10<B15,Расчет!D9+Расчет!D10,I75)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$75 [Value]: 0 [Formula]: =IF(K75<=0,0,K75)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$77 [Value]: 0 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J77)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$77 [Value]: 0 [Formula]: =IF(B15<=Расчет!D9+Расчет!D10,0,K77)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$77 [Value]: 0 [Formula]: =IF(B15>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B15-(Расчет!D9+Расчет!D10))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$77 [Value]: 0 [Formula]: =IF(K77<=0,0,K77)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$79 [Value]: 0 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J79)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$79 [Value]: 0 [Formula]: =IF(B15<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K79)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$79 [Value]: 0 [Formula]: =IF(B15>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B15-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$79 [Value]: 0 [Formula]: =IF(K79<=0,0,K79)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$75 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10>=B15,B15,K75)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$75 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10=B15,B15,K75)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$75 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10<B15,Расчет!D9+Расчет!D10,I75)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$75 [Value]: 25 [Formula]: =IF(K75<=0,0,K75)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$77 [Value]: 5 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J77)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$77 [Value]: 5 [Formula]: =IF(B15<=Расчет!D9+Расчет!D10,0,K77)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$77 [Value]: 5 [Formula]: =IF(B15>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B15-(Расчет!D9+Расчет!D10))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$77 [Value]: 5 [Formula]: =IF(K77<=0,0,K77)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$79 [Value]: 6,4 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J79)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$79 [Value]: 6,4 [Formula]: =IF(B15<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K79)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$79 [Value]: 6,4 [Formula]: =IF(B15>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B15-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$79 [Value]: 6,4 [Formula]: =IF(K79<=0,0,K79)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$81 [Value]: 0 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J81)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$81 [Value]: 0 [Formula]: =IF(B15>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B15-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$81 [Value]: -2,6 [Formula]: =IF(B15>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B15-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$81 [Value]: 0 [Formula]: =IF(K81<=0,0,K81)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$81 [Value]: 0 [Formula]: =IF(B15<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K81)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$82 [Value]: 1,31277099630788 [Formula]: =SQRT((SUMSQ(L75*(Расчет!E9+Расчет!E10)+L77*(Расчет!E12+Расчет!E13)+L79*(Расчет!E15+Расчет!E16)+L81*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L75*(Расчет!F9+Расчет!F10)+L77*(Расчет!F12+Расчет!F13)+L79*(Расчет!F15+Расчет!F16)+L81*(Расчет!F18+Расчет!F19))))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$82 [Value]: 17,853296333046 [Formula]: =SQRT((SUMSQ(L75*(Расчет!E9+Расчет!E10)+L77*(Расчет!E12+Расчет!E13)+L79*(Расчет!E15+Расчет!E16)+L81*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L75*(Расчет!F9+Расчет!F10)+L77*(Расчет!F12+Расчет!F13)+L79*(Расчет!F15+Расчет!F16)+L81*(Расчет!F18+Расчет!F19))))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$83 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ(L75*(Расчет!E9+Расчет!E10)+L77*(Расчет!E12+Расчет!E13)+L79*(Расчет!E15+Расчет!E16)+L81*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F6+L75*(Расчет!F9+Расчет!F10)+L77*(Расчет!F12+Расчет!F13)+L79*(Расчет!F15+Расчет!F16)+L81*(Расчет!F18+Расчет!F19)))),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$85 [Value]: True [Formula]: =IF(L86+L88+L90+L92=B16,TRUE,FALSE)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$86 [Value]:  [Formula]: 
@@ -13448,23 +13448,23 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$90 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$91 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$92 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$86 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10>=B16,B16,K86)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$86 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10=B16,B16,K86)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$86 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10<B16,Расчет!D9+Расчет!D10,I86)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$86 [Value]: 0 [Formula]: =IF(K86<=0,0,K86)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$88 [Value]: 0 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J88)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$88 [Value]: 0 [Formula]: =IF(B16<=Расчет!D9+Расчет!D10,0,K88)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$88 [Value]: 0 [Formula]: =IF(B16>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B16-(Расчет!D9+Расчет!D10))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$88 [Value]: 0 [Formula]: =IF(K88<=0,0,K88)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$90 [Value]: 0 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J90)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$90 [Value]: 0 [Formula]: =IF(B16<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K90)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$90 [Value]: 0 [Formula]: =IF(B16>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B16-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$90 [Value]: 0 [Formula]: =IF(K90<=0,0,K90)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$92 [Value]: 0 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J92)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$92 [Value]: 0 [Formula]: =IF(B16>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B16-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$92 [Value]: 0 [Formula]: =IF(K92<=0,0,K92)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$92 [Value]: 0 [Formula]: =IF(B16<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K92)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$93 [Value]: 1,31277099630788 [Formula]: =SQRT((SUMSQ(L86*(Расчет!E9+Расчет!E10)+L88*(Расчет!E12+Расчет!E13)+L90*(Расчет!E15+Расчет!E16)+L92*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L86*(Расчет!F9+Расчет!F10)+L88*(Расчет!F12+Расчет!F13)+L90*(Расчет!F15+Расчет!F16)+L92*(Расчет!F18+Расчет!F19))))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$86 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10>=B16,B16,K86)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$86 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10=B16,B16,K86)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$86 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10<B16,Расчет!D9+Расчет!D10,I86)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$86 [Value]: 25 [Formula]: =IF(K86<=0,0,K86)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$88 [Value]: 5 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J88)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$88 [Value]: 5 [Formula]: =IF(B16<=Расчет!D9+Расчет!D10,0,K88)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$88 [Value]: 5 [Formula]: =IF(B16>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B16-(Расчет!D9+Расчет!D10))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$88 [Value]: 5 [Formula]: =IF(K88<=0,0,K88)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$90 [Value]: 9 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J90)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$90 [Value]: 9 [Formula]: =IF(B16<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K90)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$90 [Value]: 9 [Formula]: =IF(B16>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B16-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$90 [Value]: 9 [Formula]: =IF(K90<=0,0,K90)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$92 [Value]: 2,6 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J92)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$92 [Value]: 2,6 [Formula]: =IF(B16>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B16-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$92 [Value]: 2,6 [Formula]: =IF(K92<=0,0,K92)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$92 [Value]: 2,6 [Formula]: =IF(B16<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K92)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$93 [Value]: 20,7348439755135 [Formula]: =SQRT((SUMSQ(L86*(Расчет!E9+Расчет!E10)+L88*(Расчет!E12+Расчет!E13)+L90*(Расчет!E15+Расчет!E16)+L92*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L86*(Расчет!F9+Расчет!F10)+L88*(Расчет!F12+Расчет!F13)+L90*(Расчет!F15+Расчет!F16)+L92*(Расчет!F18+Расчет!F19))))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$94 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ(L86*(Расчет!E9+Расчет!E10)+L88*(Расчет!E12+Расчет!E13)+L90*(Расчет!E15+Расчет!E16)+L92*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F6+L86*(Расчет!F9+Расчет!F10)+L88*(Расчет!F12+Расчет!F13)+L90*(Расчет!F15+Расчет!F16)+L92*(Расчет!F18+Расчет!F19)))),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$96 [Value]: True [Formula]: =IF(L97+L99+L101+L103=B17,TRUE,FALSE)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$97 [Value]:  [Formula]: 
@@ -13474,23 +13474,23 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$101 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$102 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$103 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$97 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10>=B17,B17,K97)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$97 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10=B17,B17,K97)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$97 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10<B17,Расчет!D9+Расчет!D10,I97)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$97 [Value]: 0 [Formula]: =IF(K97<=0,0,K97)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$99 [Value]: 0 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J99)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$99 [Value]: 0 [Formula]: =IF(B17<=Расчет!D9+Расчет!D10,0,K99)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$99 [Value]: 0 [Formula]: =IF(B17>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B17-(Расчет!D9+Расчет!D10))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$99 [Value]: 0 [Formula]: =IF(K99<=0,0,K99)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$101 [Value]: 0 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J101)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$101 [Value]: 0 [Formula]: =IF(B17<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K101)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$101 [Value]: 0 [Formula]: =IF(B17>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B17-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$101 [Value]: 0 [Formula]: =IF(K101<=0,0,K101)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$103 [Value]: 0 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J103)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$103 [Value]: 0 [Formula]: =IF(B17>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B17-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$103 [Value]: 0 [Formula]: =IF(K103<=0,0,K103)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$103 [Value]: 0 [Formula]: =IF(B17<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K103)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$104 [Value]: 1,31277099630788 [Formula]: =SQRT((SUMSQ(L97*(Расчет!E9+Расчет!E10)+L99*(Расчет!E12+Расчет!E13)+L101*(Расчет!E15+Расчет!E16)+L103*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L97*(Расчет!F9+Расчет!F10)+L99*(Расчет!F12+Расчет!F13)+L101*(Расчет!F15+Расчет!F16)+L103*(Расчет!F18+Расчет!F19))))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$97 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10>=B17,B17,K97)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$97 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10=B17,B17,K97)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$97 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10<B17,Расчет!D9+Расчет!D10,I97)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$97 [Value]: 25 [Formula]: =IF(K97<=0,0,K97)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$99 [Value]: 5 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J99)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$99 [Value]: 5 [Formula]: =IF(B17<=Расчет!D9+Расчет!D10,0,K99)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$99 [Value]: 5 [Formula]: =IF(B17>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B17-(Расчет!D9+Расчет!D10))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$99 [Value]: 5 [Formula]: =IF(K99<=0,0,K99)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$101 [Value]: 9 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J101)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$101 [Value]: 9 [Formula]: =IF(B17<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K101)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$101 [Value]: 9 [Formula]: =IF(B17>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B17-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$101 [Value]: 9 [Formula]: =IF(K101<=0,0,K101)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$103 [Value]: 7,8 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J103)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$103 [Value]: 7,8 [Formula]: =IF(B17>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B17-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$103 [Value]: 7,8 [Formula]: =IF(K103<=0,0,K103)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$103 [Value]: 7,8 [Formula]: =IF(B17<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K103)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$104 [Value]: 24,2833051040788 [Formula]: =SQRT((SUMSQ(L97*(Расчет!E9+Расчет!E10)+L99*(Расчет!E12+Расчет!E13)+L101*(Расчет!E15+Расчет!E16)+L103*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L97*(Расчет!F9+Расчет!F10)+L99*(Расчет!F12+Расчет!F13)+L101*(Расчет!F15+Расчет!F16)+L103*(Расчет!F18+Расчет!F19))))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$105 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ(L97*(Расчет!E9+Расчет!E10)+L99*(Расчет!E12+Расчет!E13)+L101*(Расчет!E15+Расчет!E16)+L103*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F6+L97*(Расчет!F9+Расчет!F10)+L99*(Расчет!F12+Расчет!F13)+L101*(Расчет!F15+Расчет!F16)+L103*(Расчет!F18+Расчет!F19)))),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$107 [Value]: True [Formula]: =IF(L108+L110+L112+L114=B18,TRUE,FALSE)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$108 [Value]:  [Formula]: 
@@ -13500,126 +13500,126 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$112 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$113 [Value]:  [Formula]: 
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$114 [Value]:  [Formula]: 
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$108 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10>=B18,B18,K108)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$108 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10=B18,B18,K108)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$108 [Value]: 0 [Formula]: =IF(Расчет!D9+Расчет!D10<B18,Расчет!D9+Расчет!D10,I108)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$108 [Value]: 0 [Formula]: =IF(K108<=0,0,K108)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$110 [Value]: 0 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J110)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$110 [Value]: 0 [Formula]: =IF(B18<=Расчет!D9+Расчет!D10,0,K110)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$110 [Value]: 0 [Formula]: =IF(B18>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B18-(Расчет!D9+Расчет!D10))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$110 [Value]: 0 [Formula]: =IF(K110<=0,0,K110)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$112 [Value]: 0 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J112)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$112 [Value]: 0 [Formula]: =IF(B18<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K112)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$112 [Value]: 0 [Formula]: =IF(B18>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B18-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$112 [Value]: 0 [Formula]: =IF(K112<=0,0,K112)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$114 [Value]: 0 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J114)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$114 [Value]: 0 [Formula]: =IF(B18>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B18-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$114 [Value]: 0 [Formula]: =IF(K114<=0,0,K114)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$114 [Value]: 0 [Formula]: =IF(B18<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K114)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$115 [Value]: 1,31277099630788 [Formula]: =SQRT((SUMSQ(L108*(Расчет!E9+Расчет!E10)+L110*(Расчет!E12+Расчет!E13)+L112*(Расчет!E15+Расчет!E16)+L114*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L108*(Расчет!F9+Расчет!F10)+L110*(Расчет!F12+Расчет!F13)+L112*(Расчет!F15+Расчет!F16)+L114*(Расчет!F18+Расчет!F19))))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$108 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10>=B18,B18,K108)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$108 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10=B18,B18,K108)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$108 [Value]: 25 [Formula]: =IF(Расчет!D9+Расчет!D10<B18,Расчет!D9+Расчет!D10,I108)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$108 [Value]: 25 [Formula]: =IF(K108<=0,0,K108)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$110 [Value]: 5 [Formula]: =IF(Расчет!D12+Расчет!D13<=0,0,J110)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$110 [Value]: 5 [Formula]: =IF(B18<=Расчет!D9+Расчет!D10,0,K110)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$110 [Value]: 5 [Formula]: =IF(B18>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,Расчет!D12+Расчет!D13,B18-(Расчет!D9+Расчет!D10))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$110 [Value]: 5 [Formula]: =IF(K110<=0,0,K110)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$112 [Value]: 9 [Formula]: =IF(Расчет!D15+Расчет!D16<=0,0,J112)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$112 [Value]: 9 [Formula]: =IF(B18<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13,0,K112)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$112 [Value]: 9 [Formula]: =IF(B18>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,Расчет!D15+Расчет!D16,B18-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$112 [Value]: 9 [Formula]: =IF(K112<=0,0,K112)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$114 [Value]: 13 [Formula]: =IF(Расчет!D18+Расчет!D19<=0,0,J114)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$114 [Value]: 13 [Formula]: =IF(B18>=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16+Расчет!D18+Расчет!D19,Расчет!D18+Расчет!D19,B18-(Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16))
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$114 [Value]: 13 [Formula]: =IF(K114<=0,0,K114)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$114 [Value]: 13 [Formula]: =IF(B18<=Расчет!D9+Расчет!D10+Расчет!D12+Расчет!D13+Расчет!D15+Расчет!D16,0,K114)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$115 [Value]: 28,0424841762954 [Formula]: =SQRT((SUMSQ(L108*(Расчет!E9+Расчет!E10)+L110*(Расчет!E12+Расчет!E13)+L112*(Расчет!E15+Расчет!E16)+L114*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F5+L108*(Расчет!F9+Расчет!F10)+L110*(Расчет!F12+Расчет!F13)+L112*(Расчет!F15+Расчет!F16)+L114*(Расчет!F18+Расчет!F19))))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$116 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ(L108*(Расчет!E9+Расчет!E10)+L110*(Расчет!E12+Расчет!E13)+L112*(Расчет!E15+Расчет!E16)+L114*(Расчет!E18+Расчет!E19)))+(SUMSQ(Расчет!F6+L108*(Расчет!F9+Расчет!F10)+L110*(Расчет!F12+Расчет!F13)+L112*(Расчет!F15+Расчет!F16)+L114*(Расчет!F18+Расчет!F19)))),"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$118 [Value]: 1,98934545943005 [Formula]: =IFERROR(SQRT((SUMSQ((Расчет!D28+Расчет!D29)*(Расчет!E28+Расчет!E29)+(Расчет!D31+Расчет!D32)*(Расчет!E31+Расчет!E32)+(Расчет!D34+Расчет!D35)*(Расчет!E34+Расчет!E35)+(Расчет!D37+Расчет!D38)*(Расчет!E37+Расчет!E38)))+(SUMSQ(Расчет!E5+Расчет!E26+(Расчет!D28+Расчет!D29)*(Расчет!F28+Расчет!F29)+(Расчет!D31+Расчет!D32)*(Расчет!F31+Расчет!F32)+(Расчет!D34+Расчет!D35)*(Расчет!F34+Расчет!F35)+(Расчет!D37+Расчет!D38)*(Расчет!F37+Расчет!F38)))),"---")
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$118 [Value]: 15,8164025991655 [Formula]: =IFERROR(SQRT((SUMSQ((Расчет!D28+Расчет!D29)*(Расчет!E28+Расчет!E29)+(Расчет!D31+Расчет!D32)*(Расчет!E31+Расчет!E32)+(Расчет!D34+Расчет!D35)*(Расчет!E34+Расчет!E35)+(Расчет!D37+Расчет!D38)*(Расчет!E37+Расчет!E38)))+(SUMSQ(Расчет!E5+Расчет!E26+(Расчет!D28+Расчет!D29)*(Расчет!F28+Расчет!F29)+(Расчет!D31+Расчет!D32)*(Расчет!F31+Расчет!F32)+(Расчет!D34+Расчет!D35)*(Расчет!F34+Расчет!F35)+(Расчет!D37+Расчет!D38)*(Расчет!F37+Расчет!F38)))),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$119 [Value]: --- [Formula]: =IFERROR(SQRT((SUMSQ((Расчет!D28+Расчет!D29)*(Расчет!E28+Расчет!E29)+(Расчет!D31+Расчет!D32)*(Расчет!E31+Расчет!E32)+(Расчет!D34+Расчет!D35)*(Расчет!E34+Расчет!E35)+(Расчет!D37+Расчет!D38)*(Расчет!E37+Расчет!E38)))+(SUMSQ(Расчет!E6+Расчет!E26+(Расчет!D28+Расчет!D29)*(Расчет!F28+Расчет!F29)+(Расчет!D31+Расчет!D32)*(Расчет!F31+Расчет!F32)+(Расчет!D34+Расчет!D35)*(Расчет!F34+Расчет!F35)+(Расчет!D37+Расчет!D38)*(Расчет!F37+Расчет!F38)))),"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$145 [Value]: 2399,50456618805 [Formula]: =B145-C145
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$145 [Value]: 2399,50456618805 [Formula]: =B145-2*C145
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$145 [Value]: 2399,50456618805 [Formula]: =B145-3*C145
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$145 [Value]: 2399,50456618805 [Formula]: =B145-4*C145
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$145 [Value]: 2399,50456618805 [Formula]: =B145-5*C145
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$145 [Value]: 2399,50456618805 [Formula]: =B145-6*C145
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$145 [Value]: 2399,50456618805 [Formula]: =B145-7*C145
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$145 [Value]: 2399,50456618805 [Formula]: =B145-8*C145
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$145 [Value]: 2399,50456618805 [Formula]: =B145-9*C145
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$145 [Value]: 2399,50456618805 [Formula]: =B145-10*C145
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$146 [Value]: 2399,50456618805 [Formula]: =B146-C146
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$146 [Value]: 2399,50456618805 [Formula]: =B146-2*C146
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$146 [Value]: 2399,50456618805 [Formula]: =B146-3*C146
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$146 [Value]: 2399,50456618805 [Formula]: =B146-4*C146
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$146 [Value]: 2399,50456618805 [Formula]: =B146-5*C146
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$146 [Value]: 2399,50456618805 [Formula]: =B146-6*C146
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$146 [Value]: 2399,50456618805 [Formula]: =B146-7*C146
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$146 [Value]: 2399,50456618805 [Formula]: =B146-8*C146
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$146 [Value]: 2399,50456618805 [Formula]: =B146-9*C146
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$146 [Value]: 2399,50456618805 [Formula]: =B146-10*C146
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$147 [Value]: 2399,50456618805 [Formula]: =B147-C147
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$147 [Value]: 2399,50456618805 [Formula]: =B147-2*C147
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$147 [Value]: 2399,50456618805 [Formula]: =B147-3*C147
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$147 [Value]: 2399,50456618805 [Formula]: =B147-4*C147
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$147 [Value]: 2399,50456618805 [Formula]: =B147-5*C147
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$147 [Value]: 2399,50456618805 [Formula]: =B147-6*C147
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$147 [Value]: 2399,50456618805 [Formula]: =B147-7*C147
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$147 [Value]: 2399,50456618805 [Formula]: =B147-8*C147
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$147 [Value]: 2399,50456618805 [Formula]: =B147-9*C147
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$147 [Value]: 2399,50456618805 [Formula]: =B147-10*C147
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$148 [Value]: 2399,50456618805 [Formula]: =B148-C148
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$148 [Value]: 2399,50456618805 [Formula]: =B148-2*C148
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$148 [Value]: 2399,50456618805 [Formula]: =B148-3*C148
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$148 [Value]: 2399,50456618805 [Formula]: =B148-4*C148
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$148 [Value]: 2399,50456618805 [Formula]: =B148-5*C148
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$148 [Value]: 2399,50456618805 [Formula]: =B148-6*C148
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$148 [Value]: 2399,50456618805 [Formula]: =B148-7*C148
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$148 [Value]: 2399,50456618805 [Formula]: =B148-8*C148
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$148 [Value]: 2399,50456618805 [Formula]: =B148-9*C148
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$148 [Value]: 2399,50456618805 [Formula]: =B148-10*C148
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$149 [Value]: 2399,50456618805 [Formula]: =B149-C149
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$149 [Value]: 2399,50456618805 [Formula]: =B149-2*C149
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$149 [Value]: 2399,50456618805 [Formula]: =B149-3*C149
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$149 [Value]: 2399,50456618805 [Formula]: =B149-4*C149
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$149 [Value]: 2399,50456618805 [Formula]: =B149-5*C149
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$149 [Value]: 2399,50456618805 [Formula]: =B149-6*C149
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$149 [Value]: 2399,50456618805 [Formula]: =B149-7*C149
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$149 [Value]: 2399,50456618805 [Formula]: =B149-8*C149
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$149 [Value]: 2399,50456618805 [Formula]: =B149-9*C149
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$149 [Value]: 2399,50456618805 [Formula]: =B149-10*C149
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$150 [Value]: 2399,50456618805 [Formula]: =B150-C150
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$150 [Value]: 2399,50456618805 [Formula]: =B150-2*C150
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$150 [Value]: 2399,50456618805 [Formula]: =B150-3*C150
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$150 [Value]: 2399,50456618805 [Formula]: =B150-4*C150
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$150 [Value]: 2399,50456618805 [Formula]: =B150-5*C150
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$150 [Value]: 2399,50456618805 [Formula]: =B150-6*C150
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$150 [Value]: 2399,50456618805 [Formula]: =B150-7*C150
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$150 [Value]: 2399,50456618805 [Formula]: =B150-8*C150
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$150 [Value]: 2399,50456618805 [Formula]: =B150-9*C150
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$150 [Value]: 2399,50456618805 [Formula]: =B150-10*C150
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$151 [Value]: 2399,50456618805 [Formula]: =B151-C151
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$151 [Value]: 2399,50456618805 [Formula]: =B151-2*C151
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$151 [Value]: 2399,50456618805 [Formula]: =B151-3*C151
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$151 [Value]: 2399,50456618805 [Formula]: =B151-4*C151
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$151 [Value]: 2399,50456618805 [Formula]: =B151-5*C151
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$151 [Value]: 2399,50456618805 [Formula]: =B151-6*C151
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$151 [Value]: 2399,50456618805 [Formula]: =B151-7*C151
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$151 [Value]: 2399,50456618805 [Formula]: =B151-8*C151
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$151 [Value]: 2399,50456618805 [Formula]: =B151-9*C151
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$151 [Value]: 2399,50456618805 [Formula]: =B151-10*C151
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$152 [Value]: 2399,50456618805 [Formula]: =B152-C152
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$152 [Value]: 2399,50456618805 [Formula]: =B152-2*C152
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$152 [Value]: 2399,50456618805 [Formula]: =B152-3*C152
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$152 [Value]: 2399,50456618805 [Formula]: =B152-4*C152
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$152 [Value]: 2399,50456618805 [Formula]: =B152-5*C152
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$152 [Value]: 2399,50456618805 [Formula]: =B152-6*C152
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$152 [Value]: 2399,50456618805 [Formula]: =B152-7*C152
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$152 [Value]: 2399,50456618805 [Formula]: =B152-8*C152
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$152 [Value]: 2399,50456618805 [Formula]: =B152-9*C152
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$152 [Value]: 2399,50456618805 [Formula]: =B152-10*C152
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$153 [Value]: 2399,50456618805 [Formula]: =B153-C153
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$153 [Value]: 2399,50456618805 [Formula]: =B153-2*C153
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$153 [Value]: 2399,50456618805 [Formula]: =B153-3*C153
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$153 [Value]: 2399,50456618805 [Formula]: =B153-4*C153
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$153 [Value]: 2399,50456618805 [Formula]: =B153-5*C153
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$153 [Value]: 2399,50456618805 [Formula]: =B153-6*C153
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$153 [Value]: 2399,50456618805 [Formula]: =B153-7*C153
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$153 [Value]: 2399,50456618805 [Formula]: =B153-8*C153
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$153 [Value]: 2399,50456618805 [Formula]: =B153-9*C153
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$153 [Value]: 2399,50456618805 [Formula]: =B153-10*C153
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$154 [Value]: 2399,50456618805 [Formula]: =B154-C154
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$154 [Value]: 2399,50456618805 [Formula]: =B154-2*C154
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$154 [Value]: 2399,50456618805 [Formula]: =B154-3*C154
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$154 [Value]: 2399,50456618805 [Formula]: =B154-4*C154
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$154 [Value]: 2399,50456618805 [Formula]: =B154-5*C154
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$154 [Value]: 2399,50456618805 [Formula]: =B154-6*C154
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$154 [Value]: 2399,50456618805 [Formula]: =B154-7*C154
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$154 [Value]: 2399,50456618805 [Formula]: =B154-8*C154
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$154 [Value]: 2399,50456618805 [Formula]: =B154-9*C154
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$154 [Value]: 2399,50456618805 [Formula]: =B154-10*C154
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$145 [Value]: 5034,93843341371 [Formula]: =B145-C145
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$145 [Value]: 4591,6159972622 [Formula]: =B145-2*C145
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$145 [Value]: 4148,2935611107 [Formula]: =B145-3*C145
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$145 [Value]: 3704,97112495919 [Formula]: =B145-4*C145
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$145 [Value]: 3261,64868880769 [Formula]: =B145-5*C145
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$145 [Value]: 2818,32625265618 [Formula]: =B145-6*C145
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$145 [Value]: 2375,00381650467 [Formula]: =B145-7*C145
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$145 [Value]: 1931,68138035317 [Formula]: =B145-8*C145
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$145 [Value]: 1488,35894420166 [Formula]: =B145-9*C145
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$145 [Value]: 1045,03650805015 [Formula]: =B145-10*C145
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$146 [Value]: 997,807502494295 [Formula]: =B146-C146
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$146 [Value]: 950,578496938439 [Formula]: =B146-2*C146
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$146 [Value]: 903,349491382582 [Formula]: =B146-3*C146
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$146 [Value]: 856,120485826725 [Formula]: =B146-4*C146
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$146 [Value]: 808,891480270868 [Formula]: =B146-5*C146
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$146 [Value]: 761,662474715011 [Formula]: =B146-6*C146
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$146 [Value]: 714,433469159154 [Formula]: =B146-7*C146
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$146 [Value]: 667,204463603297 [Formula]: =B146-8*C146
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$146 [Value]: 619,97545804744 [Formula]: =B146-9*C146
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$146 [Value]: 572,746452491583 [Formula]: =B146-10*C146
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$147 [Value]: 554,903079976795 [Formula]: =B147-C147
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$147 [Value]: 537,059707462008 [Formula]: =B147-2*C147
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$147 [Value]: 519,21633494722 [Formula]: =B147-3*C147
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$147 [Value]: 501,372962432432 [Formula]: =B147-4*C147
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$147 [Value]: 483,529589917645 [Formula]: =B147-5*C147
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$147 [Value]: 465,686217402857 [Formula]: =B147-6*C147
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$147 [Value]: 447,84284488807 [Formula]: =B147-7*C147
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$147 [Value]: 429,999472373282 [Formula]: =B147-8*C147
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$147 [Value]: 412,156099858494 [Formula]: =B147-9*C147
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$147 [Value]: 394,312727343707 [Formula]: =B147-10*C147
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$148 [Value]: 384,943667389117 [Formula]: =B148-C148
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$148 [Value]: 375,574607434527 [Formula]: =B148-2*C148
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$148 [Value]: 366,205547479936 [Formula]: =B148-3*C148
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$148 [Value]: 356,836487525346 [Formula]: =B148-4*C148
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$148 [Value]: 347,467427570756 [Formula]: =B148-5*C148
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$148 [Value]: 338,098367616166 [Formula]: =B148-6*C148
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$148 [Value]: 328,729307661576 [Formula]: =B148-7*C148
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$148 [Value]: 319,360247706986 [Formula]: =B148-8*C148
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$148 [Value]: 309,991187752396 [Formula]: =B148-9*C148
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$148 [Value]: 300,622127797806 [Formula]: =B148-10*C148
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$149 [Value]: 294,865558524974 [Formula]: =B149-C149
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$149 [Value]: 289,108989252142 [Formula]: =B149-2*C149
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$149 [Value]: 283,35241997931 [Formula]: =B149-3*C149
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$149 [Value]: 277,595850706478 [Formula]: =B149-4*C149
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$149 [Value]: 271,839281433647 [Formula]: =B149-5*C149
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$149 [Value]: 266,082712160815 [Formula]: =B149-6*C149
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$149 [Value]: 260,326142887983 [Formula]: =B149-7*C149
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$149 [Value]: 254,569573615151 [Formula]: =B149-8*C149
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$149 [Value]: 248,813004342319 [Formula]: =B149-9*C149
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$149 [Value]: 243,056435069488 [Formula]: =B149-10*C149
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$150 [Value]: 239,19661434196 [Formula]: =B150-C150
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$150 [Value]: 235,336793614432 [Formula]: =B150-2*C150
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$150 [Value]: 231,476972886905 [Formula]: =B150-3*C150
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$150 [Value]: 227,617152159377 [Formula]: =B150-4*C150
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$150 [Value]: 223,75733143185 [Formula]: =B150-5*C150
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$150 [Value]: 219,897510704322 [Formula]: =B150-6*C150
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$150 [Value]: 216,037689976794 [Formula]: =B150-7*C150
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$150 [Value]: 212,177869249267 [Formula]: =B150-8*C150
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$150 [Value]: 208,318048521739 [Formula]: =B150-9*C150
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$150 [Value]: 204,458227794212 [Formula]: =B150-10*C150
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$151 [Value]: 201,656205583817 [Formula]: =B151-C151
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$151 [Value]: 198,854183373423 [Formula]: =B151-2*C151
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$151 [Value]: 196,052161163028 [Formula]: =B151-3*C151
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$151 [Value]: 193,250138952634 [Formula]: =B151-4*C151
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$151 [Value]: 190,448116742239 [Formula]: =B151-5*C151
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$151 [Value]: 187,646094531845 [Formula]: =B151-6*C151
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$151 [Value]: 184,84407232145 [Formula]: =B151-7*C151
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$151 [Value]: 182,042050111056 [Formula]: =B151-8*C151
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$151 [Value]: 179,240027900661 [Formula]: =B151-9*C151
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$151 [Value]: 176,438005690267 [Formula]: =B151-10*C151
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$152 [Value]: 173,986024281876 [Formula]: =B152-C152
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$152 [Value]: 171,534042873485 [Formula]: =B152-2*C152
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$152 [Value]: 169,082061465094 [Formula]: =B152-3*C152
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$152 [Value]: 166,630080056703 [Formula]: =B152-4*C152
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$152 [Value]: 164,178098648312 [Formula]: =B152-5*C152
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$152 [Value]: 161,726117239922 [Formula]: =B152-6*C152
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$152 [Value]: 159,274135831531 [Formula]: =B152-7*C152
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$152 [Value]: 156,82215442314 [Formula]: =B152-8*C152
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$152 [Value]: 154,370173014749 [Formula]: =B152-9*C152
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$152 [Value]: 151,918191606358 [Formula]: =B152-10*C152
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$153 [Value]: 149,698247511736 [Formula]: =B153-C153
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$153 [Value]: 147,478303417114 [Formula]: =B153-2*C153
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$153 [Value]: 145,258359322491 [Formula]: =B153-3*C153
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$153 [Value]: 143,038415227869 [Formula]: =B153-4*C153
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$153 [Value]: 140,818471133247 [Formula]: =B153-5*C153
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$153 [Value]: 138,598527038625 [Formula]: =B153-6*C153
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$153 [Value]: 136,378582944003 [Formula]: =B153-7*C153
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$153 [Value]: 134,15863884938 [Formula]: =B153-8*C153
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$153 [Value]: 131,938694754758 [Formula]: =B153-9*C153
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$153 [Value]: 129,718750660136 [Formula]: =B153-10*C153
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$154 [Value]: 127,979831919235 [Formula]: =B154-C154
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$154 [Value]: 126,240913178335 [Formula]: =B154-2*C154
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$154 [Value]: 124,501994437434 [Formula]: =B154-3*C154
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$154 [Value]: 122,763075696534 [Formula]: =B154-4*C154
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$154 [Value]: 121,024156955633 [Formula]: =B154-5*C154
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$154 [Value]: 119,285238214733 [Formula]: =B154-6*C154
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$154 [Value]: 117,546319473832 [Formula]: =B154-7*C154
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$154 [Value]: 115,807400732932 [Formula]: =B154-8*C154
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$154 [Value]: 114,068481992031 [Formula]: =B154-9*C154
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$154 [Value]: 112,32956325113 [Formula]: =B154-10*C154
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $T$145 [Value]: --- [Formula]: =IFERROR(Q145-R145,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $U$145 [Value]: --- [Formula]: =IFERROR(Q145-2*R145,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $V$145 [Value]: --- [Formula]: =IFERROR(Q145-3*R145,"---")
@@ -13720,16 +13720,16 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $AA$154 [Value]: --- [Formula]: =IFERROR(Q154-8*R154,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $AB$154 [Value]: --- [Formula]: =IFERROR(Q154-9*R154,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $AC$154 [Value]: --- [Formula]: =IFERROR(Q154-10*R154,"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$145 [Value]: 0 [Formula]: =(B145-B146)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$146 [Value]: 0 [Formula]: =(B146-B147)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$147 [Value]: 0 [Formula]: =(B147-B148)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$148 [Value]: 0 [Formula]: =(B148-B149)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$149 [Value]: 0 [Formula]: =(B149-B150)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$150 [Value]: 0 [Formula]: =(B150-B151)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$151 [Value]: 0 [Formula]: =(B151-B152)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$152 [Value]: 0 [Formula]: =(B152-B153)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$153 [Value]: 0 [Formula]: =(B153-B154)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$154 [Value]: 0 [Formula]: =(B154-B155)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$145 [Value]: 443,322436151507 [Formula]: =(B145-B146)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$146 [Value]: 47,229005555857 [Formula]: =(B146-B147)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$147 [Value]: 17,8433725147876 [Formula]: =(B147-B148)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$148 [Value]: 9,3690599545901 [Formula]: =(B148-B149)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$149 [Value]: 5,75656927283181 [Formula]: =(B149-B150)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$150 [Value]: 3,85982072752761 [Formula]: =(B150-B151)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$151 [Value]: 2,80202221039447 [Formula]: =(B151-B152)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$152 [Value]: 2,45198140839088 [Formula]: =(B152-B153)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$153 [Value]: 2,21994409462221 [Formula]: =(B153-B154)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$154 [Value]: 1,73891874090055 [Formula]: =(B154-B155)/10
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$145 [Value]: --- [Formula]: =IFERROR((Q145-Q146)/10,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$146 [Value]: --- [Formula]: =IFERROR((Q146-Q147)/10,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$147 [Value]: --- [Formula]: =IFERROR((Q147-Q148)/10,"---")
@@ -13740,17 +13740,17 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$152 [Value]: --- [Formula]: =IFERROR((Q152-Q153)/10,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$153 [Value]: --- [Formula]: =IFERROR((Q153-Q154)/10,"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$154 [Value]: --- [Formula]: =IFERROR((Q154-Q155)/10,"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$145 [Value]: 2399,50456618805 [Formula]: =B20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$146 [Value]: 2399,50456618805 [Formula]: =B21
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$147 [Value]: 2399,50456618805 [Formula]: =B22
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$148 [Value]: 2399,50456618805 [Formula]: =B23
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$149 [Value]: 2399,50456618805 [Formula]: =B24
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$150 [Value]: 2399,50456618805 [Formula]: =B25
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$151 [Value]: 2399,50456618805 [Formula]: =B26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$152 [Value]: 2399,50456618805 [Formula]: =B27
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$153 [Value]: 2399,50456618805 [Formula]: =B28
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$154 [Value]: 2399,50456618805 [Formula]: =B29
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$155 [Value]: 2399,50456618805 [Formula]: =B30
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$145 [Value]: 5478,26086956522 [Formula]: =B20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$146 [Value]: 1045,03650805015 [Formula]: =B21
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$147 [Value]: 572,746452491583 [Formula]: =B22
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$148 [Value]: 394,312727343707 [Formula]: =B23
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$149 [Value]: 300,622127797806 [Formula]: =B24
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$150 [Value]: 243,056435069488 [Formula]: =B25
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$151 [Value]: 204,458227794212 [Formula]: =B26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$152 [Value]: 176,438005690267 [Formula]: =B27
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$153 [Value]: 151,918191606358 [Formula]: =B28
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$154 [Value]: 129,718750660136 [Formula]: =B29
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$155 [Value]: 112,32956325113 [Formula]: =B30
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$145 [Value]: [Error 2042] [Formula]: =P20
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$146 [Value]: [Error 2042] [Formula]: =P21
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$147 [Value]: [Error 2042] [Formula]: =P22
@@ -13762,8 +13762,8 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$153 [Value]: [Error 2042] [Formula]: =P28
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$154 [Value]: [Error 2042] [Formula]: =P29
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$155 [Value]: [Error 2042] [Formula]: =P30
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$157 [Value]: 0 [Formula]: =Расчет!K26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$158 [Value]: 100 [Formula]: =COUNTIF(E167:N177,">0")
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$157 [Value]: 980 [Formula]: =Расчет!K26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$158 [Value]: 10 [Formula]: =COUNTIF(E167:N177,">0")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$157 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$26)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$158 [Value]: --- [Formula]: =IF(R157="---","---",(COUNTIF(T167:AC177,">0")))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$167 [Value]: 1 [Formula]: =IF(C157>F145,0,F156)
@@ -13775,87 +13775,87 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$167 [Value]: 7 [Formula]: =IF(C157>L145,0,L156)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$167 [Value]: 8 [Formula]: =IF(C157>M145,0,M156)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$167 [Value]: 9 [Formula]: =IF(C157>N145,0,N156)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$168 [Value]: 11 [Formula]: =IF(C157>F146,0,F157)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$168 [Value]: 12 [Formula]: =IF(C157>G146,0,G157)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$168 [Value]: 13 [Formula]: =IF(C157>H146,0,H157)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$168 [Value]: 14 [Formula]: =IF(C157>I146,0,I157)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$168 [Value]: 15 [Formula]: =IF(C157>J146,0,J157)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$168 [Value]: 16 [Formula]: =IF(C157>K146,0,K157)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$168 [Value]: 17 [Formula]: =IF(C157>L146,0,L157)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$168 [Value]: 18 [Formula]: =IF(C157>M146,0,M157)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$168 [Value]: 19 [Formula]: =IF(C157>N146,0,N157)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$169 [Value]: 21 [Formula]: =IF(C157>F147,0,F158)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$169 [Value]: 22 [Formula]: =IF(C157>G147,0,G158)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$169 [Value]: 23 [Formula]: =IF(C157>H147,0,H158)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$169 [Value]: 24 [Formula]: =IF(C157>I147,0,I158)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$169 [Value]: 25 [Formula]: =IF(C157>J147,0,J158)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$169 [Value]: 26 [Formula]: =IF(C157>K147,0,K158)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$169 [Value]: 27 [Formula]: =IF(C157>L147,0,L158)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$169 [Value]: 28 [Formula]: =IF(C157>M147,0,M158)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$169 [Value]: 29 [Formula]: =IF(C157>N147,0,N158)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$170 [Value]: 31 [Formula]: =IF(C157>F148,0,F159)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$170 [Value]: 32 [Formula]: =IF(C157>G148,0,G159)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$170 [Value]: 33 [Formula]: =IF(C157>H148,0,H159)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$170 [Value]: 34 [Formula]: =IF(C157>I148,0,I159)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$170 [Value]: 35 [Formula]: =IF(C157>J148,0,J159)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$170 [Value]: 36 [Formula]: =IF(C157>K148,0,K159)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$170 [Value]: 37 [Formula]: =IF(C157>L148,0,L159)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$170 [Value]: 38 [Formula]: =IF(C157>M148,0,M159)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$170 [Value]: 39 [Formula]: =IF(C157>N148,0,N159)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$171 [Value]: 41 [Formula]: =IF(C157>F149,0,F160)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$171 [Value]: 42 [Formula]: =IF(C157>G149,0,G160)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$171 [Value]: 43 [Formula]: =IF(C157>H149,0,H160)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$171 [Value]: 44 [Formula]: =IF(C157>I149,0,I160)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$171 [Value]: 45 [Formula]: =IF(C157>J149,0,J160)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$171 [Value]: 46 [Formula]: =IF(C157>K149,0,K160)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$171 [Value]: 47 [Formula]: =IF(C157>L149,0,L160)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$171 [Value]: 48 [Formula]: =IF(C157>M149,0,M160)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$171 [Value]: 49 [Formula]: =IF(C157>N149,0,N160)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$172 [Value]: 51 [Formula]: =IF(C157>F150,0,F161)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$172 [Value]: 52 [Formula]: =IF(C157>G150,0,G161)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$172 [Value]: 53 [Formula]: =IF(C157>H150,0,H161)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$172 [Value]: 54 [Formula]: =IF(C157>I150,0,I161)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$172 [Value]: 55 [Formula]: =IF(C157>J150,0,J161)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$172 [Value]: 56 [Formula]: =IF(C157>K150,0,K161)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$172 [Value]: 57 [Formula]: =IF(C157>L150,0,L161)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$172 [Value]: 58 [Formula]: =IF(C157>M150,0,M161)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$172 [Value]: 59 [Formula]: =IF(C157>N150,0,N161)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$173 [Value]: 61 [Formula]: =IF(C157>F151,0,F162)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$173 [Value]: 62 [Formula]: =IF(C157>G151,0,G162)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$173 [Value]: 63 [Formula]: =IF(C157>H151,0,H162)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$173 [Value]: 64 [Formula]: =IF(C157>I151,0,I162)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$173 [Value]: 65 [Formula]: =IF(C157>J151,0,J162)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$173 [Value]: 66 [Formula]: =IF(C157>K151,0,K162)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$173 [Value]: 67 [Formula]: =IF(C157>L151,0,L162)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$173 [Value]: 68 [Formula]: =IF(C157>M151,0,M162)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$173 [Value]: 69 [Formula]: =IF(C157>N151,0,N162)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$174 [Value]: 71 [Formula]: =IF(C157>F152,0,F163)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$174 [Value]: 72 [Formula]: =IF(C157>G152,0,G163)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$174 [Value]: 73 [Formula]: =IF(C157>H152,0,H163)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$174 [Value]: 74 [Formula]: =IF(C157>I152,0,I163)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$174 [Value]: 75 [Formula]: =IF(C157>J152,0,J163)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$174 [Value]: 76 [Formula]: =IF(C157>K152,0,K163)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$174 [Value]: 77 [Formula]: =IF(C157>L152,0,L163)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$174 [Value]: 78 [Formula]: =IF(C157>M152,0,M163)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$174 [Value]: 79 [Formula]: =IF(C157>N152,0,N163)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$175 [Value]: 81 [Formula]: =IF(C157>F153,0,F164)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$175 [Value]: 82 [Formula]: =IF(C157>G153,0,G164)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$175 [Value]: 83 [Formula]: =IF(C157>H153,0,H164)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$175 [Value]: 84 [Formula]: =IF(C157>I153,0,I164)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$175 [Value]: 85 [Formula]: =IF(C157>J153,0,J164)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$175 [Value]: 86 [Formula]: =IF(C157>K153,0,K164)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$175 [Value]: 87 [Formula]: =IF(C157>L153,0,L164)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$175 [Value]: 88 [Formula]: =IF(C157>M153,0,M164)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$175 [Value]: 89 [Formula]: =IF(C157>N153,0,N164)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$176 [Value]: 91 [Formula]: =IF(C157>F154,0,F165)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$176 [Value]: 92 [Formula]: =IF(C157>G154,0,G165)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$176 [Value]: 93 [Formula]: =IF(C157>H154,0,H165)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$176 [Value]: 94 [Formula]: =IF(C157>I154,0,I165)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$176 [Value]: 95 [Formula]: =IF(C157>J154,0,J165)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$176 [Value]: 96 [Formula]: =IF(C157>K154,0,K165)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$176 [Value]: 97 [Formula]: =IF(C157>L154,0,L165)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$176 [Value]: 98 [Formula]: =IF(C157>M154,0,M165)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$176 [Value]: 99 [Formula]: =IF(C157>N154,0,N165)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$168 [Value]: 0 [Formula]: =IF(C157>F146,0,F157)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$168 [Value]: 0 [Formula]: =IF(C157>G146,0,G157)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$168 [Value]: 0 [Formula]: =IF(C157>H146,0,H157)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$168 [Value]: 0 [Formula]: =IF(C157>I146,0,I157)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$168 [Value]: 0 [Formula]: =IF(C157>J146,0,J157)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$168 [Value]: 0 [Formula]: =IF(C157>K146,0,K157)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$168 [Value]: 0 [Formula]: =IF(C157>L146,0,L157)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$168 [Value]: 0 [Formula]: =IF(C157>M146,0,M157)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$168 [Value]: 0 [Formula]: =IF(C157>N146,0,N157)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$169 [Value]: 0 [Formula]: =IF(C157>F147,0,F158)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$169 [Value]: 0 [Formula]: =IF(C157>G147,0,G158)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$169 [Value]: 0 [Formula]: =IF(C157>H147,0,H158)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$169 [Value]: 0 [Formula]: =IF(C157>I147,0,I158)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$169 [Value]: 0 [Formula]: =IF(C157>J147,0,J158)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$169 [Value]: 0 [Formula]: =IF(C157>K147,0,K158)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$169 [Value]: 0 [Formula]: =IF(C157>L147,0,L158)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$169 [Value]: 0 [Formula]: =IF(C157>M147,0,M158)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$169 [Value]: 0 [Formula]: =IF(C157>N147,0,N158)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$170 [Value]: 0 [Formula]: =IF(C157>F148,0,F159)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$170 [Value]: 0 [Formula]: =IF(C157>G148,0,G159)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$170 [Value]: 0 [Formula]: =IF(C157>H148,0,H159)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$170 [Value]: 0 [Formula]: =IF(C157>I148,0,I159)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$170 [Value]: 0 [Formula]: =IF(C157>J148,0,J159)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$170 [Value]: 0 [Formula]: =IF(C157>K148,0,K159)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$170 [Value]: 0 [Formula]: =IF(C157>L148,0,L159)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$170 [Value]: 0 [Formula]: =IF(C157>M148,0,M159)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$170 [Value]: 0 [Formula]: =IF(C157>N148,0,N159)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$171 [Value]: 0 [Formula]: =IF(C157>F149,0,F160)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$171 [Value]: 0 [Formula]: =IF(C157>G149,0,G160)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$171 [Value]: 0 [Formula]: =IF(C157>H149,0,H160)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$171 [Value]: 0 [Formula]: =IF(C157>I149,0,I160)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$171 [Value]: 0 [Formula]: =IF(C157>J149,0,J160)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$171 [Value]: 0 [Formula]: =IF(C157>K149,0,K160)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$171 [Value]: 0 [Formula]: =IF(C157>L149,0,L160)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$171 [Value]: 0 [Formula]: =IF(C157>M149,0,M160)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$171 [Value]: 0 [Formula]: =IF(C157>N149,0,N160)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$172 [Value]: 0 [Formula]: =IF(C157>F150,0,F161)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$172 [Value]: 0 [Formula]: =IF(C157>G150,0,G161)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$172 [Value]: 0 [Formula]: =IF(C157>H150,0,H161)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$172 [Value]: 0 [Formula]: =IF(C157>I150,0,I161)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$172 [Value]: 0 [Formula]: =IF(C157>J150,0,J161)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$172 [Value]: 0 [Formula]: =IF(C157>K150,0,K161)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$172 [Value]: 0 [Formula]: =IF(C157>L150,0,L161)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$172 [Value]: 0 [Formula]: =IF(C157>M150,0,M161)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$172 [Value]: 0 [Formula]: =IF(C157>N150,0,N161)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$173 [Value]: 0 [Formula]: =IF(C157>F151,0,F162)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$173 [Value]: 0 [Formula]: =IF(C157>G151,0,G162)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$173 [Value]: 0 [Formula]: =IF(C157>H151,0,H162)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$173 [Value]: 0 [Formula]: =IF(C157>I151,0,I162)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$173 [Value]: 0 [Formula]: =IF(C157>J151,0,J162)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$173 [Value]: 0 [Formula]: =IF(C157>K151,0,K162)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$173 [Value]: 0 [Formula]: =IF(C157>L151,0,L162)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$173 [Value]: 0 [Formula]: =IF(C157>M151,0,M162)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$173 [Value]: 0 [Formula]: =IF(C157>N151,0,N162)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$174 [Value]: 0 [Formula]: =IF(C157>F152,0,F163)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$174 [Value]: 0 [Formula]: =IF(C157>G152,0,G163)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$174 [Value]: 0 [Formula]: =IF(C157>H152,0,H163)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$174 [Value]: 0 [Formula]: =IF(C157>I152,0,I163)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$174 [Value]: 0 [Formula]: =IF(C157>J152,0,J163)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$174 [Value]: 0 [Formula]: =IF(C157>K152,0,K163)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$174 [Value]: 0 [Formula]: =IF(C157>L152,0,L163)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$174 [Value]: 0 [Formula]: =IF(C157>M152,0,M163)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$174 [Value]: 0 [Formula]: =IF(C157>N152,0,N163)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$175 [Value]: 0 [Formula]: =IF(C157>F153,0,F164)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$175 [Value]: 0 [Formula]: =IF(C157>G153,0,G164)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$175 [Value]: 0 [Formula]: =IF(C157>H153,0,H164)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$175 [Value]: 0 [Formula]: =IF(C157>I153,0,I164)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$175 [Value]: 0 [Formula]: =IF(C157>J153,0,J164)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$175 [Value]: 0 [Formula]: =IF(C157>K153,0,K164)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$175 [Value]: 0 [Formula]: =IF(C157>L153,0,L164)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$175 [Value]: 0 [Formula]: =IF(C157>M153,0,M164)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$175 [Value]: 0 [Formula]: =IF(C157>N153,0,N164)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$176 [Value]: 0 [Formula]: =IF(C157>F154,0,F165)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$176 [Value]: 0 [Formula]: =IF(C157>G154,0,G165)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$176 [Value]: 0 [Formula]: =IF(C157>H154,0,H165)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$176 [Value]: 0 [Formula]: =IF(C157>I154,0,I165)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$176 [Value]: 0 [Formula]: =IF(C157>J154,0,J165)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$176 [Value]: 0 [Formula]: =IF(C157>K154,0,K165)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$176 [Value]: 0 [Formula]: =IF(C157>L154,0,L165)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$176 [Value]: 0 [Formula]: =IF(C157>M154,0,M165)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$176 [Value]: 0 [Formula]: =IF(C157>N154,0,N165)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $U$167 [Value]: --- [Formula]: =IF($R$157="---","---",IF($R$157>U145,0,U156))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $V$167 [Value]: --- [Formula]: =IF($R$157="---","---",IF($R$157>V145,0,V156))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $W$167 [Value]: --- [Formula]: =IF($R$157="---","---",IF($R$157>W145,0,W156))
@@ -13948,15 +13948,15 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $AC$176 [Value]: --- [Formula]: =IF($R$157="---","---",IF($R$157>AC154,0,AC165))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$167 [Value]: 0 [Formula]: =IF(C157>E145,0,E156)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$168 [Value]: 10 [Formula]: =IF(C157>E146,0,E157)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$169 [Value]: 20 [Formula]: =IF(C157>E147,0,E158)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$170 [Value]: 30 [Formula]: =IF(C157>E148,0,E159)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$171 [Value]: 40 [Formula]: =IF(C157>E149,0,E160)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$172 [Value]: 50 [Formula]: =IF(C157>E150,0,E161)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$173 [Value]: 60 [Formula]: =IF(C157>E151,0,E162)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$174 [Value]: 70 [Formula]: =IF(C157>E152,0,E163)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$175 [Value]: 80 [Formula]: =IF(C157>E153,0,E164)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$176 [Value]: 90 [Formula]: =IF(C157>E154,0,E165)
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$177 [Value]: 100 [Formula]: =IF(C157>E154,0,E166)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$169 [Value]: 0 [Formula]: =IF(C157>E147,0,E158)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$170 [Value]: 0 [Formula]: =IF(C157>E148,0,E159)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$171 [Value]: 0 [Formula]: =IF(C157>E149,0,E160)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$172 [Value]: 0 [Formula]: =IF(C157>E150,0,E161)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$173 [Value]: 0 [Formula]: =IF(C157>E151,0,E162)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$174 [Value]: 0 [Formula]: =IF(C157>E152,0,E163)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$175 [Value]: 0 [Formula]: =IF(C157>E153,0,E164)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$176 [Value]: 0 [Formula]: =IF(C157>E154,0,E165)
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$177 [Value]: 0 [Formula]: =IF(C157>E154,0,E166)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $T$167 [Value]: --- [Formula]: =IF($R$157="---","---",IF($R$157>T145,0,T156))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $T$168 [Value]: --- [Formula]: =IF($R$157="---","---",IF($R$157>T146,0,T157))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $T$169 [Value]: --- [Formula]: =IF($R$157="---","---",IF($R$157>T147,0,T158))
@@ -13968,106 +13968,106 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $T$175 [Value]: --- [Formula]: =IF($R$157="---","---",IF($R$157>T153,0,T164))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $T$176 [Value]: --- [Formula]: =IF($R$157="---","---",IF($R$157>T154,0,T165))
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $T$177 [Value]: --- [Formula]: =IF($R$157="---","---",IF($R$157>T154,0,T166))
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$180 [Value]: 1599,66971079203 [Formula]: =B180-C180
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$180 [Value]: 1599,66971079203 [Formula]: =B180-2*C180
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$180 [Value]: 1599,66971079203 [Formula]: =B180-3*C180
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$180 [Value]: 1599,66971079203 [Formula]: =B180-4*C180
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$180 [Value]: 1599,66971079203 [Formula]: =B180-5*C180
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$180 [Value]: 1599,66971079203 [Formula]: =B180-6*C180
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$180 [Value]: 1599,66971079203 [Formula]: =B180-7*C180
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$180 [Value]: 1599,66971079203 [Formula]: =B180-8*C180
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$180 [Value]: 1599,66971079203 [Formula]: =B180-9*C180
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$180 [Value]: 1599,66971079203 [Formula]: =B180-10*C180
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$181 [Value]: 1599,66971079203 [Formula]: =B181-C181
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$181 [Value]: 1599,66971079203 [Formula]: =B181-2*C181
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$181 [Value]: 1599,66971079203 [Formula]: =B181-3*C181
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$181 [Value]: 1599,66971079203 [Formula]: =B181-4*C181
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$181 [Value]: 1599,66971079203 [Formula]: =B181-5*C181
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$181 [Value]: 1599,66971079203 [Formula]: =B181-6*C181
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$181 [Value]: 1599,66971079203 [Formula]: =B181-7*C181
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$181 [Value]: 1599,66971079203 [Formula]: =B181-8*C181
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$181 [Value]: 1599,66971079203 [Formula]: =B181-9*C181
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$181 [Value]: 1599,66971079203 [Formula]: =B181-10*C181
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$182 [Value]: 1599,66971079203 [Formula]: =B182-C182
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$182 [Value]: 1599,66971079203 [Formula]: =B182-2*C182
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$182 [Value]: 1599,66971079203 [Formula]: =B182-3*C182
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$182 [Value]: 1599,66971079203 [Formula]: =B182-4*C182
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$182 [Value]: 1599,66971079203 [Formula]: =B182-5*C182
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$182 [Value]: 1599,66971079203 [Formula]: =B182-6*C182
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$182 [Value]: 1599,66971079203 [Formula]: =B182-7*C182
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$182 [Value]: 1599,66971079203 [Formula]: =B182-8*C182
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$182 [Value]: 1599,66971079203 [Formula]: =B182-9*C182
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$182 [Value]: 1599,66971079203 [Formula]: =B182-10*C182
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$183 [Value]: 1599,66971079203 [Formula]: =B183-C183
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$183 [Value]: 1599,66971079203 [Formula]: =B183-2*C183
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$183 [Value]: 1599,66971079203 [Formula]: =B183-3*C183
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$183 [Value]: 1599,66971079203 [Formula]: =B183-4*C183
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$183 [Value]: 1599,66971079203 [Formula]: =B183-5*C183
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$183 [Value]: 1599,66971079203 [Formula]: =B183-6*C183
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$183 [Value]: 1599,66971079203 [Formula]: =B183-7*C183
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$183 [Value]: 1599,66971079203 [Formula]: =B183-8*C183
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$183 [Value]: 1599,66971079203 [Formula]: =B183-9*C183
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$183 [Value]: 1599,66971079203 [Formula]: =B183-10*C183
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$184 [Value]: 1599,66971079203 [Formula]: =B184-C184
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$184 [Value]: 1599,66971079203 [Formula]: =B184-2*C184
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$184 [Value]: 1599,66971079203 [Formula]: =B184-3*C184
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$184 [Value]: 1599,66971079203 [Formula]: =B184-4*C184
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$184 [Value]: 1599,66971079203 [Formula]: =B184-5*C184
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$184 [Value]: 1599,66971079203 [Formula]: =B184-6*C184
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$184 [Value]: 1599,66971079203 [Formula]: =B184-7*C184
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$184 [Value]: 1599,66971079203 [Formula]: =B184-8*C184
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$184 [Value]: 1599,66971079203 [Formula]: =B184-9*C184
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$184 [Value]: 1599,66971079203 [Formula]: =B184-10*C184
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$185 [Value]: 1599,66971079203 [Formula]: =B185-C185
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$185 [Value]: 1599,66971079203 [Formula]: =B185-2*C185
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$185 [Value]: 1599,66971079203 [Formula]: =B185-3*C185
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$185 [Value]: 1599,66971079203 [Formula]: =B185-4*C185
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$185 [Value]: 1599,66971079203 [Formula]: =B185-5*C185
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$185 [Value]: 1599,66971079203 [Formula]: =B185-6*C185
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$185 [Value]: 1599,66971079203 [Formula]: =B185-7*C185
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$185 [Value]: 1599,66971079203 [Formula]: =B185-8*C185
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$185 [Value]: 1599,66971079203 [Formula]: =B185-9*C185
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$185 [Value]: 1599,66971079203 [Formula]: =B185-10*C185
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$186 [Value]: 1599,66971079203 [Formula]: =B186-C186
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$186 [Value]: 1599,66971079203 [Formula]: =B186-2*C186
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$186 [Value]: 1599,66971079203 [Formula]: =B186-3*C186
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$186 [Value]: 1599,66971079203 [Formula]: =B186-4*C186
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$186 [Value]: 1599,66971079203 [Formula]: =B186-5*C186
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$186 [Value]: 1599,66971079203 [Formula]: =B186-6*C186
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$186 [Value]: 1599,66971079203 [Formula]: =B186-7*C186
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$186 [Value]: 1599,66971079203 [Formula]: =B186-8*C186
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$186 [Value]: 1599,66971079203 [Formula]: =B186-9*C186
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$186 [Value]: 1599,66971079203 [Formula]: =B186-10*C186
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$187 [Value]: 1599,66971079203 [Formula]: =B187-C187
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$187 [Value]: 1599,66971079203 [Formula]: =B187-2*C187
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$187 [Value]: 1599,66971079203 [Formula]: =B187-3*C187
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$187 [Value]: 1599,66971079203 [Formula]: =B187-4*C187
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$187 [Value]: 1599,66971079203 [Formula]: =B187-5*C187
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$187 [Value]: 1599,66971079203 [Formula]: =B187-6*C187
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$187 [Value]: 1599,66971079203 [Formula]: =B187-7*C187
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$187 [Value]: 1599,66971079203 [Formula]: =B187-8*C187
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$187 [Value]: 1599,66971079203 [Formula]: =B187-9*C187
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$187 [Value]: 1599,66971079203 [Formula]: =B187-10*C187
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$188 [Value]: 1599,66971079203 [Formula]: =B188-C188
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$188 [Value]: 1599,66971079203 [Formula]: =B188-2*C188
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$188 [Value]: 1599,66971079203 [Formula]: =B188-3*C188
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$188 [Value]: 1599,66971079203 [Formula]: =B188-4*C188
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$188 [Value]: 1599,66971079203 [Formula]: =B188-5*C188
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$188 [Value]: 1599,66971079203 [Formula]: =B188-6*C188
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$188 [Value]: 1599,66971079203 [Formula]: =B188-7*C188
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$188 [Value]: 1599,66971079203 [Formula]: =B188-8*C188
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$188 [Value]: 1599,66971079203 [Formula]: =B188-9*C188
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$188 [Value]: 1599,66971079203 [Formula]: =B188-10*C188
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$189 [Value]: 1599,66971079203 [Formula]: =B189-C189
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$189 [Value]: 1599,66971079203 [Formula]: =B189-2*C189
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$189 [Value]: 1599,66971079203 [Formula]: =B189-3*C189
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$189 [Value]: 1599,66971079203 [Formula]: =B189-4*C189
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$189 [Value]: 1599,66971079203 [Formula]: =B189-5*C189
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$189 [Value]: 1599,66971079203 [Formula]: =B189-6*C189
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$189 [Value]: 1599,66971079203 [Formula]: =B189-7*C189
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$189 [Value]: 1599,66971079203 [Formula]: =B189-8*C189
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$189 [Value]: 1599,66971079203 [Formula]: =B189-9*C189
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$189 [Value]: 1599,66971079203 [Formula]: =B189-10*C189
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$180 [Value]: 3356,62562227581 [Formula]: =B180-C180
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$180 [Value]: 3061,07733150814 [Formula]: =B180-2*C180
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$180 [Value]: 2765,52904074047 [Formula]: =B180-3*C180
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$180 [Value]: 2469,98074997279 [Formula]: =B180-4*C180
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$180 [Value]: 2174,43245920512 [Formula]: =B180-5*C180
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$180 [Value]: 1878,88416843745 [Formula]: =B180-6*C180
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$180 [Value]: 1583,33587766978 [Formula]: =B180-7*C180
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$180 [Value]: 1287,78758690211 [Formula]: =B180-8*C180
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$180 [Value]: 992,239296134439 [Formula]: =B180-9*C180
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$180 [Value]: 696,691005366768 [Formula]: =B180-10*C180
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$181 [Value]: 665,205001662864 [Formula]: =B181-C181
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$181 [Value]: 633,718997958959 [Formula]: =B181-2*C181
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$181 [Value]: 602,232994255054 [Formula]: =B181-3*C181
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$181 [Value]: 570,74699055115 [Formula]: =B181-4*C181
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$181 [Value]: 539,260986847245 [Formula]: =B181-5*C181
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$181 [Value]: 507,77498314334 [Formula]: =B181-6*C181
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$181 [Value]: 476,288979439436 [Formula]: =B181-7*C181
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$181 [Value]: 444,802975735531 [Formula]: =B181-8*C181
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$181 [Value]: 413,316972031627 [Formula]: =B181-9*C181
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$181 [Value]: 381,830968327722 [Formula]: =B181-10*C181
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$182 [Value]: 369,935386651197 [Formula]: =B182-C182
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$182 [Value]: 358,039804974672 [Formula]: =B182-2*C182
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$182 [Value]: 346,144223298147 [Formula]: =B182-3*C182
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$182 [Value]: 334,248641621622 [Formula]: =B182-4*C182
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$182 [Value]: 322,353059945097 [Formula]: =B182-5*C182
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$182 [Value]: 310,457478268571 [Formula]: =B182-6*C182
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$182 [Value]: 298,561896592046 [Formula]: =B182-7*C182
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$182 [Value]: 286,666314915521 [Formula]: =B182-8*C182
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$182 [Value]: 274,770733238996 [Formula]: =B182-9*C182
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$182 [Value]: 262,875151562471 [Formula]: =B182-10*C182
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$183 [Value]: 256,629111592744 [Formula]: =B183-C183
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$183 [Value]: 250,383071623018 [Formula]: =B183-2*C183
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$183 [Value]: 244,137031653291 [Formula]: =B183-3*C183
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$183 [Value]: 237,890991683564 [Formula]: =B183-4*C183
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$183 [Value]: 231,644951713837 [Formula]: =B183-5*C183
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$183 [Value]: 225,398911744111 [Formula]: =B183-6*C183
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$183 [Value]: 219,152871774384 [Formula]: =B183-7*C183
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$183 [Value]: 212,906831804657 [Formula]: =B183-8*C183
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$183 [Value]: 206,660791834931 [Formula]: =B183-9*C183
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$183 [Value]: 200,414751865204 [Formula]: =B183-10*C183
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$184 [Value]: 196,577039016649 [Formula]: =B184-C184
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$184 [Value]: 192,739326168095 [Formula]: =B184-2*C184
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$184 [Value]: 188,90161331954 [Formula]: =B184-3*C184
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$184 [Value]: 185,063900470986 [Formula]: =B184-4*C184
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$184 [Value]: 181,226187622431 [Formula]: =B184-5*C184
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$184 [Value]: 177,388474773877 [Formula]: =B184-6*C184
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$184 [Value]: 173,550761925322 [Formula]: =B184-7*C184
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$184 [Value]: 169,713049076768 [Formula]: =B184-8*C184
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$184 [Value]: 165,875336228213 [Formula]: =B184-9*C184
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$184 [Value]: 162,037623379658 [Formula]: =B184-10*C184
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$185 [Value]: 159,464409561307 [Formula]: =B185-C185
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$185 [Value]: 156,891195742955 [Formula]: =B185-2*C185
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$185 [Value]: 154,317981924603 [Formula]: =B185-3*C185
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$185 [Value]: 151,744768106251 [Formula]: =B185-4*C185
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$185 [Value]: 149,1715542879 [Formula]: =B185-5*C185
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$185 [Value]: 146,598340469548 [Formula]: =B185-6*C185
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$185 [Value]: 144,025126651196 [Formula]: =B185-7*C185
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$185 [Value]: 141,451912832844 [Formula]: =B185-8*C185
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$185 [Value]: 138,878699014493 [Formula]: =B185-9*C185
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$185 [Value]: 136,305485196141 [Formula]: =B185-10*C185
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$186 [Value]: 134,437470389211 [Formula]: =B186-C186
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$186 [Value]: 132,569455582282 [Formula]: =B186-2*C186
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$186 [Value]: 130,701440775352 [Formula]: =B186-3*C186
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$186 [Value]: 128,833425968422 [Formula]: =B186-4*C186
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$186 [Value]: 126,965411161493 [Formula]: =B186-5*C186
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$186 [Value]: 125,097396354563 [Formula]: =B186-6*C186
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$186 [Value]: 123,229381547634 [Formula]: =B186-7*C186
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$186 [Value]: 121,361366740704 [Formula]: =B186-8*C186
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$186 [Value]: 119,493351933774 [Formula]: =B186-9*C186
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$186 [Value]: 117,625337126845 [Formula]: =B186-10*C186
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$187 [Value]: 115,990682854584 [Formula]: =B187-C187
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$187 [Value]: 114,356028582323 [Formula]: =B187-2*C187
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$187 [Value]: 112,721374310063 [Formula]: =B187-3*C187
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$187 [Value]: 111,086720037802 [Formula]: =B187-4*C187
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$187 [Value]: 109,452065765542 [Formula]: =B187-5*C187
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$187 [Value]: 107,817411493281 [Formula]: =B187-6*C187
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$187 [Value]: 106,18275722102 [Formula]: =B187-7*C187
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$187 [Value]: 104,54810294876 [Formula]: =B187-8*C187
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$187 [Value]: 102,913448676499 [Formula]: =B187-9*C187
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$187 [Value]: 101,278794404239 [Formula]: =B187-10*C187
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$188 [Value]: 99,7988316744906 [Formula]: =B188-C188
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$188 [Value]: 98,3188689447424 [Formula]: =B188-2*C188
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$188 [Value]: 96,8389062149943 [Formula]: =B188-3*C188
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$188 [Value]: 95,3589434852461 [Formula]: =B188-4*C188
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$188 [Value]: 93,878980755498 [Formula]: =B188-5*C188
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$188 [Value]: 92,3990180257499 [Formula]: =B188-6*C188
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$188 [Value]: 90,9190552960017 [Formula]: =B188-7*C188
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$188 [Value]: 89,4390925662536 [Formula]: =B188-8*C188
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$188 [Value]: 87,9591298365054 [Formula]: =B188-9*C188
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$188 [Value]: 86,4791671067573 [Formula]: =B188-10*C188
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $E$189 [Value]: 85,3198879461569 [Formula]: =B189-C189
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $F$189 [Value]: 84,1606087855566 [Formula]: =B189-2*C189
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $G$189 [Value]: 83,0013296249562 [Formula]: =B189-3*C189
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $H$189 [Value]: 81,8420504643559 [Formula]: =B189-4*C189
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $I$189 [Value]: 80,6827713037555 [Formula]: =B189-5*C189
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $J$189 [Value]: 79,5234921431551 [Formula]: =B189-6*C189
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $K$189 [Value]: 78,3642129825547 [Formula]: =B189-7*C189
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $L$189 [Value]: 77,2049338219544 [Formula]: =B189-8*C189
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $M$189 [Value]: 76,045654661354 [Formula]: =B189-9*C189
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $N$189 [Value]: 74,8863755007537 [Formula]: =B189-10*C189
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $T$180 [Value]: --- [Formula]: =IFERROR((Q180-R180),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $U$180 [Value]: --- [Formula]: =IFERROR((Q180-2*R180),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $V$180 [Value]: --- [Formula]: =IFERROR((Q180-3*R180),"---")
@@ -14168,16 +14168,16 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $AA$189 [Value]: --- [Formula]: =IFERROR((Q189-8*R189),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $AB$189 [Value]: --- [Formula]: =IFERROR((Q189-9*R189),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $AC$189 [Value]: --- [Formula]: =IFERROR((Q189-10*R189),"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$180 [Value]: 0 [Formula]: =(B180-B181)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$181 [Value]: 0 [Formula]: =(B181-B182)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$182 [Value]: 0 [Formula]: =(B182-B183)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$183 [Value]: 0 [Formula]: =(B183-B184)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$184 [Value]: 0 [Formula]: =(B184-B185)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$185 [Value]: 0 [Formula]: =(B185-B186)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$186 [Value]: 0 [Formula]: =(B186-B187)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$187 [Value]: 0 [Formula]: =(B187-B188)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$188 [Value]: 0 [Formula]: =(B188-B189)/10
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$189 [Value]: 0 [Formula]: =(B189-B190)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$180 [Value]: 295,548290767671 [Formula]: =(B180-B181)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$181 [Value]: 31,4860037039046 [Formula]: =(B181-B182)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$182 [Value]: 11,8955816765251 [Formula]: =(B182-B183)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$183 [Value]: 6,24603996972673 [Formula]: =(B183-B184)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$184 [Value]: 3,83771284855454 [Formula]: =(B184-B185)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$185 [Value]: 2,57321381835174 [Formula]: =(B185-B186)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$186 [Value]: 1,86801480692964 [Formula]: =(B186-B187)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$187 [Value]: 1,63465427226059 [Formula]: =(B187-B188)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$188 [Value]: 1,47996272974814 [Formula]: =(B188-B189)/10
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$189 [Value]: 1,15927916060036 [Formula]: =(B189-B190)/10
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$180 [Value]: --- [Formula]: =IFERROR(((Q180-Q181)/10),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$181 [Value]: --- [Formula]: =IFERROR(((Q181-Q182)/10),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$182 [Value]: --- [Formula]: =IFERROR(((Q182-Q183)/10),"---")
@@ -14188,17 +14188,17 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$187 [Value]: --- [Formula]: =IFERROR(((Q187-Q188)/10),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$188 [Value]: --- [Formula]: =IFERROR(((Q188-Q189)/10),"---")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$189 [Value]: --- [Formula]: =IFERROR(((Q189-Q190)/10),"---")
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$180 [Value]: 1599,66971079203 [Formula]: =D20
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$181 [Value]: 1599,66971079203 [Formula]: =D21
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$182 [Value]: 1599,66971079203 [Formula]: =D22
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$183 [Value]: 1599,66971079203 [Formula]: =D23
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$184 [Value]: 1599,66971079203 [Formula]: =D24
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$185 [Value]: 1599,66971079203 [Formula]: =D25
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$186 [Value]: 1599,66971079203 [Formula]: =D26
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$187 [Value]: 1599,66971079203 [Formula]: =D27
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$188 [Value]: 1599,66971079203 [Formula]: =D28
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$189 [Value]: 1599,66971079203 [Formula]: =D29
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$190 [Value]: 1599,66971079203 [Formula]: =D30
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$180 [Value]: 3652,17391304348 [Formula]: =D20
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$181 [Value]: 696,691005366768 [Formula]: =D21
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$182 [Value]: 381,830968327722 [Formula]: =D22
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$183 [Value]: 262,875151562471 [Formula]: =D23
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$184 [Value]: 200,414751865204 [Formula]: =D24
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$185 [Value]: 162,037623379658 [Formula]: =D25
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$186 [Value]: 136,305485196141 [Formula]: =D26
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$187 [Value]: 117,625337126845 [Formula]: =D27
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$188 [Value]: 101,278794404239 [Formula]: =D28
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$189 [Value]: 86,4791671067573 [Formula]: =D29
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $B$190 [Value]: 74,8863755007537 [Formula]: =D30
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$180 [Value]: [Error 2042] [Formula]: =R20
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$181 [Value]: [Error 2042] [Formula]: =R21
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$182 [Value]: [Error 2042] [Formula]: =R22
@@ -14210,7 +14210,7 @@
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$188 [Value]: [Error 2042] [Formula]: =R28
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$189 [Value]: [Error 2042] [Formula]: =R29
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $Q$190 [Value]: [Error 2042] [Formula]: =R30
-[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$192 [Value]: 0 [Formula]: =Расчет!K33
+[Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$192 [Value]: 74,8 [Formula]: =Расчет!K33
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $C$193 [Value]: 100 [Formula]: =COUNTIF(E202:N212,">0")
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$192 [Value]: --- [Formula]: =IF(Расчет!$F$6="---","---",Расчет!$K$33)
 [Book]: ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls [Sheet]: 1 [Cell]: $R$193 [Value]: --- [Formula]: =IF(R192="---","---",COUNTIF(T202:AC212,">0"))

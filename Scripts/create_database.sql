@@ -1,20 +1,10 @@
--- Создание базы данных RZA_Calculator
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'RZA_Calculator')
-BEGIN
     CREATE DATABASE RZA_Calculator;
-    PRINT 'База данных RZA_Calculator создана успешно!';
-END
-ELSE
-BEGIN
-    PRINT 'База данных RZA_Calculator уже существует.';
-END
 GO
 
--- Переключение на базу данных
 USE RZA_Calculator;
 GO
 
--- Создание таблиц
 CREATE TABLE workbooks (
     id INT IDENTITY(1,1) PRIMARY KEY,
     filename NVARCHAR(255) NOT NULL UNIQUE,
@@ -33,14 +23,25 @@ CREATE TABLE sheets (
 CREATE TABLE cells (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
     sheet_id INT FOREIGN KEY REFERENCES sheets(id) ON DELETE CASCADE,
-    address NVARCHAR(10) NOT NULL,
+    address NVARCHAR(10) NOT NULL,  -- без $
     formula NVARCHAR(MAX),
     value_numeric DECIMAL(38,15),
     value_text NVARCHAR(MAX),
-    data_type NVARCHAR(20),
+    data_type NVARCHAR(20),         -- 'formula', 'constant', 'error'
     has_external_link BIT DEFAULT 0,
     updated_at DATETIME2 DEFAULT GETDATE(),
     UNIQUE(sheet_id, address)
+);
+
+CREATE TABLE cell_dependencies (
+    id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    cell_id BIGINT FOREIGN KEY REFERENCES cells(id) ON DELETE CASCADE,
+    depends_on_sheet_id INT FOREIGN KEY REFERENCES sheets(id),
+    depends_on_address NVARCHAR(10),
+    depends_on_workbook_id INT FOREIGN KEY REFERENCES workbooks(id),
+    dependency_type NVARCHAR(20) DEFAULT 'internal',
+    created_at DATETIME2 DEFAULT GETDATE(),
+    UNIQUE(cell_id, depends_on_sheet_id, depends_on_address)
 );
 
 CREATE TABLE input_parameters (
@@ -53,7 +54,10 @@ CREATE TABLE input_parameters (
     min_value DECIMAL(38,15),
     max_value DECIMAL(38,15),
     is_required BIT DEFAULT 1,
-    display_order INT DEFAULT 0
+    display_order INT DEFAULT 0,
+    excel_sheet NVARCHAR(100),
+    excel_cell NVARCHAR(10),
+    is_engineer_input BIT DEFAULT 0  -- 1 = вводит расчётчик
 );
 
 CREATE TABLE calculation_results (
@@ -61,15 +65,12 @@ CREATE TABLE calculation_results (
     calculation_type NVARCHAR(100),
     input_params_json NVARCHAR(MAX),
     result_value DECIMAL(38,15),
-    result_unit NVARCHAR(20),
+ result_unit NVARCHAR(20),
     calculated_at DATETIME2 DEFAULT GETDATE(),
     calculated_by NVARCHAR(100)
 );
 
--- Создание индексов
+-- Индексы
 CREATE INDEX IX_cells_lookup ON cells(sheet_id, address);
-CREATE INDEX IX_cells_formula ON cells(sheet_id) WHERE formula IS NOT NULL;
+CREATE INDEX IX_deps_cell ON cell_dependencies(cell_id);
 CREATE INDEX IX_params_code ON input_parameters(param_code);
-
-PRINT 'Все таблицы созданы успешно!';
-GO

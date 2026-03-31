@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, BigInteger, DateTime, Boolean, Numeric, ForeignKey, Text
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, declarative_base
 from datetime import datetime
-from app.database import Base
+
+Base = declarative_base()
 
 class Workbook(Base):
     __tablename__ = 'workbooks'
@@ -40,11 +41,14 @@ class InputParameter(Base):
     param_name = Column(String(255), nullable=False)
     param_description = Column(Text)
     unit = Column(String(20))
-    default_value = Column(Numeric(38, 15))
+    default_value =(Numeric(38, 15))
     min_value = Column(Numeric(38, 15))
     max_value = Column(Numeric(38, 15))
     is_required = Column(Boolean, default=True)
     display_order = Column(Integer, default=0)
+    excel_sheet = Column(String(100))
+    excel_cell = Column(String(10))
+    is_engineer_input = Column(Boolean, default=False)
 
 class CalculationResult(Base):
     __tablename__ = 'calculation_results'

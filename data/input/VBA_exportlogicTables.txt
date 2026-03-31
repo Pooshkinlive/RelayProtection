@@ -3,9 +3,9 @@ Sub ExportWorkbookLogic()
     Dim filePath As String
     Dim fNum As Integer
     ' === УКАЖИТЕ СВОИ ПУТИ К ФАЙЛАМ === '
-    Set wb1 = Workbooks.Open("E:\AI Projects\RelayProtection\rza_calculator\data\Расчет реактансов по сетевым районам 2016.xls")
-    Set wb2 = Workbooks.Open("E:\AI Projects\RelayProtection\rza_calculator\data\ЭКСПЕРТ.xls")
-    Set wb3 = Workbooks.Open("E:\AI Projects\RelayProtection\rza_calculator\data\ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls")
+    Set wb1 = Workbooks.Open("E:\AI Projects\RelayProtection\rza_calculator\data\input\Расчет реактансов по сетевым районам 2016.xls")
+    Set wb2 = Workbooks.Open("E:\AI Projects\RelayProtection\rza_calculator\data\input\ЭКСПЕРТ.xls")
+    Set wb3 = Workbooks.Open("E:\AI Projects\RelayProtection\rza_calculator\data\input\ЭТАЛОН защита ВЛ 6кВ ПЕРЕМИТИН.xls")
 filePath = Environ("USERPROFILE") & "\Desktop\Full_System_Logic.txt"
     fNum = FreeFile
     Open filePath For Output As #fNum
