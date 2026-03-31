@@ -1,94 +1,87 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
-from typing import Dict, List
-import json
-from app.database import get_db
-from app.models import InputParameter, Cell, Sheet, Workbook
-import os
 from pathlib import Path
+from typing import Dict, Any, List
 
-app = FastAPI(title="RZA Calculator", description="Расчёт уставок РЗА по Excel-логике")
+from app.database import get_db
+from app.calculator import calculate_mto, calculate_mtz, get_excel_data as calc_get_excel_data
 
-app.mount("/static", StaticFiles(directory="templates"), name="static")
+app = FastAPI(title="RZA Calculator")
+
+# === Пуки к файлам ===
+BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATES_DIR = BASE_DIR / "templates"
+INDEX_FILE = TEMPLATES_DIR / "index.html"
+
+print(f"📁 BASE_DIR: {BASE_DIR}")
+print(f"📁 TEMPLATES_DIR: {TEMPLATES_DIR}")
+print(f"📄 INDEX_FILE exists: {INDEX_FILE.exists()}")
+
+# Монтируем статику
+if TEMPLATES_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(TEMPLATES_DIR)), name="static")
+else:
+    print(f"⚠️ Папка templates не найдена: {TEMPLATES_DIR}")
 
 @app.get("/")
 async def root():
-    # Используем абсолютный путь, чтобы избежать проблем
-    file_path = Path(__file__).parent.parent / "templates" / "index.html"
-    if file_path.exists():
-        return FileResponse(file_path)
-    else:
-        return {"error": "Файл templates/index.html не найден."}
+    if not INDEX_FILE.exists():
+        return {
+            "error": "index.html not found",
+            "expected_path": str(INDEX_FILE),
+            "templates_dir_exists": TEMPLATES_DIR.exists()
+        }
+    return FileResponse(str(INDEX_FILE))
 
-@app.get("/api/parameters")
-async def get_parameters(db: Session = Depends(get_db)) -> List[Dict]:
-    """Возвращает все параметры с метками is_engineer_input"""
-    params = db.query(InputParameter).order_by(InputParameter.display_order).all()
-    result = []
-    for p in params:
-        current_value = get_cell_value(db, p.excel_sheet, p.excel_cell, p.param_code)
-        result.append({
-            "code": p.param_code,        # Исправлено: было p.paramname"
-            "name": p.param_name,
-            "description": p.param_description or "",
-            "unit": p.unit,
-            "default_value": float(p.default_value) if p.default_value else None,
-            "min_value": float(p.min_value) if p.min_value else None,
-            "max_value": float(p.max_value) if p.max_value else None,
-            "required": p.is_required,
-            "engineer_input": p.is_engineer_input,
-            "excel_sheet": p.excel_sheet,
-            "excel_cell": p.excel_cell,
-            "current_value": current_value
-        })
-    return result
+@app.get("/api/health")
+async def health():
+    return {"status": "ok", "templates": str(TEMPLATES_DIR)}
 
-def get_cell_value(db: Session, sheet_name: str, cell_addr: str, param_code: str) -> float:
-    """Получает текущее значение ячейки из БД (для отображения в форме)"""
+@app.get("/api/excel-data")
+async def get_excel_data(db: Session = Depends(get_db)):
+    """Возвращает ключевые ячейки из ЭТАЛОН"""
     try:
-        cell = db.query(Cell).join(Sheet).join(Workbook).filter(
-            Sheet.sheet_name == sheet_name,
-            Cell.address == cell_addr
-        ).first()
-        if cell and cell.value_numeric is not None:
-            return float(cell.value_numeric)
-        # Если нет — пытаемся взять из default_value
-        param = db.query(InputParameter).filter(InputParameter.param_code == param_code).first()
-        return float(param.default_value) if param and param.default_value else 0.0
+        data = calc_get_excel_data(db)
+        return {"success": True, "data": data}
     except Exception as e:
-        print(f"Ошибка получения {sheet_name}!{cell_addr}: {e}")
-        return 0.0
+        return {"success": False, "error": str(e)}
 
 @app.post("/api/calculate")
 async def calculate(inputs: Dict[str, float], db: Session = Depends(get_db)):
-    """Основной расчёт: проверка чувствительности МТО/МТЗ"""
-    # Получаем ключевые расчётные ячейки из БД
-    i_kz_min = get_cell_value(db, "Расчет", "K35", "I_KZ_MIN_BEHIND_TR")  # 74.89 А (пример)
-    i_mto_raw: float = inputs.get("SET_MTO_RAW", 1250.0)
-    i_mtz_raw: float = inputs.get("SET_MTZ_RAW", 2000.0)
-
-    # МТО: должна быть ≤ i_kz_min * k_чувств (обычно 1.2)
-    sens_mto = i_kz_min / i_mto_raw if i_mto_raw > 0 else 0.0
-    ok_mto = sens_mto >= 1.2
-
-    # МТЗ: должна быть ≤ i_kz_min * k_чувств (обычно 1.5 для 100% зоны)
-    sens_mtz = i_kz_min / i_mtz_raw if i_mtz_raw > 0 else 0.0
-    ok_mtz = sens_mtz >= 1.5
-
-    return {
-        "input": inputs,
-        "i_kz_min_behind_tr": i_kz_min,
-        "mto": {
-            "setting_raw": i_mto_raw,
-            "sensitivity": round(sens_mto, 3),
-            "ok": ok_mto,
-            "message": "OK" if ok_mto else f"Недостаточная чувствительность (<1.2)"
-        },
-        "mtz": {
-            "setting_raw": i_mtz_raw,
-            "sensitivity": round(sens_mtz, 3),
-            "message": "OK" if ok_mtz else f"Недостаточная чувствительность (<1.5)"
+    """Основной расчёт МТО и МТЗ"""
+    try:
+        mto_result = calculate_mto(db, inputs)
+        mtz_result = calculate_mtz(db, inputs)
+        
+        return {
+            "success": True,
+            "mto": mto_result,
+            "mtz": mtz_result
         }
-    }
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+@app.get("/api/parameters")
+async def get_parameters(db: Session = Depends(get_db)):
+    """Список всех параметров для ввода"""
+    from app.models import InputParameter
+    try:
+        params = db.query(InputParameter).order_by(InputParameter.display_order).all()
+        return {
+            "success": True,
+            "parameters": [{
+                "code": p.param_code,
+                "name": p.param_name,
+                "unit": p.unit,
+                "default_value": float(p.default_value) if p.default_value else None,
+                "engineer_input": p.is_engineer_input
+            } for p in params]
+        }
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=False)

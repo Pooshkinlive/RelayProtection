@@ -1,26 +1,26 @@
-import pyodbc
+import sys
+from pathlib import Path
 
-conn_str = (
-    "DRIVER={ODBC Driver 18 for SQL Server};"
-    "SERVER=MSI-ALEXNAB\\SQLEXPRESS;"
-    "DATABASE=RZA_Calculator;"
-    "Trusted_Connection=yes;"
-    "TrustServerCertificate=yes;"
-)
+# === ДОБАВЛЯЕМ КОРЕНЬ ПРОЕКТА В PYTHON PATH ===
+ROOT_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT_DIR))
+# ===============================================
+
+from app.database import engine
+from sqlalchemy import text
 
 try:
-    conn = pyodbc.connect(conn_str)
-    print("✅ Подключение успешно!")
-    
-    cursor = conn.cursor()
-    cursor.execute("SELECT @@VERSION")
-    version = cursor.fetchone()[0]
-    print(f"Версия: {version[:80]}...")
-    
-    cursor.execute("SELECT name FROM sys.tables")
-    tables = [row[0] for row in cursor.fetchall()]
-    print(f"Таблицы в БД: {tables}")
-    
-    conn.close()
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT @@VERSION"))
+        print("✅ Подключение успешно!")
+        print(f"Версия: {result.scalar()[:100]}")
+        
+        # Проверка таблиц
+        tables = conn.execute(text("""
+            SELECT name FROM sys.tables WHERE type = 'U'
+        """))
+        print("\n📋 Таблицы в БД:")
+        for t in tables:
+            print(f"  - {t[0]}")
 except Exception as e:
     print(f"❌ Ошибка: {e}")

@@ -3,69 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <title>Расчёт уставок РЗА</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        
-        body { font-family: Arial, sans-serif; padding: 20px; background: #f8f9fa; }
-        .form-group { margin: 15px 0; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input { width: 100%; padding: 8px; border: 1px solid #ccc; }
-        button { background: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; }
-        .result { margin-top: 20px; padding: 15px; background: #e7f3ff; border-left: 4px solid #007bff; }
-        .error { color: #dc3545; font-weight: bold; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .full-width { grid-column: 1 / -1; }
+        h2 { color: #333; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
+        input { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 5px; }
+        input:focus { outline: none; border-color: #667eea; }
+        .btn { 
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; padding: 15px 40px; border: none; border-radius: 5px;
+            font-size: 18px; cursor: pointer; width: 100%;
+        }
+        .calculated-value {
+            background: #e7f3ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+        .ok { color: #28a745; }
+        .error { color: #dc3545; }
+        .chart-container { position: relative; height: 400px; }
     </style>
 </head>
 <body>
-<h2>Расчёт уставок РЗА (по данным ЭТАЛОНА)</h2>
-
-<div id="params-container"></div>
-<button onclick="calculate()">Рассчитать</button>
-<div id="result" style="display:none;"></div>
-
-<script>
-    let params = [];
-
-    async function loadParams() {
-        const res = await fetch('/api/parameters');
-        params = await res.json();
-        
-        const container = document.getElementById('params-container');
-        container.innerHTML = params
-            .filter(p => p.engineer_input)
-            .map(p => `
+    <div class="container">
+        <!-- Форма ввода -->
+        <div class="card">
+            <h2>⚡ Ввод уставок</h2>
+            <form id="rza-form">
                 <div class="form-group">
-                    <label>${p.name} (${p.code}) [${p.unit}]</label>
-                    <input type="number" id="${p.code}" step="0.1" value="${p.current_value || p.default_value || ''}">
+                    <label>Уставка МТО (А) *</label>
+                    <input type="number" id="SET_MTO_RAW" step="0.1" value="980">
+                    <div class="calculated-value">
+                        📊 Расчётное значение (K24): <strong id="calc-mto">2114.78 А</strong><br>
+                        📍 Ячейка Excel: K26 (ручной ввод)<br>
+                        ✅ Критерий: ≥1.2×I<sub>кз мин</sub>
+                    </div>
                 </div>
-            `).join('');
-    }
+                
+                <div class="form-group">
+                    <label>Уставка МТЗ (А) *</label>
+                    <input type="number" id="SET_MTZ_RAW" step="0.1" value="400">
+                    <div class="calculated-value">
+                        📊 Расчётное значение (K25): <strong id="calc-mtz">0 А</strong><br>
+                        📍 Ячейка Excel: K27 (ручной ввод)<br>
+                        ✅ Критерий: ≥1.5×I<sub>кз мин</sub>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Рассчитать</button>
+            </form>
+            
+            <div id="result" class="result-box" style="display:none;"></div>
+        </div>
+        
+        <!-- Расчётные данные из БД -->
+        <div class="card">
+            <h2>📋 Данные из Excel (ЭТАЛОН)</h2>
+            <div id="excel-data">
+                <p>Загрузка данных...</p>
+            </div>
+        </div>
+        
+        <!-- График чувствительности -->
+        <div class="card full-width">
+            <h2>📈 График чувствительности (Ток КЗ vs Длина линии)</h2>
+            <div class="chart-container">
+                <canvas id="sensitivityChart"></canvas>
+            </div>
+        </div>
+    </div>
 
-    async function calculate() {
-        const data = {};
-        params.forEach(p => {
-            if (p.engineer_input) {
-                const val = document.getElementById(p.code).value;
-                data[p.code] = val ? parseFloat(val) : null;
+    <script>
+        let excelData = {};
+        let chart = null;
+
+        // Загрузка данных из БД
+        async function loadExcelData() {
+            try {
+                const response = await fetch('/api/excel-data');
+                excelData = await response.json();
+                
+                document.getElementById('excel-data').innerHTML = `
+                    <div class="calculated-value">
+                        <strong>I<sub>кз мин</sub> за трансформатором (K35):</strong> ${excelData.k35 || '—'} А<br>
+                        <strong>Расчётная уставка МТО (K24):</strong> ${excelData.k24 || '—'} А<br>
+                        <strong>Расчётная уставка МТЗ (K25):</strong> ${excelData.k25 || '—'} А<br>
+                        <strong>R' линии (E5):</strong> ${excelData.e5 || '—'} Ом/км<br>
+                        <strong>X' линии (F5):</strong> ${excelData.f5 || '—'} Ом/км
+                    </div>
+                `;
+                
+                document.getElementById('calc-mto').textContent = (excelData.k24 || '—') + ' А';
+                document.getElementById('calc-mtz').textContent = (excelData.k25 || '—') + ' А';
+                
+                // Обновляем график
+                updateChart(excelData);
+            } catch (error) {
+                document.getElementById('excel-data').innerHTML = 
+                    '<p style="color: #dc3545;">Ошибка загрузки данных из БД</p>';
+            }
+        }
+
+        // График чувствительности
+        function updateChart(data) {
+            const ctx = document.getElementById('sensitivityChart').getContext('2d');
+            
+            // Пример данных (замените на реальные из БД)
+            const lengths = [0, 2, 4, 6, 8, 10, 12, 14, 16];
+            const ikz_values = [5500, 4500, 3500, 2500, 1800, 1200, 800, 500, 300];
+            const mto_line = new Array(lengths.length).fill(data.k26 || 980);
+            const mtz_line = new Array(lengths.length).fill(data.k27 || 400);
+            
+            if (chart) chart.destroy();
+            
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: lengths,
+                    datasets: [
+                        {
+                            label: 'Ток КЗ (А)',
+                            data: ikz_values,
+                            borderColor: '#667eea',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            fill: true
+                        },
+                        {
+                            label: 'Уставка МТО',
+                            data: mto_line,
+                            borderColor: '#dc3545',
+                            borderDash: [5, 5]
+                        },
+                        {
+                            label: 'Уставка МТЗ',
+                            data: mtz_line,
+                            borderColor: '#28a745',
+                            borderDash: [5, 5]
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { title: { display: true, text: 'Длина линии, км' } },
+                        y: { title: { display: true, text: 'Ток, А' } }
+                    }
+                }
+            });
+        }
+
+        // Расчёт
+        document.getElementById('rza-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const data = {
+                SET_MTO_RAW: parseFloat(document.getElementById('SET_MTO_RAW').value),
+                SET_MTZ_RAW: parseFloat(document.getElementById('SET_MTZ_RAW').value)
+            };
+            
+            try {
+                const response = await fetch('/api/calculate', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
+                
+                const result = await response.json();
+                
+                document.getElementById('result').innerHTML = `
+                    <h3>📊 Результаты:</h3>
+                    <p><strong>МТО:</strong> ${result.mto.setting} А | 
+                       Чувствительность: ${result.mto.sensitivity} 
+                       ${result.mto.ok ? '✅ OK' : '❌ Не проходит'}</p>
+                    <p><strong>МТЗ:</strong> ${result.mtz.setting} А | 
+                       Чувствительность: ${result.mtz.sensitivity} 
+                       ${result.mtz.ok ? '✅ OK' : '❌ Не проходит'}</p>
+                    <p><small>I<sub>кз мин</sub> = ${result.i_kz_min} А</small></p>
+                `;
+                document.getElementById('result').style.display = 'block';
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    `<p style="color: #dc3545;">❌ ${error.message}</p>`;
+                document.getElementById('result').style.display = 'block';
             }
         });
 
-        const res = await fetch('/api/calculate', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        });
-        const result = await res.json();
-
-        const el = document.getElementById('result');
-        el.innerHTML = `
-            <h3>Результаты:</h3>
-            <p><strong>МТО</strong>: ${result.mto.setting_raw} А | Чувствительность: ${result.mto.sensitivity} (${result.mto.ok ? '✅ OK' : '❌ Не проходит'})</p>
-            <p><strong>МТЗ</strong>: ${result.mtz.setting_raw} А | Чувствительность: ${result.mtz.sensitivity} (${result.mtz.ok ? '✅ OK' : '❌ Не проходит'})</p>
-            <p><small>Критерий: МТО ≥ 1.2×I<sub>кз мин</sub>, МТЗ ≥ 1.5×I<sub>кз мин</sub>. I<sub>кз мин за ТР</sub> = ${result.i_kz_min_behind_tr} А</small></p>
-        `;
-        el.style.display = 'block';
-    }
-
-    loadParams();
-</script>
+        loadExcelData();
+    </script>
 </body>
 </html>

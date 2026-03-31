@@ -110,7 +110,7 @@ def import_workbook(filepath: str, engine) -> Dict:
             workbook_id = res.scalar()
             logger.info(f"Создана запись о файле: {filename} (id={workbook_id})")
 
-        wb = load_workbook(str(filepath), data_only=False)  # сохраняем формулы
+        wb = load_workbook(str(filepath), data_only=True)  # сохраняем формулы
         stats = {"file": filename, "sheets": {}, "total_cells": 0}
 
         for ws in wb.worksheets:
