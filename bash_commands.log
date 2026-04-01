@@ -3,3 +3,18 @@
 2026-03-28 11:11:10 -    11  source venv/Scripts/activate
 2026-03-28 11:11:40 -    12  source rza_venv/Scripts/activate
 2026-03-28 11:11:57 -    13  source rza_env/Scripts/activate
+2026-04-01 05:51:25 -    14  cd rza_calculator
+2026-04-01 05:51:35 -    15  source rza_env/Scripts/activate
+2026-04-01 05:51:45 -    16  git status
+2026-04-01 05:51:55 -    17  git add .
+2026-04-01 05:52:05 -    18  git commit -m "new env and new parsing"
+2026-04-01 05:52:15 -    19  git push -u origin main
+2026-04-01 05:52:25 -    20  git status
+2026-04-01 05:52:35 -    21  git add .
+2026-04-01 05:52:45 -    22  git commit -m "new env and new parsing"
+2026-04-01 05:52:55 -    23  git push -u origin main
+2026-04-01 05:53:05 -    24  git status
+2026-04-01 05:53:15 -    25  git add .
+2026-04-01 05:53:25 -    26  git commit -m "ГРАФИК добавлен и успешное подключение к БД"
+2026-04-01 05:53:35 -    27  git push -u origin main
+2026-04-01 05:53:45 -    28  cat ~/bash_commands.log

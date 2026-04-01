@@ -10,47 +10,56 @@ def get_cell_value(db: Session, sheet_name: str, cell_addr: str, workbook_filena
         if workbook_filename:
             query = query.filter(Workbook.filename == workbook_filename)
         
+        clean_sheet = sheet_name.strip()
+        clean_addr = cell_addr.strip().upper().replace('$', '')
+        
         cell = query.filter(
-            Sheet.sheet_name == sheet_name, 
-            Cell.address == cell_addr.upper().replace('$', '')
+            Sheet.sheet_name == clean_sheet, 
+            Cell.address == clean_addr
         ).first()
         
-        if cell and cell.value_numeric is not None:
-            return float(cell.value_numeric)
-        
-        # Если нет числового значения, пробуем распарсить text
-        if cell and cell.value_text:
-            try:
-                return float(cell.value_text.replace(',', '.'))
-            except:
-                return None
+        if cell:
+            if cell.value_numeric is not None:
+                return float(cell.value_numeric)
+            if cell.value_text:
+                try:
+                    return float(cell.value_text.replace(',', '.'))
+                except:
+                    return None
         
         return None
     except Exception as e:
-        print(f"Ошибка получения {sheet_name}!{cell_addr}: {e}")
+        print(f"❌ Ошибка получения {sheet_name}!{cell_addr}: {e}")
         return None
 
 def calculate_mto(db: Session, inputs: Dict[str, float]) -> Dict[str, Any]:
-    """Расчёт МТО на основе данных из Excel"""
+    """Расчёт МТО — использует ВВЕДЁННОЕ пользователем значение!"""
     
-    # Получаем ключевые значения из БД
-    i_kz_min = get_cell_value(db, "Расчет", "K35")  # Iкз мин за ТР
-    i_mto_calc = get_cell_value(db, "Расчет", "K24")  # Расчётная уставка МТО
-    i_mto_raw = inputs.get("SET_MTO_RAW", None)  # Введённая пользователем
+    # Iкз мин за ТР (из БД)
+    i_kz_min = get_cell_value(db, "Расчет", "K35")
     
-    # Если нет данных из БД — используем ввод пользователя
-    if i_mto_calc is None and i_mto_raw is not None:
-        i_mto_calc = i_mto_raw
-    elif i_mto_calc is None:
-        i_mto_calc = 1000.0  # Значение по умолчанию
+    # ⚠️ ВАЖНО: Используем ВВЕДЁННОЕ пользователем значение, а не K24 из БД!
+    i_mto_user = inputs.get("SET_MTO_RAW", None)
+    
+    # K24 из БД — только для справки (расчётное значение из Excel)
+    i_mto_excel = get_cell_value(db, "Расчет", "K24")
+    
+    # Если пользователь ввёл значение — используем его
+    if i_mto_user is not None and i_mto_user > 0:
+        i_mto_calc = i_mto_user
+    elif i_mto_excel is not None:
+        i_mto_calc = i_mto_excel
+    else:
+        i_mto_calc = 1000.0
     
     # Расчёт чувствительности
     sensitivity = i_kz_min / i_mto_calc if i_kz_min and i_mto_calc and i_mto_calc > 0 else 0.0
     ok = sensitivity >= 1.2
     
     return {
-        "setting_raw": i_mto_raw,
+        "setting_raw": i_mto_user,
         "setting_calc": i_mto_calc,
+        "setting_excel": i_mto_excel,
         "i_kz_min": i_kz_min,
         "sensitivity": round(sensitivity, 3),
         "ok": ok,
@@ -58,26 +67,28 @@ def calculate_mto(db: Session, inputs: Dict[str, float]) -> Dict[str, Any]:
     }
 
 def calculate_mtz(db: Session, inputs: Dict[str, float]) -> Dict[str, Any]:
-    """Расчёт МТЗ на основе данных из Excel"""
+    """Расчёт МТЗ — использует ВВЕДЁННОЕ пользователем значение!"""
     
-    # Получаем ключевые значения из БД
-    i_kz_min = get_cell_value(db, "Расчет", "K35")  # Iкз мин за ТР
-    i_mtz_calc = get_cell_value(db, "Расчет", "K25")  # Расчётная уставка МТЗ
-    i_mtz_raw = inputs.get("SET_MTZ_RAW", None)  # Введённая пользователем
+    i_kz_min = get_cell_value(db, "Расчет", "K35")
     
-    # Если нет данных из БД — используем ввод пользователя
-    if i_mtz_calc is None and i_mtz_raw is not None:
-        i_mtz_calc = i_mtz_raw
-    elif i_mtz_calc is None:
-        i_mtz_calc = 400.0  # Значение по умолчанию
+    # ⚠️ ВАЖНО: Используем ВВЕДЁННОЕ пользователем значение
+    i_mtz_user = inputs.get("SET_MTZ_RAW", None)
+    i_mtz_excel = get_cell_value(db, "Расчет", "K25")
     
-    # Расчёт чувствительности
+    if i_mtz_user is not None and i_mtz_user > 0:
+        i_mtz_calc = i_mtz_user
+    elif i_mtz_excel is not None:
+        i_mtz_calc = i_mtz_excel
+    else:
+        i_mtz_calc = 400.0
+    
     sensitivity = i_kz_min / i_mtz_calc if i_kz_min and i_mtz_calc and i_mtz_calc > 0 else 0.0
     ok = sensitivity >= 1.5
     
     return {
-        "setting_raw": i_mtz_raw,
+        "setting_raw": i_mtz_user,
         "setting_calc": i_mtz_calc,
+        "setting_excel": i_mtz_excel,
         "i_kz_min": i_kz_min,
         "sensitivity": round(sensitivity, 3),
         "ok": ok,
@@ -85,7 +96,7 @@ def calculate_mtz(db: Session, inputs: Dict[str, float]) -> Dict[str, Any]:
     }
 
 def get_excel_data(db: Session) -> Dict[str, Any]:
-    """Получить все ключевые ячейки из ЭТАЛОН для отображения"""
+    """Получить все ключевые ячейки из ЭТАЛОН"""
     return {
         "k24": get_cell_value(db, "Расчет", "K24"),
         "k25": get_cell_value(db, "Расчет", "K25"),

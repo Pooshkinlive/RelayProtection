@@ -3,14 +3,14 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 from app.database import get_db
 from app.calculator import calculate_mto, calculate_mtz, get_excel_data as calc_get_excel_data
 
 app = FastAPI(title="RZA Calculator")
 
-# === Пуки к файлам ===
+# === Пути к файлам ===
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = BASE_DIR / "templates"
 INDEX_FILE = TEMPLATES_DIR / "index.html"
@@ -22,17 +22,11 @@ print(f"📄 INDEX_FILE exists: {INDEX_FILE.exists()}")
 # Монтируем статику
 if TEMPLATES_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(TEMPLATES_DIR)), name="static")
-else:
-    print(f"⚠️ Папка templates не найдена: {TEMPLATES_DIR}")
 
 @app.get("/")
 async def root():
     if not INDEX_FILE.exists():
-        return {
-            "error": "index.html not found",
-            "expected_path": str(INDEX_FILE),
-            "templates_dir_exists": TEMPLATES_DIR.exists()
-        }
+        return {"error": "index.html not found", "path": str(INDEX_FILE)}
     return FileResponse(str(INDEX_FILE))
 
 @app.get("/api/health")
@@ -44,9 +38,11 @@ async def get_excel_data(db: Session = Depends(get_db)):
     """Возвращает ключевые ячейки из ЭТАЛОН"""
     try:
         data = calc_get_excel_data(db)
+        print(f"📊 Excel data: {data}")
         return {"success": True, "data": data}
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        print(f"❌ Error in /api/excel-data: {e}")
+        return {"success": False, "error": str(e), "data": {}}
 
 @app.post("/api/calculate")
 async def calculate(inputs: Dict[str, float], db: Session = Depends(get_db)):
