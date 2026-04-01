@@ -1,76 +1,34 @@
-IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'RZA_Calculator')
-    CREATE DATABASE RZA_Calculator;
-GO
-
 USE RZA_Calculator;
 GO
 
-CREATE TABLE workbooks (
+-- Таблица типов линий
+CREATE TABLE line_types (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    filename NVARCHAR(255) NOT NULL UNIQUE,
-    file_hash CHAR(32),
-    imported_at DATETIME2 DEFAULT GETDATE(),
-    is_active BIT DEFAULT 1
+    category NVARCHAR(50) NOT NULL,
+    type_name NVARCHAR(100) NOT NULL,
+    r_ohm_per_km DECIMAL(10,6) NOT NULL,
+    x_ohm_per_km DECIMAL(10,6) NOT NULL,
+    description NVARCHAR(255),
+    UNIQUE(category, type_name)
 );
 
-CREATE TABLE sheets (
+-- Таблица конфигураций пользователя
+CREATE TABLE user_configurations (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    workbook_id INT FOREIGN KEY REFERENCES workbooks(id) ON DELETE CASCADE,
-    sheet_name NVARCHAR(255) NOT NULL,
-    UNIQUE(workbook_id, sheet_name)
-);
-
-CREATE TABLE cells (
-    id BIGINT IDENTITY(1,1) PRIMARY KEY,
-    sheet_id INT FOREIGN KEY REFERENCES sheets(id) ON DELETE CASCADE,
-    address NVARCHAR(10) NOT NULL,  -- без $
-    formula NVARCHAR(MAX),
-    value_numeric DECIMAL(38,15),
-    value_text NVARCHAR(MAX),
-    data_type NVARCHAR(20),         -- 'formula', 'constant', 'error'
-    has_external_link BIT DEFAULT 0,
-    updated_at DATETIME2 DEFAULT GETDATE(),
-    UNIQUE(sheet_id, address)
-);
-
-CREATE TABLE cell_dependencies (
-    id BIGINT IDENTITY(1,1) PRIMARY KEY,
-    cell_id BIGINT FOREIGN KEY REFERENCES cells(id) ON DELETE CASCADE,
-    depends_on_sheet_id INT FOREIGN KEY REFERENCES sheets(id),
-    depends_on_address NVARCHAR(10),
-    depends_on_workbook_id INT FOREIGN KEY REFERENCES workbooks(id),
-    dependency_type NVARCHAR(20) DEFAULT 'internal',
     created_at DATETIME2 DEFAULT GETDATE(),
-    UNIQUE(cell_id, depends_on_sheet_id, depends_on_address)
+    total_length DECIMAL(10,2) DEFAULT 0
 );
 
-CREATE TABLE input_parameters (
+-- Таблица участков линии
+CREATE TABLE line_sections (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    param_code NVARCHAR(50) NOT NULL UNIQUE,
-    param_name NVARCHAR(255) NOT NULL,
-    param_description NVARCHAR(MAX),
-    unit NVARCHAR(20),
-    default_value DECIMAL(38,15),
-    min_value DECIMAL(38,15),
-    max_value DECIMAL(38,15),
-    is_required BIT DEFAULT 1,
-    display_order INT DEFAULT 0,
-    excel_sheet NVARCHAR(100),
-    excel_cell NVARCHAR(10),
-    is_engineer_input BIT DEFAULT 0  -- 1 = вводит расчётчик
+    configuration_id INT FOREIGN KEY REFERENCES user_configurations(id) ON DELETE CASCADE,
+    section_number INT NOT NULL,
+    conductor_type NVARCHAR(100),
+    conductor_length DECIMAL(10,2) DEFAULT 0,
+    cable_type NVARCHAR(100),
+    cable_length DECIMAL(10,2) DEFAULT 0
 );
 
-CREATE TABLE calculation_results (
-    id BIGINT IDENTITY(1,1) PRIMARY KEY,
-    calculation_type NVARCHAR(100),
-    input_params_json NVARCHAR(MAX),
-    result_value DECIMAL(38,15),
- result_unit NVARCHAR(20),
-    calculated_at DATETIME2 DEFAULT GETDATE(),
-    calculated_by NVARCHAR(100)
-);
-
--- Индексы
-CREATE INDEX IX_cells_lookup ON cells(sheet_id, address);
-CREATE INDEX IX_deps_cell ON cell_dependencies(cell_id);
-CREATE INDEX IX_params_code ON input_parameters(param_code);
+CREATE INDEX IX_line_types_category ON line_types(category);
+CREATE INDEX IX_line_sections_config ON line_sections(configuration_id);

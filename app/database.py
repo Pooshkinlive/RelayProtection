@@ -1,7 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-# === ПРАВИЛЬНАЯ СТРОКА ПОДКЛЮЧЕНИЯ ===
 DATABASE_URL = "mssql+pyodbc:///?odbc_connect=DRIVER={ODBC Driver 18 for SQL Server};SERVER=MSI-ALEXNAB\\SQLEXPRESS;DATABASE=RZA_Calculator;Trusted_Connection=yes;TrustServerCertificate=yes"
 
 engine = create_engine(DATABASE_URL, echo=False, pool_pre_ping=True)

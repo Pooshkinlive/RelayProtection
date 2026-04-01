@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расчёт уставок РЗА</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -14,7 +15,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -28,75 +29,189 @@
         }
         .full-width { grid-column: 1 / -1; }
         h2 { color: #333; margin-bottom: 20px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 600; }
-        input { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 5px; }
-        input:focus { outline: none; border-color: #667eea; }
+        h3 { color: #555; margin: 15px 0 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; color: #333; }
+        input, select { 
+            width: 100%; 
+            padding: 10px; 
+            border: 2px solid #e0e0e0; 
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input:focus, select:focus { 
+            outline: none; 
+            border-color: #667eea; 
+        }
         .btn { 
             background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white; padding: 15px 40px; border: none; border-radius: 5px;
-            font-size: 18px; cursor: pointer; width: 100%;
+            color: white; 
+            padding: 12px 30px; 
+            border: none; 
+            border-radius: 5px;
+            font-size: 16px; 
+            cursor: pointer; 
+            margin: 5px;
         }
         .btn:hover { opacity: 0.9; }
-        .calculated-value {
-            background: #e7f3ff;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 5px;
-            font-size: 14px;
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-danger { background: #dc3545; }
+        .btn-success { background: #28a745; }
+        .section-card {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
         }
         .result-box {
             margin-top: 20px;
             padding: 20px;
-            background: #f8f9fa;
+            background: #e7f3ff;
             border-radius: 8px;
             border-left: 5px solid #667eea;
         }
-        .ok { color: #28a745; }
-        .error { color: #dc3545; }
-        .chart-container { position: relative; height: 400px; }
+        .ok { color: #28a745; font-weight: bold; }
+        .error { color: #dc3545; font-weight: bold; }
+        .chart-container { 
+            position: relative; 
+            height: 400px; 
+            width: 100%;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .info-box {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Форма ввода конфигурации линии -->
         <div class="card">
-            <h2>⚡ Ввод уставок</h2>
-            <form id="rza-form">
+            <h2>⚡ Конфигурация линии</h2>
+            
+            <div class="form-group">
+                <label>Номинальное напряжение, В</label>
+                <input type="number" id="u_nom" value="6300" step="100">
+            </div>
+
+            <div class="grid-2">
                 <div class="form-group">
-                    <label>Уставка МТО (А) *</label>
-                    <input type="number" id="SET_MTO_RAW" step="0.1" value="980">
-                    <div class="calculated-value">
-                        📊 Расчётное значение (K24): <strong id="calc-mto">— А</strong><br>
-                        📍 Ячейка Excel: K26 (ручной ввод)<br>
-                        ✅ Критерий: ≥1.2×I<sub>кз мин</sub>
+                    <label>Макс. ток нагрузки (для МТЗ), А</label>
+                    <input type="number" id="i_load_max" value="100" step="1">
+                </div>
+                <div class="form-group">
+                    <label>Тип реле (K16)</label>
+                    <select id="relay_code"></select>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Реактансы (C5)</label>
+                    <select id="reactance_id"></select>
+                </div>
+                <div class="form-group">
+                    <label>Режим реактансов</label>
+                    <select id="reactance_mode">
+                        <option value="MAX" selected>MAX</option>
+                        <option value="MIN">MIN</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:12px; background:#f7fbff;">
+                <h3 style="margin:0 0 10px 0;">Нагрузки по заявке (I4:K9 → L9/LM9)</h3>
+                <table style="width:100%; border-collapse:collapse;">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left; border-bottom:1px solid #ddd;">№</th>
+                            <th style="text-align:left; border-bottom:1px solid #ddd;">Аппарат</th>
+                            <th style="text-align:left; border-bottom:1px solid #ddd;">Pном, кВт</th>
+                            <th style="border-bottom:1px solid #ddd;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="loads-table-body"></tbody>
+                </table>
+                <div style="margin-top:10px; display:flex; gap:10px; align-items:center;">
+                    <button type="button" class="btn btn-success" onclick="addLoadRow()">+ Добавить нагрузку</button>
+                    <div class="info-box" style="margin:0;">
+                        <strong>L9/LM9 (ΣP), кВт:</strong> <span id="total_power_kw">0.000</span><br>
+                        <strong>J10 (Iном = P/10.38), А:</strong> <span id="i_nom_calc">0.000</span>
                     </div>
                 </div>
-                
-                <div class="form-group">
-                    <label>Уставка МТЗ (А) *</label>
-                    <input type="number" id="SET_MTZ_RAW" step="0.1" value="400">
-                    <div class="calculated-value">
-                        📊 Расчётное значение (K25): <strong id="calc-mtz">— А</strong><br>
-                        📍 Ячейка Excel: K27 (ручной ввод)<br>
-                        ✅ Критерий: ≥1.5×I<sub>кз мин</sub>
+                <div class="form-group" style="margin-top:10px;">
+                    <label>J12: Реальный (рабочий) ток, А</label>
+                    <input type="number" id="i_work" value="0" step="0.1">
+                </div>
+            </div>
+            
+            <div id="sections-container">
+                <!-- Участки будут добавлены здесь -->
+            </div>
+
+            <div class="card" style="margin-top:12px; background:#fff7ed;">
+                <h3 style="margin:0 0 10px 0;">Ручной выбор уставок (как K26/K33 в ЭТАЛОН)</h3>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>K26: Уставка МТО (статично), А</label>
+                        <input type="number" id="manual_mto" value="0" step="1">
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Ориентир (расчётное МТО):</strong> <span id="mto_calc_hint">—</span> А
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>K33: Уставка МТЗ (статично), А</label>
+                        <input type="number" id="manual_mtz" value="0" step="1">
+                        <div class="info-box" style="margin-top:6px;">
+                            <strong>Ориентир (расчётное МТЗ):</strong> <span id="mtz_calc_hint">—</span> А
+                        </div>
                     </div>
                 </div>
-                
-                <button type="submit" class="btn">Рассчитать</button>
-            </form>
+                <div class="info-box" style="margin-top:10px;">
+                    <strong>Зона покрытия (по пересечению Iкз2ф(L) с уставкой):</strong><br>
+                    МТО: <span id="zone_mto_pct">—</span>% (до <span id="zone_mto_len">—</span> км)<br>
+                    МТЗ: <span id="zone_mtz_pct">—</span>% (до <span id="zone_mtz_len">—</span> км)
+                </div>
+            </div>
+            
+            <button type="button" class="btn btn-success" onclick="addSection()">+ Добавить участок</button>
+            <button type="button" class="btn" onclick="calculate()">📊 Рассчитать</button>
             
             <div id="result" class="result-box" style="display:none;"></div>
         </div>
         
+        <!-- Данные из Excel -->
         <div class="card">
             <h2>📋 Данные из Excel (ЭТАЛОН)</h2>
             <div id="excel-data">
                 <p>Загрузка данных...</p>
             </div>
+            
+            <h3>Справочник типов линий</h3>
+            <div class="info-box">
+                <strong>Провода:</strong> <span id="conductors-count">—</span> типов<br>
+                <strong>Кабели:</strong> <span id="cables-count">—</span> типов
+            </div>
         </div>
         
+        <!-- График -->
         <div class="card full-width">
-            <h2>📈 График чувствительности (Ток КЗ vs Длина линии)</h2>
+            <h2>📈 Ток 2-х фазного КЗ до КЛ (в конце линии) vs Длина линии</h2>
             <div class="chart-container">
                 <canvas id="sensitivityChart"></canvas>
             </div>
@@ -104,143 +219,246 @@
     </div>
 
     <script>
-        let excelData = {};
+        let lineTypes = { conductors: [], cables: [] };
+        let relays = [];
+        let reactances = [];
+        let sections = [];
         let chart = null;
 
-        // Загрузка данных из БД
+        // Загрузка типов линий из БД
+        async function loadLineTypes() {
+            try {
+                const [conductorsRes, cablesRes] = await Promise.all([
+                    fetch('/api/line-types?category=Провода'),
+                    fetch('/api/line-types?category=Кабели')
+                ]);
+                
+                const conductorsData = await conductorsRes.json();
+                const cablesData = await cablesRes.json();
+                
+                if (conductorsData.success) {
+                    lineTypes.conductors = conductorsData.data;
+                    document.getElementById('conductors-count').textContent = lineTypes.conductors.length;
+                }
+                
+                if (cablesData.success) {
+                    lineTypes.cables = cablesData.data;
+                    document.getElementById('cables-count').textContent = lineTypes.cables.length;
+                }
+                
+                // Добавляем первый участок
+                addSection();
+            } catch (e) {
+                console.error('Ошибка загрузки типов линий:', e);
+            }
+        }
+
+        async function loadRelays() {
+            try {
+                const res = await fetch('/api/relays');
+                const json = await res.json();
+                if (json.success) {
+                    relays = json.data;
+                    const sel = document.getElementById('relay_code');
+                    if (sel) {
+                        sel.innerHTML = relays.map(r => `<option value="${r.relay_code}">${r.relay_code} — ${r.relay_name} (L20=${r.coef_l20}, L19=${r.coef_l19})</option>`).join('');
+                    }
+                }
+            } catch (e) {
+                console.error('Ошибка загрузки реле:', e);
+            }
+        }
+
+        async function loadReactances() {
+            try {
+                const res = await fetch('/api/reactances');
+                const json = await res.json();
+                if (json.success) {
+                    reactances = json.data;
+                    const sel = document.getElementById('reactance_id');
+                    if (sel) {
+                        sel.innerHTML =
+                            `<option value="">— не выбрано —</option>` +
+                            reactances
+                                .map(
+                                    (r) =>
+                                        `<option value="${r.id}">${r.code} — ${r.name} (Zmax=${r.z_max_ohm}, Zmin=${r.z_min_ohm})</option>`
+                                )
+                                .join('');
+                    }
+                }
+            } catch (e) {
+                console.error('Ошибка загрузки реактансов:', e);
+            }
+        }
+
+        function getTotalPowerKw() {
+            const rows = document.querySelectorAll('.load-row input.power-kw');
+            let sum = 0;
+            rows.forEach((inp) => {
+                const v = parseFloat(inp.value);
+                if (!isNaN(v)) sum += v;
+            });
+            return sum;
+        }
+
+        function refreshDerivedCurrents() {
+            const p = getTotalPowerKw();
+            const totalPowerEl = document.getElementById('total_power_kw');
+            const iNomEl = document.getElementById('i_nom_calc');
+            if (totalPowerEl) totalPowerEl.textContent = p.toFixed(3);
+            const iNom = p > 0 ? p / 10.38 : 0;
+            if (iNomEl) iNomEl.textContent = iNom.toFixed(3);
+        }
+
+        function renumberLoads() {
+            const rows = document.querySelectorAll('#loads-table-body tr');
+            rows.forEach((r, i) => {
+                r.children[0].textContent = String(i + 1);
+            });
+        }
+
+        function addLoadRow() {
+            const t = document.getElementById('loads-table-body');
+            if (!t) return;
+            const idx = t.children.length + 1;
+            const tr = document.createElement('tr');
+            tr.className = 'load-row';
+            tr.innerHTML = `
+              <td style="width:40px;">${idx}</td>
+              <td><input type="text" placeholder="Напр. двигатель, тр-р" class="load-name" style="width:100%"></td>
+              <td style="width:120px;"><input type="number" step="0.001" class="power-kw" style="width:100%" value="0"></td>
+              <td style="width:60px;"><button type="button" class="btn btn-danger" onclick="this.closest('tr').remove(); renumberLoads(); refreshDerivedCurrents();" style="padding:4px 8px;">✕</button></td>
+            `;
+            t.appendChild(tr);
+            const p = tr.querySelector('input.power-kw');
+            if (p) p.addEventListener('input', refreshDerivedCurrents);
+            refreshDerivedCurrents();
+        }
+
+        // Загрузка данных из Excel
         async function loadExcelData() {
             try {
                 const response = await fetch('/api/excel-data');
                 const json = await response.json();
                 
                 if (json.success) {
-                    excelData = json.data;
-                    
+                    const d = json.data;
                     document.getElementById('excel-data').innerHTML = `
-                        <div class="calculated-value">
-                            <strong>I<sub>кз мин</sub> за трансформатором (K35):</strong> ${excelData.k35 ? excelData.k35.toFixed(2) : '—'} А<br>
-                            <strong>Расчётная уставка МТО (K24):</strong> ${excelData.k24 ? excelData.k24.toFixed(2) : '—'} А<br>
-                            <strong>Расчётная уставка МТЗ (K25):</strong> ${excelData.k25 ? excelData.k25.toFixed(2) : '—'} А<br>
-                            <strong>Уставка МТО (K26):</strong> ${excelData.k26 ? excelData.k26.toFixed(2) : '—'} А<br>
-                            <strong>R' линии (E5):</strong> ${excelData.e5 ? excelData.e5.toFixed(3) : '—'} Ом/км<br>
-                            <strong>X' линии (F5):</strong> ${excelData.f5 ? excelData.f5.toFixed(3) : '—'} Ом/км
+                        <div class="info-box">
+                            <strong>Iкз мин (K35):</strong> ${d.k35 ? d.k35.toFixed(2) : '—'} А<br>
+                            <strong>R' линии (E5):</strong> ${d.e5 ? d.e5.toFixed(3) : '—'} Ом/км<br>
+                            <strong>X' линии (F5):</strong> ${d.f5 ? d.f5.toFixed(3) : '—'} Ом/км<br>
+                            <strong>Длина (D20):</strong> ${d.d20 ? d.d20.toFixed(1) : '—'} км
                         </div>
                     `;
-                    
-                    document.getElementById('calc-mto').textContent = (excelData.k24 ? excelData.k24.toFixed(2) : '—') + ' А';
-                    document.getElementById('calc-mtz').textContent = (excelData.k25 ? excelData.k25.toFixed(2) : '—') + ' А';
-                    
-                    if (excelData.k26) {
-                        document.getElementById('SET_MTO_RAW').value = excelData.k26;
-                    }
-                    
-                    drawChart(excelData, excelData.k26 || 980, excelData.k27 || 400);
-                } else {
-                    document.getElementById('excel-data').innerHTML = 
-                        `<p style="color: #dc3545;">Ошибка: ${json.error}</p>`;
                 }
             } catch (e) {
-                console.error('Ошибка загрузки:', e);
-                document.getElementById('excel-data').innerHTML = 
-                    '<p style="color: #dc3545;">Ошибка загрузки данных из БД</p>';
+                console.error('Ошибка загрузки Excel:', e);
             }
         }
 
-        // Отрисовка графика
-        function drawChart(data, mtoSetting, mtzSetting) {
-            const ctx = document.getElementById('sensitivityChart').getContext('2d');
-            
-            const lengths = [0, 2, 4, 6, 8, 10, 12, 14, 16];
-            const ikz_values = [];
-            
-            const r_prime = data.e5 || 0.73;
-            const x_prime = data.f5 || 0.575;
-            const u_nom = 6300;
-            
-            for (let L of lengths) {
-                const r_total = r_prime * L;
-                const x_total = x_prime * L;
-                const z = Math.sqrt(r_total * r_total + x_total * x_total);
-                const ikz = z > 0 ? u_nom / (Math.sqrt(3) * z) : 10000;
-                ikz_values.push(ikz);
-            }
-            
-            if (chart) {
-                chart.destroy();
-            }
-            
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: lengths,
-                    datasets: [
-                        {
-                            label: 'Ток КЗ (А)',
-                            data: ikz_values,
-                            borderColor: '#667eea',
-                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                            fill: true,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Уставка МТО (А)',
-                            data: new Array(lengths.length).fill(mtoSetting),
-                            borderColor: '#dc3545',
-                            borderDash: [5, 5],
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Уставка МТЗ (А)',
-                            data: new Array(lengths.length).fill(mtzSetting),
-                            borderColor: '#28a745',
-                            borderDash: [5, 5],
-                            borderWidth: 2
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { 
-                            title: { display: true, text: 'Длина линии, км' },
-                            grid: { color: '#e0e0e0' }
-                        },
-                        y: { 
-                            title: { display: true, text: 'Ток, А' },
-                            grid: { color: '#e0e0e0' },
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        legend: { display: true, position: 'top' },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + ' А';
-                                }
-                            }
-                        }
-                    }
-                }
+        // Генерация dropdown опций
+        function generateOptions(types, selectedValue) {
+            let options = '<option value="">— Не выбрано —</option>';
+            types.forEach(t => {
+                const selected = t.type_name === selectedValue ? 'selected' : '';
+                options += `<option value="${t.type_name}" ${selected}>${t.type_name} (R=${t.r_ohm_per_km}, X=${t.x_ohm_per_km})</option>`;
             });
+            return options;
         }
 
-        // Обработчик формы
-        document.getElementById('rza-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        // Добавление участка
+        function addSection() {
+            const sectionNum = sections.length + 1;
+            if (sectionNum > 4) {
+                alert('Максимум 4 участка!');
+                return;
+            }
             
-            const btn = document.querySelector('.btn');
-            const originalText = btn.textContent;
-            btn.textContent = 'Расчёт...';
+            sections.push({
+                number: sectionNum,
+                conductor_type: '',
+                conductor_length: 0,
+                cable_type: '',
+                cable_length: 0
+            });
+            
+            renderSections();
+        }
+
+        // Удаление участка
+        function removeSection(index) {
+            sections.splice(index, 1);
+            sections.forEach((s, i) => s.number = i + 1);
+            renderSections();
+        }
+
+        // Обновление участка
+        function updateSection(index, field, value) {
+            sections[index][field] = value;
+        }
+
+        // Отрисовка участков
+        function renderSections() {
+            const container = document.getElementById('sections-container');
+            container.innerHTML = sections.map((s, index) => `
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3>Участок ${s.number}</h3>
+                        ${sections.length > 1 ? `<button type="button" class="btn btn-danger" onclick="removeSection(${index})" style="padding: 5px 10px; font-size: 12px;">✕</button>` : ''}
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Провод (ВЛ)</label>
+                            <select onchange="updateSection(${index}, 'conductor_type', this.value)">
+                                ${generateOptions(lineTypes.conductors, s.conductor_type)}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Длина провода, км</label>
+                            <input type="number" step="0.1" min="0" value="${s.conductor_length}" 
+                                   onchange="updateSection(${index}, 'conductor_length', parseFloat(this.value))">
+                        </div>
+                        <div class="form-group">
+                            <label>Кабель (КЛ)</label>
+                            <select onchange="updateSection(${index}, 'cable_type', this.value)">
+                                ${generateOptions(lineTypes.cables, s.cable_type)}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Длина кабеля, км</label>
+                            <input type="number" step="0.1" min="0" value="${s.cable_length}" 
+                                   onchange="updateSection(${index}, 'cable_length', parseFloat(this.value))">
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Расчёт
+        async function calculate() {
+            const btn = event.target;
             btn.disabled = true;
-            
-            const mtoInput = parseFloat(document.getElementById('SET_MTO_RAW').value);
-            const mtzInput = parseFloat(document.getElementById('SET_MTZ_RAW').value);
+            btn.textContent = 'Расчёт...';
             
             const data = {
-                SET_MTO_RAW: mtoInput,
-                SET_MTZ_RAW: mtzInput
+                sections: sections.map(s => ({
+                    section_number: s.number,
+                    conductor_type: s.conductor_type || null,
+                    conductor_length: s.conductor_length || 0,
+                    cable_type: s.cable_type || null,
+                    cable_length: s.cable_length || 0
+                })),
+                u_nom: parseFloat(document.getElementById('u_nom').value),
+                i_load_max: parseFloat(document.getElementById('i_load_max').value),
+                relay_code: parseInt(document.getElementById('relay_code').value || '6'),
+                reactance_id: document.getElementById('reactance_id').value ? parseInt(document.getElementById('reactance_id').value) : null,
+                reactance_mode: document.getElementById('reactance_mode').value,
+                total_power_kw: getTotalPowerKw(),
+                i_work: parseFloat(document.getElementById('i_work').value || '0'),
+                manual_mto: parseFloat(document.getElementById('manual_mto').value || '0'),
+                manual_mtz: parseFloat(document.getElementById('manual_mtz').value || '0')
             };
             
             try {
@@ -253,44 +471,207 @@
                 const result = await response.json();
                 
                 if (result.success) {
-                    // ⚠️ ВАЖНО: Показываем ВВЕДЁННЫЕ значения, а не из Excel!
-                    const mtoStatus = result.mto.ok ? '✅ OK' : '❌ Не проходит';
-                    const mtoClass = result.mto.ok ? 'ok' : 'error';
-                    
-                    const mtzStatus = result.mtz.ok ? '✅ OK' : '❌ Не проходит';
-                    const mtzClass = result.mtz.ok ? 'ok' : 'error';
+                    const calc = result.calculation;
+                    window.__lastIkzEnd = calc.i_kz_end;
+                    const mtoStatus = calc.mto_ok_manual ? '✅ OK' : '❌ Не проходит';
+                    const mtoClass = calc.mto_ok ? 'ok' : 'error';
+                    const mtzStatus = calc.mtz_ok_manual ? '✅ OK' : '❌ Не проходит';
+                    const mtzClass = calc.mtz_ok ? 'ok' : 'error';
                     
                     document.getElementById('result').innerHTML = `
-                        <h3>📊 Результаты:</h3>
-                        <p><strong>МТО:</strong> ${result.mto.setting_calc.toFixed(2)} А | 
-                           Чувствительность: ${result.mto.sensitivity.toFixed(3)} ${mtoStatus}</p>
-                        <p class="${mtoClass}">${result.mto.message}</p>
-                        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
-                        <p><strong>МТЗ:</strong> ${result.mtz.setting_calc.toFixed(2)} А | 
-                           Чувствительность: ${result.mtz.sensitivity.toFixed(3)} ${mtzStatus}</p>
-                        <p class="${mtzClass}">${result.mtz.message}</p>
-                        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
-                        <p><small>I<sub>кз мин</sub> (K35) = ${result.mto.i_kz_min ? result.mto.i_kz_min.toFixed(2) : '—'} А</small></p>
+                        <h3>📊 Результаты расчёта:</h3>
+                        <div class="grid-2">
+                            <div>
+                                <strong>Полное сопротивление:</strong><br>
+                                R = ${calc.impedance.r_total.toFixed(3)} Ом<br>
+                                X = ${calc.impedance.x_total.toFixed(3)} Ом<br>
+                                Z = ${calc.impedance.z_total.toFixed(3)} Ом<br>
+                                Длина = ${calc.impedance.length_total.toFixed(2)} км
+                            </div>
+                            <div>
+                                <strong>Токи:</strong><br>
+                                Iкз в конце линии = ${calc.i_kz_end} А<br>
+                                Уставка МТО = ${calc.i_mto_setting} А<br>
+                                Уставка МТЗ = ${calc.i_mtz_setting} А
+                            </div>
+                        </div>
+                        <div class="info-box" style="margin-top:10px;">
+                            <strong>График (для пересечений):</strong><br>
+                            По оси Y построен ток 2-ф КЗ в конце линии и горизонтали уставок МТО/МТЗ.
+                        </div>
+                        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
+                        <p><strong>МТО:</strong> Чувствительность (по K26) = <span id="kch_mto_manual">${calc.sensitivity_mto_manual}</span> ${mtoStatus}</p>
+                        <p class="${mtoClass}">${calc.mto_ok_manual ? 'Критерий ≥1.2 выполнен' : `Недостаточная чувствительность (${calc.sensitivity_mto_manual} < 1.2)`}</p>
+                        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
+                        <p><strong>МТЗ:</strong> Чувствительность (по K33) = <span id="kch_mtz_manual">${calc.sensitivity_mtz_manual}</span> ${mtzStatus}</p>
+                        <p class="${mtzClass}">${calc.mtz_ok_manual ? 'Критерий ≥1.5 выполнен' : `Недостаточная чувствительность (${calc.sensitivity_mtz_manual} < 1.5)`}</p>
                     `;
                     
-                    // 📊 Обновляем график с НОВЫМИ уставками!
-                    drawChart(excelData, mtoInput, mtzInput);
+                    // Отрисовка графика
+                    drawChart(result.chart);
                 } else {
-                    document.getElementById('result').innerHTML = 
-                        `<p style="color:red;">❌ ${result.error}</p>`;
+                    document.getElementById('result').innerHTML = `<p style="color:red;">❌ ${result.error}</p>`;
                 }
                 document.getElementById('result').style.display = 'block';
             } catch (error) {
-                document.getElementById('result').innerHTML = 
-                    `<p style="color:red;">❌ ${error.message}</p>`;
-                document.getElementById('result').style.display = 'block';
+                document.getElementById('result').innerHTML = `<p style="color:red;">❌ ${error.message}</p>`;
             } finally {
-                btn.textContent = originalText;
                 btn.disabled = false;
+                btn.textContent = '📊 Рассчитать';
             }
-        });
+        }
 
+        // Отрисовка графика
+        function computeZoneByIntersection(lengths, ikz2, setting, totalLen) {
+            let lastOk = 0;
+            for (let i = 0; i < lengths.length; i++) {
+                const L = lengths[i];
+                const I = ikz2[i];
+                if (I >= setting) lastOk = L;
+            }
+            const pct = totalLen > 0 ? (lastOk / totalLen * 100) : 0;
+            return { length: lastOk, percent: pct };
+        }
+
+        function updateManualVizors(chartData) {
+            if (!chart || !chartData) return;
+            const mto = parseFloat(document.getElementById('manual_mto').value || '0');
+            const mtz = parseFloat(document.getElementById('manual_mtz').value || '0');
+
+            // update horizontal datasets (assumes dataset 1 is MTO line, dataset 2 is MTZ line)
+            if (chart.data.datasets[1]) chart.data.datasets[1].data = chartData.lengths.map(() => mto);
+            if (chart.data.datasets[2]) chart.data.datasets[2].data = chartData.lengths.map(() => mtz);
+
+            const zMto = computeZoneByIntersection(chartData.lengths, chartData.ikz2_values, mto, chartData.total_length);
+            const zMtz = computeZoneByIntersection(chartData.lengths, chartData.ikz2_values, mtz, chartData.total_length);
+
+            const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+            setText('zone_mto_len', zMto.length.toFixed(2));
+            setText('zone_mto_pct', zMto.percent.toFixed(1));
+            setText('zone_mtz_len', zMtz.length.toFixed(2));
+            setText('zone_mtz_pct', zMtz.percent.toFixed(1));
+
+            // Update Kч display for manual settings (based on I_kz_end from last calc)
+            const ikzEnd = parseFloat(window.__lastIkzEnd || '0');
+            if (ikzEnd > 0) {
+                const kchMto = mto > 0 ? (ikzEnd / mto) : 0;
+                const kchMtz = mtz > 0 ? (ikzEnd / mtz) : 0;
+                setText('kch_mto_manual', kchMto.toFixed(3));
+                setText('kch_mtz_manual', kchMtz.toFixed(3));
+            }
+
+            chart.update();
+        }
+
+        function drawChart(chartData) {
+            const ctx = document.getElementById('sensitivityChart').getContext('2d');
+            
+            if (chart) {
+                chart.destroy();
+            }
+            
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartData.lengths,
+                    datasets: [
+                        {
+                            label: 'Ток 2-ф КЗ в конце линии (А)',
+                            data: chartData.ikz2_values,
+                            borderColor: '#dc2626',
+                            backgroundColor: 'rgba(220, 38, 38, 0.06)',
+                            fill: false,
+                            tension: 0.25,
+                            pointRadius: 0,
+                            pointHoverRadius: 5,
+                            pointHitRadius: 12
+                        },
+                        {
+                            label: 'МТО (уставка), А',
+                            data: chartData.lengths.map(() => parseFloat(document.getElementById('manual_mto')?.value || chartData.i_mto_setting)),
+                            borderColor: '#111827',
+                            borderDash: [6, 4],
+                            fill: false,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'МТЗ (уставка), А',
+                            data: chartData.lengths.map(() => parseFloat(document.getElementById('manual_mtz')?.value || chartData.i_mtz_setting)),
+                            borderColor: '#374151',
+                            borderDash: [2, 4],
+                            fill: false,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'nearest',
+                        intersect: false
+                    },
+                    scales: {
+                        x: { 
+                            title: { display: true, text: 'Длина линии, км' },
+                            grid: { color: '#e0e0e0' },
+                            min: 0,
+                            max: chartData.x_max
+                        },
+                        y: { 
+                            title: { display: true, text: 'Ток, А' },
+                            grid: { color: '#e0e0e0' },
+                            beginAtZero: true,
+                            max: chartData.y_max
+                        }
+                    },
+                    plugins: {
+                        legend: { display: true },
+                        tooltip: {
+                            enabled: true,
+                            callbacks: {
+                                title: (items) => {
+                                    if (!items?.length) return '';
+                                    const idx = items[0].dataIndex;
+                                    const L = chartData.lengths?.[idx];
+                                    return (L !== undefined) ? `Длина: ${L} км` : '';
+                                },
+                                label: (ctx) => {
+                                    const label = ctx.dataset?.label ?? '';
+                                    const val = ctx.parsed?.y;
+                                    if (val === null || val === undefined) return label;
+                                    return `${label}: ${val} А`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // After first draw, compute zones and wire inputs
+            const mtoInp = document.getElementById('manual_mto');
+            const mtzInp = document.getElementById('manual_mtz');
+            const mtoHint = document.getElementById('mto_calc_hint');
+            const mtzHint = document.getElementById('mtz_calc_hint');
+            if (mtoHint) mtoHint.textContent = String(chartData.i_mto_setting);
+            if (mtzHint) mtzHint.textContent = String(chartData.i_mtz_setting);
+
+            // set defaults to calculated if empty/zero
+            if (mtoInp && (!mtoInp.value || parseFloat(mtoInp.value) === 0)) mtoInp.value = String(chartData.i_mto_setting);
+            if (mtzInp && (!mtzInp.value || parseFloat(mtzInp.value) === 0)) mtzInp.value = String(chartData.i_mtz_setting);
+
+            if (mtoInp) mtoInp.oninput = () => updateManualVizors(chartData);
+            if (mtzInp) mtzInp.oninput = () => updateManualVizors(chartData);
+
+            updateManualVizors(chartData);
+        }
+
+        // Инициализация
+        loadLineTypes();
+        loadRelays();
+        loadReactances();
         loadExcelData();
+        addLoadRow();
     </script>
 </body>
 </html>
