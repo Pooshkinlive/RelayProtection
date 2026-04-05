@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from openpyxl import load_workbook
 
-from app.models import RelayType, Base
+from app.models import RelayType, RelayTimeCharacteristic, Base
 
 
 DATABASE_URL = "mssql+pyodbc:///?odbc_connect=DRIVER={ODBC Driver 18 for SQL Server};SERVER=MSI-ALEXNAB\\SQLEXPRESS;DATABASE=RZA_Calculator;Trusted_Connection=yes;TrustServerCertificate=yes"
@@ -57,6 +57,7 @@ def upsert_relays_from_expert_xlsx(path: str) -> int:
     with Session(ENGINE) as session:
         # Clear old wrong data (e.g., if it was populated from 'Провода').
         session.query(RelayType).delete()
+        session.query(RelayTimeCharacteristic).delete()
         session.commit()
 
         for r in range(2, 200):  # safe upper bound
@@ -64,6 +65,8 @@ def upsert_relays_from_expert_xlsx(path: str) -> int:
             relay_name = relay_ws.cell(r, 2).value
             coef_l20 = relay_ws.cell(r, 3).value
             coef_l19 = relay_ws.cell(r, 4).value
+            # Column E in Excel list (VLOOKUP(..., ; 5)) - time characteristic for MTZ
+            time_char_e = relay_ws.cell(r, 5).value
             if relay_code is None and relay_name is None:
                 break
             if not isinstance(relay_code, (int, float)) or relay_name is None:
@@ -81,6 +84,15 @@ def upsert_relays_from_expert_xlsx(path: str) -> int:
                 )
             )
             count += 1
+
+            # Time characteristic for MTZ (Excel column E).
+            # Stored separately in relay_time_characteristics table.
+            session.add(
+                RelayTimeCharacteristic(
+                    relay_code=relay_code_i,
+                    time_char_e=str(time_char_e) if time_char_e is not None else None,
+                )
+            )
 
         session.commit()
 

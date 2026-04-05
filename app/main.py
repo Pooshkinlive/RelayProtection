@@ -8,7 +8,15 @@ from pydantic import BaseModel
 
 from app.database import get_db
 from app.calculator import calculate_rza_settings, generate_chart_data, get_line_type
-from app.models import LineType, LineSection, UserConfiguration, RelayType, Reactance
+from app.models import (
+    LineType,
+    LineSection,
+    UserConfiguration,
+    RelayType,
+    RelayTimeCharacteristic,
+    Reactance,
+    Transformer,
+)
 
 app = FastAPI(title="RZA Calculator", description="Расчёт уставок релейной защиты")
 
@@ -28,18 +36,19 @@ if TEMPLATES_DIR.exists():
 # === Pydantic модели для API ===
 class SectionInput(BaseModel):
     section_number: int
-    conductor_type: str = None
+    conductor_type: str | None = None
     conductor_length: float = 0.0
-    cable_type: str = None
+    cable_type: str | None = None
     cable_length: float = 0.0
 
 class CalculationInput(BaseModel):
     sections: List[SectionInput]
+    after_sections: List[SectionInput] = []
     u_nom: float = 6300.0
-    i_load_max: float = 100.0
     relay_code: int = 6
     reactance_id: int | None = None
     reactance_mode: str = "MAX"
+    transformer_code: int | None = None
     total_power_kw: float = 0.0
     i_work: float = 0.0
     manual_mto: float = 0.0  # K26
@@ -85,6 +94,11 @@ async def get_relays(db: Session = Depends(get_db)):
     """Получить типы реле из БД (для K16)"""
     try:
         relays = db.query(RelayType).order_by(RelayType.relay_code).all()
+
+        time_map = {
+            t.relay_code: t.time_char_e
+            for t in db.query(RelayTimeCharacteristic).all()
+        }
         return {
             "success": True,
             "data": [
@@ -93,6 +107,7 @@ async def get_relays(db: Session = Depends(get_db)):
                     "relay_name": r.relay_name,
                     "coef_l20": r.coef_l20,
                     "coef_l19": r.coef_l19,
+                    "time_char_e": time_map.get(r.relay_code),
                 }
                 for r in relays
             ],
@@ -121,6 +136,26 @@ async def get_reactances(db: Session = Depends(get_db)):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
+@app.get("/api/transformers")
+async def get_transformers(db: Session = Depends(get_db)):
+    """Справочник трансформаторов (ЭКСПЕРТ.xlsx -> лист 'Трансформаторы')"""
+    try:
+        rows = db.query(Transformer).order_by(Transformer.transformer_code).all()
+        return {
+            "success": True,
+            "data": [
+                {
+                    "id": r.id,
+                    "code": r.transformer_code,
+                    "power_kva": r.power_kva,
+                    "z_ohm": r.z_ohm,
+                }
+                for r in rows
+            ],
+        }
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
 @app.post("/api/calculate")
 async def calculate(inputs: CalculationInput, db: Session = Depends(get_db)):
     """Расчёт уставок РЗА"""
@@ -136,13 +171,24 @@ async def calculate(inputs: CalculationInput, db: Session = Depends(get_db)):
                 cable_length=s.cable_length
             )
             sections.append(section)
+
+        after_sections: List[LineSection] = []
+        for s in inputs.after_sections or []:
+            after_sections.append(
+                LineSection(
+                    section_number=s.section_number,
+                    conductor_type=s.conductor_type,
+                    conductor_length=s.conductor_length,
+                    cable_type=s.cable_type,
+                    cable_length=s.cable_length,
+                )
+            )
         
         # Расчёт
         result = calculate_rza_settings(
             db,
             sections,
             inputs.u_nom,
-            i_load_max=inputs.i_load_max,
             relay_code=inputs.relay_code,
             reactance_id=inputs.reactance_id,
             reactance_mode=inputs.reactance_mode,
@@ -150,6 +196,8 @@ async def calculate(inputs: CalculationInput, db: Session = Depends(get_db)):
             i_work=inputs.i_work,
             manual_mto=inputs.manual_mto,
             manual_mtz=inputs.manual_mtz,
+            transformer_code=inputs.transformer_code,
+            after_sections=after_sections,
         )
         chart_data = generate_chart_data(
             db,
@@ -157,10 +205,12 @@ async def calculate(inputs: CalculationInput, db: Session = Depends(get_db)):
             inputs.u_nom,
             i_mto_setting=float(result["i_mto_setting"]),
             i_mtz_setting=float(result["i_mtz_setting"]),
+            after_sections=after_sections,
             kch_mto_min=float(result["kch_mto_min"]),
             kch_mtz_min=float(result["kch_mtz_min"]),
             reactance_id=inputs.reactance_id,
             reactance_mode=inputs.reactance_mode,
+            transformer_code=inputs.transformer_code,
         )
         
         return {

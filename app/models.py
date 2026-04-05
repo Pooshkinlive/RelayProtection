@@ -64,6 +64,19 @@ class RelayType(Base):
     coef_l19 = Column(Float, nullable=False)  # VLOOKUP(..., 4)
 
 
+class RelayTimeCharacteristic(Base):
+    """
+    VLOOKUP(K16; [ЭКСПЕРТ]Реле!$A$1:$E$9; 5) - time characteristic for MTZ (column E).
+    Stored separately to avoid altering existing relay_types table.
+    """
+
+    __tablename__ = "relay_time_characteristics"
+
+    id = Column(Integer, primary_key=True)
+    relay_code = Column(Integer, nullable=False, unique=True)
+    time_char_e = Column(String(255))
+
+
 class Substation(Base):
     __tablename__ = "substations"
 
@@ -118,6 +131,20 @@ class Reactance(Base):
     name = Column(String(255), nullable=False)
     z_max_ohm = Column(Float, nullable=False)
     z_min_ohm = Column(Float, nullable=False)
+
+class Transformer(Base):
+    """
+    Transformers list from ЭКСПЕРТ.xlsx sheet 'Трансформаторы':
+      - A: порядковый номер (1..11) -> используется как D26 в ЭТАЛОН
+      - B: мощность (кВА)
+      - C: полное сопротивление (Ом)
+    """
+    __tablename__ = "transformers"
+
+    id = Column(Integer, primary_key=True)
+    transformer_code = Column(Integer, nullable=False, unique=True)  # column A
+    power_kva = Column(Float, nullable=False)  # column B
+    z_ohm = Column(Float, nullable=False)  # column C
 
 
 class CalculationContext(Base):
