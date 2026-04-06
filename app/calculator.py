@@ -471,6 +471,9 @@ def calculate_rza_settings(
     #  K32 = J12 * 1.5  -> Iреал
     i_raschet = j11 * 1.5 if j11 > 0 else 0.0
     i_real = j12 * 1.5 if j12 > 0 else 0.0
+    # Лист «Расчет» K35 «МТЗ доп.»: ='1'!D30, а D30 лист «1» = B30/1.5;
+    # B30 — 2ф КЗ в конце линии до КЛ (как i_kz2_kl_end_min).
+    i_mtz_dop = float(i_kz2_kl_end_min) / 1.5 if i_kz2_kl_end_min > 0 else 0.0
 
     # These are used for automatic (not manual) criteria checks in our simplified engine.
     i_mto_setting = i_kz3_tr
@@ -506,6 +509,7 @@ def calculate_rza_settings(
         "i_kz3_tr": round(float(i_kz3_tr), 2),
         "i_mto_setting": round(i_mto_setting, 2),  # K24
         "i_mtz_setting": round(i_mtz_setting, 2),  # K32
+        "i_mtz_dop": round(float(i_mtz_dop), 2),  # Расчет K35 = '1'!D30 = B30/1.5
         "sensitivity_mto": round(sensitivity_mto, 3),
         "sensitivity_mtz": round(sensitivity_mtz, 3),
         "sensitivity_mto_manual": round(sensitivity_mto_manual, 3),
@@ -527,6 +531,7 @@ def calculate_rza_settings(
             "k25_i_nam": round(float(i_nam), 3),
             "k31_i_raschet": round(float(i_raschet), 3),
             "k32_i_real": round(float(i_real), 3),
+            "k35_mtz_dop": round(float(i_mtz_dop), 3),
             "k34_vtx_mtz": get_relay_time_char(db, relay_code),
             "j118_ohm": round(float(j118_k24), 5),
             "j118_feeder_end_ohm": round(float(j118_feeder_end), 5),

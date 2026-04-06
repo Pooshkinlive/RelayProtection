@@ -230,6 +230,7 @@
                             <div class="info-box" style="margin-top:6px;">
                                 <strong>Iрасчет =</strong> <span id="mtz_iraschet_hint">—</span> А<br>
                                 <strong>Iреал =</strong> <span id="mtz_ireal_hint">—</span> А<br>
+                                <strong>МТЗ доп. (Расчет K35 = '1'!D30 = B30/1,5) =</strong> <span id="mtz_dop_hint">—</span> А<br>
                                 <strong>ВТХ (K34) =</strong> <span id="mtz_vtk_hint">—</span>
                             </div>
                         </div>
@@ -659,6 +660,7 @@
                     setText('mto_inam_hint', orient.k25_i_nam);
                     setText('mtz_iraschet_hint', orient.k31_i_raschet);
                     setText('mtz_ireal_hint', orient.k32_i_real);
+                    setText('mtz_dop_hint', orient.k35_mtz_dop != null ? orient.k35_mtz_dop : calc.i_mtz_dop);
                     setText('mtz_vtk_hint', orient.k34_vtx_mtz);
 
                     const mtoStatus = calc.mto_ok_manual ? '✅ OK' : '❌ Не проходит';
@@ -681,7 +683,8 @@
                                 Iкз (2) min в конце линии до КЛ = ${calc.i_kz2_kl_end_min != null ? calc.i_kz2_kl_end_min : calc.i_kz_end} А<br>
                                 Iкз (3) за тр-ром = ${calc.i_kz3_tr != null ? calc.i_kz3_tr : calc.i_mto_setting} А<br>
                                 Уставка МТО = ${calc.i_mto_setting} А<br>
-                                Уставка МТЗ = ${calc.i_mtz_setting} А
+                                Уставка МТЗ = ${calc.i_mtz_setting} А<br>
+                                МТЗ доп. (Расчет K35 = '1'!D30 = B30/1,5) = ${calc.i_mtz_dop != null ? calc.i_mtz_dop : '—'} А
                             </div>
                         </div>
                         <div class="info-box" style="margin-top:10px;">
@@ -691,6 +694,7 @@
                             при полной трассе |Z| конца линии ≈ ${calc.j118_feeder_end_ohm != null ? Number(calc.j118_feeder_end_ohm).toFixed(4) : '—'} Ом;
                             B44 (U/(√3·|Z|)) ≈ ${calc.i_kz3_b44 != null ? calc.i_kz3_b44 : '—'} А;
                             K24 (B44·L20) = Iкз (3) за тр-ром = ${calc.i_kz3_tr != null ? calc.i_kz3_tr : calc.i_mto_setting} А;
+                            МТЗ доп.: B30/1,5 = ${calc.i_mtz_dop != null ? calc.i_mtz_dop : '—'} А (лист «Расчет» K35 = '1'!D30);
                             J11 = ${calc.j11 != null ? calc.j11 : '—'} А
                         </div>
                         <div class="info-box" style="margin-top:10px;">
