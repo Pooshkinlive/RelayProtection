@@ -371,6 +371,17 @@ def calculate_rza_settings(
 
     z_react = get_reactance_z(db, reactance_id, reactance_mode)
     z_tr = get_transformer_z(db, transformer_code)
+    z_react_min = get_reactance_z(db, reactance_id, "MIN")
+
+    # 2ф в конце линии до КЛ (как '1'!B30 = 6300/(2·J115)): только вкладка «до КЛ», F5 = MIN
+    slot_rows_kl = _kl_four_slot_rows(db, sections)
+    L_kl_only = float(imp_kl["length_total"])
+    eps_l = 1e-9
+    if L_kl_only <= eps_l:
+        z_kl_end_min = max(z_react_min, 1e-9)
+    else:
+        z_kl_end_min = _etalon_z_kl_sumsq(L_kl_only, slot_rows_kl, z_react_min)
+    i_kz2_kl_end_min = calculate_short_circuit_current_2ph(u_nom, z_kl_end_min)
 
     # J118: конец фидера с учётом участков за ТР (как блоки D28:F38 + E5 + E26 в ЭТАЛОН)
     j118_equiv = j118_at_feeder_end(
@@ -379,8 +390,8 @@ def calculate_rza_settings(
 
     # '1'!B44 = U/(√3·J118); K24 = B44 * L20 (L20 из ЭКСПЕРТ, столбец C таблицы Реле)
     i_kz3_b44 = calculate_short_circuit_current(u_nom, j118_equiv)
-    i_kz2_end = calculate_short_circuit_current_2ph(u_nom, j118_equiv)
-    i_kz_end = i_kz2_end  # для графика/Кч — 2ф по тому же |Z|
+    i_kz2_feeder_j118 = calculate_short_circuit_current_2ph(u_nom, j118_equiv)
+    i_kz_end = i_kz2_kl_end_min
     
     # Excel-like: coefficients depend on relay type (K16)
     coef_l20, coef_l19 = get_relay_coeffs(db, relay_code)
@@ -432,8 +443,10 @@ def calculate_rza_settings(
         "j118_ohm": round(float(j118_equiv), 5),
         "i_kz3_b44": round(float(i_kz3_b44), 3),
         "j11": round(float(j11), 3),
-        "i_kz_end": round(i_kz_end, 2),
-        "i_kz2_end": round(i_kz2_end, 2),
+        "i_kz2_kl_end_min": round(float(i_kz2_kl_end_min), 2),
+        "i_kz_end": round(float(i_kz_end), 2),
+        "i_kz2_feeder_j118": round(float(i_kz2_feeder_j118), 2),
+        "i_kz3_tr": round(float(i_kz3_tr), 2),
         "i_mto_setting": round(i_mto_setting, 2),  # K24
         "i_mtz_setting": round(i_mtz_setting, 2),  # K32
         "sensitivity_mto": round(sensitivity_mto, 3),

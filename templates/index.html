@@ -678,16 +678,18 @@
                             </div>
                             <div>
                                 <strong>Токи:</strong><br>
-                                Iкз в конце линии = ${calc.i_kz_end} А<br>
+                                Iкз (2) min в конце линии до КЛ = ${calc.i_kz2_kl_end_min != null ? calc.i_kz2_kl_end_min : calc.i_kz_end} А<br>
+                                Iкз (3) за тр-ром = ${calc.i_kz3_tr != null ? calc.i_kz3_tr : calc.i_mto_setting} А<br>
                                 Уставка МТО = ${calc.i_mto_setting} А<br>
                                 Уставка МТЗ = ${calc.i_mtz_setting} А
                             </div>
                         </div>
                         <div class="info-box" style="margin-top:10px;">
-                            <strong>Цепочка как в ЭТАЛОН (конец фидера с линией за ТР):</strong><br>
-                            J118 ≈ ${calc.j118_ohm != null ? Number(calc.j118_ohm).toFixed(4) : '—'} Ом;
+                            <strong>Как в ЭТАЛОН:</strong><br>
+                            2ф в конце линии до КЛ (B30, MIN реакт., только до КЛ) = ${calc.i_kz2_kl_end_min != null ? calc.i_kz2_kl_end_min : calc.i_kz_end} А;
+                            J118 (конец фидера с линией за ТР) ≈ ${calc.j118_ohm != null ? Number(calc.j118_ohm).toFixed(4) : '—'} Ом;
                             B44 (U/(√3·J118)) ≈ ${calc.i_kz3_b44 != null ? calc.i_kz3_b44 : '—'} А;
-                            K24 (B44·L20) = ${calc.i_mto_setting} А;
+                            K24 (B44·L20) = Iкз (3) за тр-ром = ${calc.i_kz3_tr != null ? calc.i_kz3_tr : calc.i_mto_setting} А;
                             J11 = ${calc.j11 != null ? calc.j11 : '—'} А
                         </div>
                         <div class="info-box" style="margin-top:10px;">
