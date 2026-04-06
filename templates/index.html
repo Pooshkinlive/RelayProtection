@@ -687,8 +687,9 @@
                         <div class="info-box" style="margin-top:10px;">
                             <strong>Как в ЭТАЛОН:</strong><br>
                             2ф в конце линии до КЛ (B30, MIN реакт., только до КЛ) = ${calc.i_kz2_kl_end_min != null ? calc.i_kz2_kl_end_min : calc.i_kz_end} А;
-                            J118 (конец фидера с линией за ТР) ≈ ${calc.j118_ohm != null ? Number(calc.j118_ohm).toFixed(4) : '—'} Ом;
-                            B44 (U/(√3·J118)) ≈ ${calc.i_kz3_b44 != null ? calc.i_kz3_b44 : '—'} А;
+                            |Z| для B44/K24 (до КЛ + до ТР + E5 + Zтр, КЗ за ТР) ≈ ${calc.j118_ohm != null ? Number(calc.j118_ohm).toFixed(4) : '—'} Ом;
+                            при полной трассе |Z| конца линии ≈ ${calc.j118_feeder_end_ohm != null ? Number(calc.j118_feeder_end_ohm).toFixed(4) : '—'} Ом;
+                            B44 (U/(√3·|Z|)) ≈ ${calc.i_kz3_b44 != null ? calc.i_kz3_b44 : '—'} А;
                             K24 (B44·L20) = Iкз (3) за тр-ром = ${calc.i_kz3_tr != null ? calc.i_kz3_tr : calc.i_mto_setting} А;
                             J11 = ${calc.j11 != null ? calc.j11 : '—'} А
                         </div>

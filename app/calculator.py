@@ -56,14 +56,18 @@ def get_line_type(db: Session, category: str, type_name: str) -> Optional[LineTy
 def get_relay_coeffs(db: Session, relay_code: int) -> Tuple[float, float]:
     """
     Excel mapping:
-    - L20 = VLOOKUP(K16, RelayTable, 3)
-    - L19 = VLOOKUP(K16, RelayTable, 4)
+    - L20 = VLOOKUP(K16, RelayTable, 3) — множитель для КЗ за тр (~1.0…1.25)
+    - L19 = VLOOKUP(K16, RelayTable, 4) — множитель Iнам (~2…4)
     """
     relay = db.query(RelayType).filter(RelayType.relay_code == relay_code).first()
     if not relay:
-        # fallback to legacy constants
         return 1.2, 1.5
-    return float(relay.coef_l20), float(relay.coef_l19)
+    c20 = float(relay.coef_l20)
+    c19 = float(relay.coef_l19)
+    # Если при импорте перепутаны столбцы C/D листа «Реле», в БД окажется L20≈3 и L19≈1.15.
+    if c20 >= 1.8 and c19 <= 1.35:
+        c20, c19 = c19, c20
+    return c20, c19
 
 
 def get_relay_time_char(db: Session, relay_code: int) -> Optional[str]:
@@ -320,10 +324,10 @@ def j118_at_feeder_end(
     transformer_code: Optional[int],
 ) -> float:
     """
-    |Z| для КЗ в конце рассматриваемого фидера (цепочка к B44 / J118).
-    - Если заданы участки после ТР — конец трассы Lдо+Lпосле, Zтр в точке перехода (как на графике).
-    - Если линии после ТР нет — КЗ «за ТР» с нулевой отходящей ВЛ: полная линия до ТР + E5 + Zтр
-      (совпадает с прежней моделью и учётом E26 в ЭТАЛОН).
+    |Z| в конце электрической трассы по вкладкам UI: L_доКЛ + L_доТР, с E5 и Zтр в конце
+    (как нарастание по D28:F38 + E5 + E26). Для B44/K24 используйте j118_for_k24_b44 —
+    при двух вкладках результат на полной длине совпадает; расхождение возможно, если модель
+    расширят линией после ТР.
     """
     after_sections = after_sections or []
     r_b, x_b, L_b, r_a, x_a, L_a = _feeder_r_x_lengths(db, sections, after_sections)
@@ -337,6 +341,53 @@ def j118_at_feeder_end(
         x_end = x_b + z_react + z_tr
         return max(math.sqrt(r_end * r_end + x_end * x_end), 1e-9)
     return z_mod_full_path_at_length(L_full, r_b, x_b, L_b, r_a, x_a, L_a, z_react, z_tr)
+
+
+def j118_for_k24_b44(
+    db: Session,
+    sections: List[LineSection],
+    after_sections: Optional[List[LineSection]],
+    reactance_id: Optional[int],
+    reactance_mode: str,
+    transformer_code: Optional[int],
+) -> float:
+    """
+    |Z| для '1'!B44 и K24: трёхфазное КЗ «за трансформатором».
+    ЭТАЛОН, лист «1», яч. J118:
+      J118 = SQRT( (SUMSQ( Σ L_i*(Rпровод_i + Rкабель_i) )) + (SUMSQ( E5 + E26 + Σ L_i*(Xпровод_i + Xкабель_i) )) )
+    где блок i — строки «Расчет!D28:F38», т.е. **только** линия «до ТР» (вкладка 2 UI).
+
+    Важно: ЭТАЛОН умножает суммарную длину участка (Dпровод+Dкабель) на сумму удельных
+    сопротивлений (Eпровод+Eкабель) и (Fпровод+Fкабель). Это соответствует нашей функции
+    `_section_etalon_ef_per_km`, а не `calculate_total_impedance` (которая суммирует L*R отдельно).
+    """
+    after_sections = after_sections or []
+    z_react = get_reactance_z(db, reactance_id, reactance_mode)  # E5
+    z_tr = get_transformer_z(db, transformer_code)  # E26
+
+    # J118 uses only the "до ТР" part (after_sections), up to 4 slots.
+    slot_rows_tr = _kl_four_slot_rows(db, after_sections)
+    # Full distance to TR in the block: sum of all "до ТР" lengths.
+    L_tr = 0.0
+    for row in slot_rows_tr:
+        for Lb, _, _ in row:
+            L_tr += float(Lb)
+
+    if L_tr <= 1e-9:
+        return max(abs(z_react + z_tr), 1e-9)
+
+    # Equivalent of SUMSQ( Σ L_i*(E_i) ) + SUMSQ( E5+E26 + Σ L_i*(F_i) )
+    R_sum = 0.0
+    X_line = 0.0
+    for row in slot_rows_tr:
+        for Lb, e_sum, f_sum in row:
+            if Lb <= 1e-15:
+                continue
+            R_sum += float(Lb) * float(e_sum)
+            X_line += float(Lb) * float(f_sum)
+
+    X_sum = float(z_react) + float(z_tr) + X_line
+    return max(math.sqrt(R_sum * R_sum + X_sum * X_sum), 1e-9)
 
 
 def calculate_rza_settings(
@@ -383,14 +434,18 @@ def calculate_rza_settings(
         z_kl_end_min = _etalon_z_kl_sumsq(L_kl_only, slot_rows_kl, z_react_min)
     i_kz2_kl_end_min = calculate_short_circuit_current_2ph(u_nom, z_kl_end_min)
 
-    # J118: конец фидера с учётом участков за ТР (как блоки D28:F38 + E5 + E26 в ЭТАЛОН)
-    j118_equiv = j118_at_feeder_end(
+    # B44/K24: |Z| «за ТР» — только линия до ТР + E5 + Zтр (без длины после ТР в контуре КЗ)
+    j118_k24 = j118_for_k24_b44(
+        db, sections, after_sections, reactance_id, reactance_mode, transformer_code
+    )
+    # Конец полной трассы (до КЛ + после ТР) — для сравнения / 2ф по тому же концу линии
+    j118_feeder_end = j118_at_feeder_end(
         db, sections, after_sections, reactance_id, reactance_mode, transformer_code
     )
 
-    # '1'!B44 = U/(√3·J118); K24 = B44 * L20 (L20 из ЭКСПЕРТ, столбец C таблицы Реле)
-    i_kz3_b44 = calculate_short_circuit_current(u_nom, j118_equiv)
-    i_kz2_feeder_j118 = calculate_short_circuit_current_2ph(u_nom, j118_equiv)
+    # '1'!B44 = U/(√3·J118); K24 = B44 * L20 (L20 из ЭКСПЕРТ, таблица Реле)
+    i_kz3_b44 = calculate_short_circuit_current(u_nom, j118_k24)
+    i_kz2_feeder_j118 = calculate_short_circuit_current_2ph(u_nom, j118_feeder_end)
     i_kz_end = i_kz2_kl_end_min
     
     # Excel-like: coefficients depend on relay type (K16)
@@ -440,7 +495,9 @@ def calculate_rza_settings(
     
     return {
         "impedance": impedance,
-        "j118_ohm": round(float(j118_equiv), 5),
+        "j118_ohm": round(float(j118_k24), 5),
+        "j118_k24_ohm": round(float(j118_k24), 5),
+        "j118_feeder_end_ohm": round(float(j118_feeder_end), 5),
         "i_kz3_b44": round(float(i_kz3_b44), 3),
         "j11": round(float(j11), 3),
         "i_kz2_kl_end_min": round(float(i_kz2_kl_end_min), 2),
@@ -471,7 +528,8 @@ def calculate_rza_settings(
             "k31_i_raschet": round(float(i_raschet), 3),
             "k32_i_real": round(float(i_real), 3),
             "k34_vtx_mtz": get_relay_time_char(db, relay_code),
-            "j118_ohm": round(float(j118_equiv), 5),
+            "j118_ohm": round(float(j118_k24), 5),
+            "j118_feeder_end_ohm": round(float(j118_feeder_end), 5),
         },
         "reactance": {
             "id": reactance_id,
