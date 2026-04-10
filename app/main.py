@@ -93,15 +93,25 @@ class LoginInput(BaseModel):
 class ReactanceCreateInput(BaseModel):
     reactance_code: int
     name: str = Field(min_length=1, max_length=255)
-    z_max_ohm: float = Field(gt=0)
-    z_min_ohm: float = Field(gt=0)
+    z_max_ohm: Optional[float] = None
+    z_min_ohm: Optional[float] = None
+    z_a_max_ohm: Optional[float] = None
+    z_a_min_ohm: Optional[float] = None
 
 
 class ReactanceUpdateInput(BaseModel):
     name: Optional[str] = Field(None, min_length=1, max_length=255)
-    z_max_ohm: Optional[float] = Field(None, gt=0)
-    z_min_ohm: Optional[float] = Field(None, gt=0)
+    z_max_ohm: Optional[float] = None
+    z_min_ohm: Optional[float] = None
+    z_a_max_ohm: Optional[float] = None
+    z_a_min_ohm: Optional[float] = None
     is_active: Optional[bool] = None
+
+
+def _reactance_row_usable_for_calc(r: Reactance) -> bool:
+    from app.calculator import regime_emergency_available, regime_normal_available
+
+    return regime_normal_available(r) or regime_emergency_available(r)
 
 
 def _reactance_to_dict(r: Reactance, include_inactive_fields: bool = True) -> dict:
@@ -111,6 +121,8 @@ def _reactance_to_dict(r: Reactance, include_inactive_fields: bool = True) -> di
         "name": r.name,
         "z_max_ohm": r.z_max_ohm,
         "z_min_ohm": r.z_min_ohm,
+        "z_a_max_ohm": getattr(r, "z_a_max_ohm", None),
+        "z_a_min_ohm": getattr(r, "z_a_min_ohm", None),
     }
     if include_inactive_fields:
         d["is_active"] = getattr(r, "is_active", True)
@@ -169,18 +181,30 @@ async def admin_create_reactance(
     db: Session = Depends(get_db),
     staff: dict = Depends(_staff_from_credentials),
 ):
-    if body.z_max_ohm < body.z_min_ohm:
-        raise HTTPException(status_code=400, detail="Zmax должно быть ≥ Zmin")
     dup = db.query(Reactance).filter(Reactance.reactance_code == body.reactance_code).first()
     if dup:
         raise HTTPException(status_code=409, detail=f"Код {body.reactance_code} уже занят")
+    has_n = body.z_max_ohm is not None and body.z_min_ohm is not None
+    has_a = (
+        body.z_a_max_ohm is not None
+        and body.z_a_min_ohm is not None
+        and float(body.z_a_max_ohm) > 0
+        and float(body.z_a_min_ohm) > 0
+    )
+    if not has_n and not has_a:
+        raise HTTPException(
+            status_code=400,
+            detail="Нужны оба Z норм. режима (C и D) или оба Z авар. режима (J и K) > 0",
+        )
     role = str(staff.get("role") or "engineer")
     now = datetime.utcnow()
     row = Reactance(
         reactance_code=body.reactance_code,
         name=body.name.strip(),
-        z_max_ohm=float(body.z_max_ohm),
-        z_min_ohm=float(body.z_min_ohm),
+        z_max_ohm=float(body.z_max_ohm) if has_n else None,
+        z_min_ohm=float(body.z_min_ohm) if has_n else None,
+        z_a_max_ohm=float(body.z_a_max_ohm) if has_a else None,
+        z_a_min_ohm=float(body.z_a_min_ohm) if has_a else None,
         is_active=True,
         updated_at=now,
         updated_by=role,
@@ -202,21 +226,361 @@ async def admin_update_reactance(
     if not row:
         raise HTTPException(status_code=404, detail="Запись не найдена")
     role = str(staff.get("role") or "engineer")
-    if body.name is not None:
-        row.name = body.name.strip()
-    if body.z_max_ohm is not None:
-        row.z_max_ohm = float(body.z_max_ohm)
-    if body.z_min_ohm is not None:
-        row.z_min_ohm = float(body.z_min_ohm)
-    if body.is_active is not None:
-        row.is_active = bool(body.is_active)
-    if float(row.z_max_ohm) < float(row.z_min_ohm):
-        raise HTTPException(status_code=400, detail="Zmax должно быть ≥ Zmin")
+    upd = body.model_dump(exclude_unset=True)
+    if "name" in upd and upd["name"] is not None:
+        row.name = str(upd["name"]).strip()
+    if "z_max_ohm" in upd:
+        row.z_max_ohm = float(upd["z_max_ohm"]) if upd["z_max_ohm"] is not None else None
+    if "z_min_ohm" in upd:
+        row.z_min_ohm = float(upd["z_min_ohm"]) if upd["z_min_ohm"] is not None else None
+    if "z_a_max_ohm" in upd:
+        row.z_a_max_ohm = float(upd["z_a_max_ohm"]) if upd["z_a_max_ohm"] is not None else None
+    if "z_a_min_ohm" in upd:
+        row.z_a_min_ohm = float(upd["z_a_min_ohm"]) if upd["z_a_min_ohm"] is not None else None
+    if "is_active" in upd and upd["is_active"] is not None:
+        row.is_active = bool(upd["is_active"])
     row.updated_at = datetime.utcnow()
     row.updated_by = role
+    if not _reactance_row_usable_for_calc(row):
+        db.rollback()
+        raise HTTPException(
+            status_code=400,
+            detail="Должен остаться хотя бы один режим: пара C/D или пара J/K > 0",
+        )
     db.commit()
     db.refresh(row)
     return {"success": True, "data": _reactance_to_dict(row)}
+
+
+# --- Админ: провода/кабели (line_types) ---
+
+
+class LineTypeCreateInput(BaseModel):
+    category: str = Field(min_length=1, max_length=50)
+    type_name: str = Field(min_length=1, max_length=100)
+    r_ohm_per_km: float
+    x_ohm_per_km: float
+    description: Optional[str] = None
+
+
+class LineTypeUpdateInput(BaseModel):
+    category: Optional[str] = Field(None, min_length=1, max_length=50)
+    type_name: Optional[str] = Field(None, min_length=1, max_length=100)
+    r_ohm_per_km: Optional[float] = None
+    x_ohm_per_km: Optional[float] = None
+    description: Optional[str] = None
+
+
+def _line_type_to_dict(t: LineType) -> dict:
+    return {
+        "id": t.id,
+        "category": t.category,
+        "type_name": t.type_name,
+        "r_ohm_per_km": t.r_ohm_per_km,
+        "x_ohm_per_km": t.x_ohm_per_km,
+        "description": t.description,
+    }
+
+
+@app.get("/api/admin/line-types")
+async def admin_list_line_types(
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+    category: Optional[str] = None,
+):
+    try:
+        q = db.query(LineType)
+        if category:
+            q = q.filter(LineType.category == category)
+        rows = q.order_by(LineType.category, LineType.type_name).all()
+        return {"success": True, "data": [_line_type_to_dict(t) for t in rows]}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@app.post("/api/admin/line-types")
+async def admin_create_line_type(
+    body: LineTypeCreateInput,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    cat = body.category.strip()
+    name = body.type_name.strip()
+    dup = (
+        db.query(LineType)
+        .filter(LineType.category == cat, LineType.type_name == name)
+        .first()
+    )
+    if dup:
+        raise HTTPException(status_code=409, detail=f"Тип «{name}» в категории «{cat}» уже есть")
+    row = LineType(
+        category=cat,
+        type_name=name,
+        r_ohm_per_km=float(body.r_ohm_per_km),
+        x_ohm_per_km=float(body.x_ohm_per_km),
+        description=(body.description or "").strip() or None,
+    )
+    db.add(row)
+    db.commit()
+    db.refresh(row)
+    return {"success": True, "data": _line_type_to_dict(row)}
+
+
+@app.put("/api/admin/line-types/{line_type_id}")
+async def admin_update_line_type(
+    line_type_id: int,
+    body: LineTypeUpdateInput,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    row = db.query(LineType).filter(LineType.id == line_type_id).first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Запись не найдена")
+    upd = body.model_dump(exclude_unset=True)
+    new_cat = row.category
+    new_name = row.type_name
+    if "category" in upd and upd["category"] is not None:
+        new_cat = str(upd["category"]).strip()
+        row.category = new_cat
+    if "type_name" in upd and upd["type_name"] is not None:
+        new_name = str(upd["type_name"]).strip()
+        row.type_name = new_name
+    if "r_ohm_per_km" in upd and upd["r_ohm_per_km"] is not None:
+        row.r_ohm_per_km = float(upd["r_ohm_per_km"])
+    if "x_ohm_per_km" in upd and upd["x_ohm_per_km"] is not None:
+        row.x_ohm_per_km = float(upd["x_ohm_per_km"])
+    if "description" in upd:
+        row.description = (str(upd["description"]).strip() if upd["description"] else "") or None
+    oth = (
+        db.query(LineType)
+        .filter(
+            LineType.category == new_cat,
+            LineType.type_name == new_name,
+            LineType.id != line_type_id,
+        )
+        .first()
+    )
+    if oth:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Дубликат категория + тип")
+    db.commit()
+    db.refresh(row)
+    return {"success": True, "data": _line_type_to_dict(row)}
+
+
+# --- Админ: трансформаторы ---
+
+
+class TransformerCreateInput(BaseModel):
+    transformer_code: int
+    power_kva: float
+    z_ohm: float
+
+
+class TransformerUpdateInput(BaseModel):
+    transformer_code: Optional[int] = None
+    power_kva: Optional[float] = None
+    z_ohm: Optional[float] = None
+
+
+def _transformer_to_dict(t: Transformer) -> dict:
+    return {
+        "id": t.id,
+        "code": t.transformer_code,
+        "power_kva": t.power_kva,
+        "z_ohm": t.z_ohm,
+    }
+
+
+@app.get("/api/admin/transformers")
+async def admin_list_transformers(
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    try:
+        rows = db.query(Transformer).order_by(Transformer.transformer_code).all()
+        return {"success": True, "data": [_transformer_to_dict(t) for t in rows]}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@app.post("/api/admin/transformers")
+async def admin_create_transformer(
+    body: TransformerCreateInput,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    dup = (
+        db.query(Transformer)
+        .filter(Transformer.transformer_code == body.transformer_code)
+        .first()
+    )
+    if dup:
+        raise HTTPException(status_code=409, detail=f"Код {body.transformer_code} уже занят")
+    row = Transformer(
+        transformer_code=int(body.transformer_code),
+        power_kva=float(body.power_kva),
+        z_ohm=float(body.z_ohm),
+    )
+    db.add(row)
+    db.commit()
+    db.refresh(row)
+    return {"success": True, "data": _transformer_to_dict(row)}
+
+
+@app.put("/api/admin/transformers/{transformer_row_id}")
+async def admin_update_transformer(
+    transformer_row_id: int,
+    body: TransformerUpdateInput,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    row = db.query(Transformer).filter(Transformer.id == transformer_row_id).first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Запись не найдена")
+    upd = body.model_dump(exclude_unset=True)
+    new_code = row.transformer_code
+    if "transformer_code" in upd and upd["transformer_code"] is not None:
+        new_code = int(upd["transformer_code"])
+        oth = (
+            db.query(Transformer)
+            .filter(
+                Transformer.transformer_code == new_code,
+                Transformer.id != transformer_row_id,
+            )
+            .first()
+        )
+        if oth:
+            raise HTTPException(status_code=409, detail=f"Код {new_code} уже занят")
+        row.transformer_code = new_code
+    if "power_kva" in upd and upd["power_kva"] is not None:
+        row.power_kva = float(upd["power_kva"])
+    if "z_ohm" in upd and upd["z_ohm"] is not None:
+        row.z_ohm = float(upd["z_ohm"])
+    db.commit()
+    db.refresh(row)
+    return {"success": True, "data": _transformer_to_dict(row)}
+
+
+# --- Админ: реле ---
+
+
+class RelayAdminCreateInput(BaseModel):
+    relay_code: int
+    relay_name: str = Field(min_length=1, max_length=255)
+    coef_l20: float
+    coef_l19: float
+    time_char_e: Optional[str] = Field(None, max_length=500)
+
+
+class RelayAdminUpdateInput(BaseModel):
+    relay_name: Optional[str] = Field(None, min_length=1, max_length=255)
+    coef_l20: Optional[float] = None
+    coef_l19: Optional[float] = None
+    time_char_e: Optional[str] = Field(None, max_length=500)
+
+
+def _relay_admin_row_dict(r: RelayType, time_char: Optional[str]) -> dict:
+    return {
+        "id": r.id,
+        "relay_code": r.relay_code,
+        "relay_name": r.relay_name,
+        "coef_l20": r.coef_l20,
+        "coef_l19": r.coef_l19,
+        "time_char_e": time_char,
+    }
+
+
+def _get_time_char_map(db: Session) -> Dict[int, Optional[str]]:
+    return {
+        t.relay_code: t.time_char_e
+        for t in db.query(RelayTimeCharacteristic).all()
+    }
+
+
+@app.get("/api/admin/relays")
+async def admin_list_relays(
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    try:
+        rows = db.query(RelayType).order_by(RelayType.relay_code).all()
+        tm = _get_time_char_map(db)
+        return {
+            "success": True,
+            "data": [_relay_admin_row_dict(r, tm.get(r.relay_code)) for r in rows],
+        }
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@app.post("/api/admin/relays")
+async def admin_create_relay(
+    body: RelayAdminCreateInput,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    dup = db.query(RelayType).filter(RelayType.relay_code == body.relay_code).first()
+    if dup:
+        raise HTTPException(status_code=409, detail=f"Код реле {body.relay_code} уже занят")
+    row = RelayType(
+        relay_code=int(body.relay_code),
+        relay_name=body.relay_name.strip(),
+        coef_l20=float(body.coef_l20),
+        coef_l19=float(body.coef_l19),
+    )
+    db.add(row)
+    db.flush()
+    if body.time_char_e is not None and str(body.time_char_e).strip():
+        db.add(
+            RelayTimeCharacteristic(
+                relay_code=int(body.relay_code),
+                time_char_e=str(body.time_char_e).strip()[:500],
+            )
+        )
+    db.commit()
+    db.refresh(row)
+    tm = _get_time_char_map(db)
+    return {"success": True, "data": _relay_admin_row_dict(row, tm.get(row.relay_code))}
+
+
+@app.put("/api/admin/relays/{relay_row_id}")
+async def admin_update_relay(
+    relay_row_id: int,
+    body: RelayAdminUpdateInput,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    row = db.query(RelayType).filter(RelayType.id == relay_row_id).first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Запись не найдена")
+    upd = body.model_dump(exclude_unset=True)
+    if "relay_name" in upd and upd["relay_name"] is not None:
+        row.relay_name = str(upd["relay_name"]).strip()
+    if "coef_l20" in upd and upd["coef_l20"] is not None:
+        row.coef_l20 = float(upd["coef_l20"])
+    if "coef_l19" in upd and upd["coef_l19"] is not None:
+        row.coef_l19 = float(upd["coef_l19"])
+    rc = row.relay_code
+    if "time_char_e" in upd:
+        tc_row = (
+            db.query(RelayTimeCharacteristic)
+            .filter(RelayTimeCharacteristic.relay_code == rc)
+            .first()
+        )
+        val = upd["time_char_e"]
+        s = str(val).strip()[:500] if val is not None and str(val).strip() else None
+        if s:
+            if tc_row:
+                tc_row.time_char_e = s
+            else:
+                db.add(RelayTimeCharacteristic(relay_code=rc, time_char_e=s))
+        elif tc_row:
+            db.delete(tc_row)
+    db.commit()
+    db.refresh(row)
+    tm = _get_time_char_map(db)
+    return {"success": True, "data": _relay_admin_row_dict(row, tm.get(rc))}
 
 
 @app.get("/api/line-types")
@@ -278,9 +642,10 @@ async def get_reactances(db: Session = Depends(get_db)):
             .order_by(Reactance.reactance_code)
             .all()
         )
+        usable = [r for r in rows if _reactance_row_usable_for_calc(r)]
         return {
             "success": True,
-            "data": [_reactance_to_dict(r, include_inactive_fields=False) for r in rows],
+            "data": [_reactance_to_dict(r, include_inactive_fields=False) for r in usable],
         }
     except Exception as e:
         return {"success": False, "error": str(e)}

@@ -99,3 +99,16 @@
 2026-04-10 16:18:33 - python run.py
 2026-04-10 16:19:07 - git status
 2026-04-10 16:19:30 - git add .
+2026-04-10 16:19:49 - git add .
+2026-04-10 16:20:46 - git commit -m "init Authoriza Level Master/Engeneer/Admin"
+2026-04-10 16:20:59 - git push -u origin main
+2026-04-10 22:04:15 - python run.py
+2026-04-10 22:43:33 - python run.py
+2026-04-10 22:44:34 - python Scripts/insert_reactances.py
+2026-04-10 23:18:09 - python run.py
+2026-04-10 23:22:55 - python run.py
+2026-04-10 23:23:06 - git add .
+2026-04-10 23:23:36 - python run.py
+2026-04-10 23:25:43 - [200~netstat -ano | findstr :8000
+2026-04-10 23:27:46 - netstat -ano | findstr :8000
+2026-04-10 23:27:57 - netstat -ano | findstr :8000

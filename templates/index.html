@@ -184,11 +184,11 @@
                 </div>
                 <div class="grid-2">
                     <div class="form-group">
-                        <label>Реактансы (C5)</label>
+                        <label>Реактансы (C5): норм. C/D и авар. J/K из ЭКСПЕРТ</label>
                         <select id="reactance_id"></select>
                     </div>
                     <div class="form-group">
-                        <label>Режим реактансов</label>
+                        <label>MAX/MIN (единый переключатель: норм. C↔D, авар. J↔K)</label>
                         <select id="reactance_mode">
                             <option value="MAX" selected>MAX</option>
                             <option value="MIN">MIN</option>
@@ -240,7 +240,8 @@
                             <div class="info-box" style="margin-top:6px;">
                                 <strong>Iрасчет =</strong> <span id="mtz_iraschet_hint">—</span> А<br>
                                 <strong>Iреал =</strong> <span id="mtz_ireal_hint">—</span> А<br>
-                                <strong>МТЗ доп. (Расчет K35 = '1'!D30 = B30/1,5) =</strong> <span id="mtz_dop_hint">—</span> А<br>
+                                <strong>МТЗ доп. Н (K35 = '1'!D30) =</strong> <span id="mtz_dop_hint">—</span> А;
+                                <strong>МТЗ доп. А (L35 = '1'!R30) =</strong> <span id="mtz_dop_hint_a">—</span> А<br>
                                 <strong>ВТХ (K34) =</strong> <span id="mtz_vtk_hint">—</span>
                             </div>
                         </div>
@@ -257,7 +258,7 @@
                 </div>
                 <div id="result" class="result-box" style="display:none;"></div>
 
-                <h2 style="margin-top:28px;">📈 Ток 2-ф КЗ (как ЭТАЛОН: Реал.Н, С коэф.чувств.Н, конец фидера), 11 точек</h2>
+                <h2 style="margin-top:28px;">📈 Ток 2-ф КЗ до КЛ: Реал.Н / С коэф.чувств.Н и при наличии J,K — Реал.А / С коэф.чувств.А (11 точек)</h2>
                 <div class="chart-container">
                     <canvas id="sensitivityChart"></canvas>
                 </div>
@@ -266,7 +267,8 @@
             <div id="tab-panel-4" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-4">
                 <p class="info-box" style="margin-top:0;">
                     <strong>Инженер / Админ:</strong> вход по паролю из <code>.env</code> (<code>ENGINEER_PASSWORD</code>, <code>ADMIN_PASSWORD</code>).
-                    Доступ к дополнению справочника реактансов в БД. Удаление записей не выполняется — только скрытие (<strong>неактивна</strong>).
+                    После входа доступно редактирование в БД: <strong>реактансы</strong> (скрытие вместо удаления), <strong>провода/кабели</strong> (<code>line_types</code>),
+                    <strong>трансформаторы</strong>, <strong>реле</strong> и ВТХ для МТЗ (столбец E). Изменения сразу подхватываются на вкладках расчёта.
                 </p>
                 <div id="staff-login-box" class="card" style="background:#fefce8; margin-bottom:12px;">
                     <h3 style="margin:0 0 10px 0;">Вход</h3>
@@ -299,8 +301,10 @@
                                 <tr style="background:#f3f4f6;">
                                     <th style="text-align:left; padding:8px; border:1px solid #ddd;">Код</th>
                                     <th style="text-align:left; padding:8px; border:1px solid #ddd;">Наименование</th>
-                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Zmax</th>
-                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Zmin</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Zmax Н</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Zmin Н</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Zmax А</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Zmin А</th>
                                     <th style="text-align:center; padding:8px; border:1px solid #ddd;">Активен</th>
                                     <th style="text-align:left; padding:8px; border:1px solid #ddd;">Обновлено</th>
                                     <th style="padding:8px; border:1px solid #ddd;">Действия</th>
@@ -321,17 +325,156 @@
                                 <input type="text" id="admin_rx_name" style="max-width:100%">
                             </div>
                             <div class="form-group">
-                                <label>Zmax, Ом</label>
+                                <label>Zmax норм. (C), Ом</label>
                                 <input type="number" id="admin_rx_zmax" step="0.000001">
                             </div>
                             <div class="form-group">
-                                <label>Zmin, Ом</label>
+                                <label>Zmin норм. (D), Ом</label>
                                 <input type="number" id="admin_rx_zmin" step="0.000001">
+                            </div>
+                            <div class="form-group">
+                                <label>Zmax авар. (J), Ом</label>
+                                <input type="number" id="admin_rx_zamax" step="0.000001">
+                            </div>
+                            <div class="form-group">
+                                <label>Zmin авар. (K), Ом</label>
+                                <input type="number" id="admin_rx_zamin" step="0.000001">
                             </div>
                         </div>
                         <input type="hidden" id="admin_rx_edit_id" value="">
                         <button type="button" class="btn btn-success" onclick="submitAdminReactance()">Сохранить</button>
                         <button type="button" class="btn" onclick="resetAdminReactanceForm()">Очистить форму</button>
+                    </div>
+                </div>
+                <div id="admin-line-types-panel" style="display:none; margin-top:24px;">
+                    <h3>Провода и кабели (листы «Провода», «Кабели» → <code>line_types</code>)</h3>
+                    <div style="overflow-x:auto; margin-bottom:16px;">
+                        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                            <thead>
+                                <tr style="background:#f3f4f6;">
+                                    <th style="text-align:left; padding:8px; border:1px solid #ddd;">Категория</th>
+                                    <th style="text-align:left; padding:8px; border:1px solid #ddd;">Тип (как в ЭКСПЕРТ, B)</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">R, Ом/км</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">X, Ом/км</th>
+                                    <th style="text-align:left; padding:8px; border:1px solid #ddd;">Примечание</th>
+                                    <th style="padding:8px; border:1px solid #ddd;">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-line-types-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div class="card" style="background:#eff6ff;">
+                        <h4 style="margin:0 0 10px 0;" id="admin-lt-form-title">Новый тип линии</h4>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Категория</label>
+                                <select id="admin_lt_category">
+                                    <option value="Провода">Провода</option>
+                                    <option value="Кабели">Кабели</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Наименование типа</label>
+                                <input type="text" id="admin_lt_name" style="max-width:100%">
+                            </div>
+                            <div class="form-group">
+                                <label>R, Ом/км</label>
+                                <input type="number" id="admin_lt_r" step="any">
+                            </div>
+                            <div class="form-group">
+                                <label>X, Ом/км</label>
+                                <input type="number" id="admin_lt_x" step="any">
+                            </div>
+                            <div class="form-group" style="grid-column:1/-1;">
+                                <label>Описание (необязательно)</label>
+                                <input type="text" id="admin_lt_desc" style="max-width:100%">
+                            </div>
+                        </div>
+                        <input type="hidden" id="admin_lt_edit_id" value="">
+                        <button type="button" class="btn btn-success" onclick="submitAdminLineType()">Сохранить</button>
+                        <button type="button" class="btn" onclick="resetAdminLineTypeForm()">Очистить форму</button>
+                    </div>
+                </div>
+                <div id="admin-transformers-panel" style="display:none; margin-top:24px;">
+                    <h3>Трансформаторы</h3>
+                    <div style="overflow-x:auto; margin-bottom:16px;">
+                        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                            <thead>
+                                <tr style="background:#f3f4f6;">
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Код</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">P, кВА</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Z, Ом</th>
+                                    <th style="padding:8px; border:1px solid #ddd;">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-transformers-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div class="card" style="background:#faf5ff;">
+                        <h4 style="margin:0 0 10px 0;" id="admin-tr-form-title">Новый трансформатор</h4>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Код</label>
+                                <input type="number" id="admin_tr_code" step="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Мощность, кВА</label>
+                                <input type="number" id="admin_tr_power" step="any">
+                            </div>
+                            <div class="form-group">
+                                <label>Zтр, Ом</label>
+                                <input type="number" id="admin_tr_z" step="any">
+                            </div>
+                        </div>
+                        <input type="hidden" id="admin_tr_edit_id" value="">
+                        <button type="button" class="btn btn-success" onclick="submitAdminTransformer()">Сохранить</button>
+                        <button type="button" class="btn" onclick="resetAdminTransformerForm()">Очистить форму</button>
+                    </div>
+                </div>
+                <div id="admin-relays-panel" style="display:none; margin-top:24px;">
+                    <h3>Реле (лист «Реле») и ВТХ для МТЗ (столбец E)</h3>
+                    <div style="overflow-x:auto; margin-bottom:16px;">
+                        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                            <thead>
+                                <tr style="background:#f3f4f6;">
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Код</th>
+                                    <th style="text-align:left; padding:8px; border:1px solid #ddd;">Наименование</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">L20</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">L19</th>
+                                    <th style="text-align:left; padding:8px; border:1px solid #ddd;">ВТХ (E)</th>
+                                    <th style="padding:8px; border:1px solid #ddd;">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-relays-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div class="card" style="background:#fff7ed;">
+                        <h4 style="margin:0 0 10px 0;" id="admin-rel-form-title">Новое реле</h4>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Код реле</label>
+                                <input type="number" id="admin_rel_code" step="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Наименование</label>
+                                <input type="text" id="admin_rel_name" style="max-width:100%">
+                            </div>
+                            <div class="form-group">
+                                <label>Коэф. L20 (КЗ за тр-р)</label>
+                                <input type="number" id="admin_rel_l20" step="any">
+                            </div>
+                            <div class="form-group">
+                                <label>Коэф. L19 (Iном)</label>
+                                <input type="number" id="admin_rel_l19" step="any">
+                            </div>
+                            <div class="form-group" style="grid-column:1/-1;">
+                                <label>ВТХ для МТЗ (E), текст</label>
+                                <input type="text" id="admin_rel_time_e" style="max-width:100%" placeholder="Необязательно; пусто — удалить ВТХ">
+                            </div>
+                        </div>
+                        <input type="hidden" id="admin_rel_edit_id" value="">
+                        <button type="button" class="btn btn-success" onclick="submitAdminRelay()">Сохранить</button>
+                        <button type="button" class="btn" onclick="resetAdminRelayForm()">Очистить форму</button>
                     </div>
                 </div>
             </div>
@@ -375,10 +518,23 @@
             return h;
         }
 
+        const STAFF_ADMIN_PANEL_IDS = [
+            'admin-reactances-panel',
+            'admin-line-types-panel',
+            'admin-transformers-panel',
+            'admin-relays-panel',
+        ];
+
+        function setStaffAdminPanelsVisible(show) {
+            STAFF_ADMIN_PANEL_IDS.forEach((id) => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = show ? '' : 'none';
+            });
+        }
+
         async function updateAuthUI() {
             const token = localStorage.getItem('rza_token');
             const tabBtn = document.getElementById('tab-btn-4');
-            const panel = document.getElementById('admin-reactances-panel');
             const loginBox = document.getElementById('staff-login-box');
             const badge = document.getElementById('staff-badge');
             const btnOut = document.getElementById('btn_logout');
@@ -387,7 +543,7 @@
             if (!tabBtn) return;
             if (!token) {
                 tabBtn.style.display = 'none';
-                if (panel) panel.style.display = 'none';
+                setStaffAdminPanelsVisible(false);
                 if (btnOut) btnOut.style.display = 'none';
                 if (badge) badge.textContent = '';
                 if (openRef) openRef.textContent = 'Вход Инженер / Админ';
@@ -399,17 +555,20 @@
                 const j = await res.json();
                 if (j.success && j.role) {
                     tabBtn.style.display = '';
-                    if (panel) panel.style.display = '';
+                    setStaffAdminPanelsVisible(true);
                     if (btnOut) btnOut.style.display = '';
                     if (badge) badge.textContent = '(вошли: ' + j.role + ')';
                     if (openRef) openRef.textContent = 'Справочники (вкладка 4)';
                     if (logoutHdr) logoutHdr.style.display = 'inline';
                     if (loginBox) loginBox.style.display = 'none';
                     loadAdminReactances();
+                    loadAdminLineTypes();
+                    loadAdminTransformers();
+                    loadAdminRelays();
                 } else {
                     localStorage.removeItem('rza_token');
                     tabBtn.style.display = 'none';
-                    if (panel) panel.style.display = 'none';
+                    setStaffAdminPanelsVisible(false);
                     if (btnOut) btnOut.style.display = 'none';
                     if (badge) badge.textContent = '';
                     if (openRef) openRef.textContent = 'Вход Инженер / Админ';
@@ -469,11 +628,14 @@
                     const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
                     const dt = r.updated_at ? esc(r.updated_at) : '—';
                     const act = r.is_active ? 'да' : '<span style="color:#b45309">нет</span>';
+                    const zan = (v) => (v === null || v === undefined ? '—' : v);
                     return `<tr>
                         <td style="padding:6px;border:1px solid #ddd;">${r.code}</td>
                         <td style="padding:6px;border:1px solid #ddd;">${esc(r.name)}</td>
-                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.z_max_ohm}</td>
-                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.z_min_ohm}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${zan(r.z_max_ohm)}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${zan(r.z_min_ohm)}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${zan(r.z_a_max_ohm)}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${zan(r.z_a_min_ohm)}</td>
                         <td style="padding:6px;border:1px solid #ddd;text-align:center;">${act}</td>
                         <td style="padding:6px;border:1px solid #ddd;font-size:11px;">${dt}<br><span style="color:#666">${esc(r.updated_by || '')}</span></td>
                         <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
@@ -498,8 +660,10 @@
                     const item = (j.data || []).find((x) => x.id === id);
                     if (!item) return;
                     document.getElementById('admin_rx_name').value = item.name || '';
-                    document.getElementById('admin_rx_zmax').value = item.z_max_ohm;
-                    document.getElementById('admin_rx_zmin').value = item.z_min_ohm;
+                    document.getElementById('admin_rx_zmax').value = item.z_max_ohm ?? '';
+                    document.getElementById('admin_rx_zmin').value = item.z_min_ohm ?? '';
+                    document.getElementById('admin_rx_zamax').value = item.z_a_max_ohm ?? '';
+                    document.getElementById('admin_rx_zamin').value = item.z_a_min_ohm ?? '';
                 });
         }
 
@@ -510,25 +674,47 @@
             document.getElementById('admin_rx_name').value = '';
             document.getElementById('admin_rx_zmax').value = '';
             document.getElementById('admin_rx_zmin').value = '';
+            document.getElementById('admin_rx_zamax').value = '';
+            document.getElementById('admin_rx_zamin').value = '';
             document.getElementById('admin-form-title').textContent = 'Новая запись';
+        }
+
+        function parseOptFloat(id) {
+            const el = document.getElementById(id);
+            if (!el) return null;
+            const v = String(el.value ?? '').trim();
+            if (v === '') return null;
+            const x = parseFloat(v);
+            return Number.isFinite(x) ? x : null;
         }
 
         async function submitAdminReactance() {
             const editId = document.getElementById('admin_rx_edit_id').value;
             const code = parseInt(document.getElementById('admin_rx_code').value, 10);
             const name = document.getElementById('admin_rx_name').value.trim();
-            const zmax = parseFloat(document.getElementById('admin_rx_zmax').value);
-            const zmin = parseFloat(document.getElementById('admin_rx_zmin').value);
-            if (!name || !Number.isFinite(zmax) || !Number.isFinite(zmin)) {
-                alert('Заполните наименование и сопротивления');
+            const zmax = parseOptFloat('admin_rx_zmax');
+            const zmin = parseOptFloat('admin_rx_zmin');
+            const zamax = parseOptFloat('admin_rx_zamax');
+            const zamin = parseOptFloat('admin_rx_zamin');
+            const hasN = zmax != null && zmin != null;
+            const hasA = zamax != null && zamin != null && zamax > 0 && zamin > 0;
+            if (!name || (!hasN && !hasA)) {
+                alert('Укажите наименование и хотя бы один режим: оба Z для Н (C+D) или оба Z для А (J+K) > 0');
                 return;
             }
+            const payload = {
+                name,
+                z_max_ohm: hasN ? zmax : null,
+                z_min_ohm: hasN ? zmin : null,
+                z_a_max_ohm: hasA ? zamax : null,
+                z_a_min_ohm: hasA ? zamin : null,
+            };
             try {
                 if (editId) {
                     const res = await fetch('/api/admin/reactances/' + editId, {
                         method: 'PUT',
                         headers: adminAuthHeaders(),
-                        body: JSON.stringify({ name, z_max_ohm: zmax, z_min_ohm: zmin })
+                        body: JSON.stringify(payload)
                     });
                     const j = await res.json();
                     if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
@@ -540,7 +726,7 @@
                     const res = await fetch('/api/admin/reactances', {
                         method: 'POST',
                         headers: adminAuthHeaders(),
-                        body: JSON.stringify({ reactance_code: code, name, z_max_ohm: zmax, z_min_ohm: zmin })
+                        body: JSON.stringify({ reactance_code: code, ...payload })
                     });
                     const j = await res.json();
                     if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
@@ -565,6 +751,270 @@
                 if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
                 loadAdminReactances();
                 loadReactances();
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+
+        function escHtml(s) {
+            return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        async function loadAdminLineTypes() {
+            const token = localStorage.getItem('rza_token');
+            if (!token) return;
+            try {
+                const res = await fetch('/api/admin/line-types', { headers: adminAuthHeaders() });
+                const j = await res.json();
+                const tb = document.getElementById('admin-line-types-tbody');
+                if (!tb || !j.success) return;
+                tb.innerHTML = (j.data || []).map((r) => {
+                    const desc = r.description != null && r.description !== '' ? escHtml(r.description) : '—';
+                    return `<tr>
+                        <td style="padding:6px;border:1px solid #ddd;">${escHtml(r.category)}</td>
+                        <td style="padding:6px;border:1px solid #ddd;">${escHtml(r.type_name)}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.r_ohm_per_km}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.x_ohm_per_km}</td>
+                        <td style="padding:6px;border:1px solid #ddd;font-size:12px;">${desc}</td>
+                        <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
+                            <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="editAdminLineType(${r.id})">Изменить</button>
+                        </td>
+                    </tr>`;
+                }).join('');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function editAdminLineType(id) {
+            document.getElementById('admin_lt_edit_id').value = String(id);
+            document.getElementById('admin-lt-form-title').textContent = 'Редактирование линии (id=' + id + ')';
+            fetch('/api/admin/line-types', { headers: adminAuthHeaders() })
+                .then((r) => r.json())
+                .then((j) => {
+                    const item = (j.data || []).find((x) => x.id === id);
+                    if (!item) return;
+                    document.getElementById('admin_lt_category').value = item.category || 'Провода';
+                    document.getElementById('admin_lt_name').value = item.type_name || '';
+                    document.getElementById('admin_lt_r').value = item.r_ohm_per_km ?? '';
+                    document.getElementById('admin_lt_x').value = item.x_ohm_per_km ?? '';
+                    document.getElementById('admin_lt_desc').value = item.description || '';
+                });
+        }
+
+        function resetAdminLineTypeForm() {
+            document.getElementById('admin_lt_edit_id').value = '';
+            document.getElementById('admin-lt-form-title').textContent = 'Новый тип линии';
+            document.getElementById('admin_lt_category').value = 'Провода';
+            document.getElementById('admin_lt_name').value = '';
+            document.getElementById('admin_lt_r').value = '';
+            document.getElementById('admin_lt_x').value = '';
+            document.getElementById('admin_lt_desc').value = '';
+        }
+
+        async function submitAdminLineType() {
+            const editId = document.getElementById('admin_lt_edit_id').value;
+            const category = document.getElementById('admin_lt_category').value;
+            const type_name = document.getElementById('admin_lt_name').value.trim();
+            const r = parseFloat(document.getElementById('admin_lt_r').value);
+            const x = parseFloat(document.getElementById('admin_lt_x').value);
+            const description = document.getElementById('admin_lt_desc').value.trim();
+            if (!type_name || !Number.isFinite(r) || !Number.isFinite(x)) {
+                alert('Укажите наименование и числовые R, X');
+                return;
+            }
+            const body = { category, type_name, r_ohm_per_km: r, x_ohm_per_km: x, description: description || null };
+            try {
+                let res;
+                if (editId) {
+                    res = await fetch('/api/admin/line-types/' + editId, {
+                        method: 'PUT',
+                        headers: adminAuthHeaders(),
+                        body: JSON.stringify(body),
+                    });
+                } else {
+                    res = await fetch('/api/admin/line-types', {
+                        method: 'POST',
+                        headers: adminAuthHeaders(),
+                        body: JSON.stringify(body),
+                    });
+                }
+                const j = await res.json();
+                if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
+                resetAdminLineTypeForm();
+                loadAdminLineTypes();
+                loadLineTypes();
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+
+        async function loadAdminTransformers() {
+            const token = localStorage.getItem('rza_token');
+            if (!token) return;
+            try {
+                const res = await fetch('/api/admin/transformers', { headers: adminAuthHeaders() });
+                const j = await res.json();
+                const tb = document.getElementById('admin-transformers-tbody');
+                if (!tb || !j.success) return;
+                tb.innerHTML = (j.data || []).map((r) => `<tr>
+                    <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.code}</td>
+                    <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.power_kva}</td>
+                    <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.z_ohm}</td>
+                    <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
+                        <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="editAdminTransformer(${r.id}, ${r.code})">Изменить</button>
+                    </td>
+                </tr>`).join('');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function editAdminTransformer(id, code) {
+            document.getElementById('admin_tr_edit_id').value = String(id);
+            document.getElementById('admin_tr_code').value = String(code);
+            document.getElementById('admin_tr_code').disabled = true;
+            document.getElementById('admin-tr-form-title').textContent = 'Редактирование трансформатора (id=' + id + ')';
+            fetch('/api/admin/transformers', { headers: adminAuthHeaders() })
+                .then((r) => r.json())
+                .then((j) => {
+                    const item = (j.data || []).find((x) => x.id === id);
+                    if (!item) return;
+                    document.getElementById('admin_tr_power').value = item.power_kva ?? '';
+                    document.getElementById('admin_tr_z').value = item.z_ohm ?? '';
+                });
+        }
+
+        function resetAdminTransformerForm() {
+            document.getElementById('admin_tr_edit_id').value = '';
+            document.getElementById('admin_tr_code').value = '';
+            document.getElementById('admin_tr_code').disabled = false;
+            document.getElementById('admin-tr-form-title').textContent = 'Новый трансформатор';
+            document.getElementById('admin_tr_power').value = '';
+            document.getElementById('admin_tr_z').value = '';
+        }
+
+        async function submitAdminTransformer() {
+            const editId = document.getElementById('admin_tr_edit_id').value;
+            const code = parseInt(document.getElementById('admin_tr_code').value, 10);
+            const power_kva = parseFloat(document.getElementById('admin_tr_power').value);
+            const z_ohm = parseFloat(document.getElementById('admin_tr_z').value);
+            if (!Number.isInteger(code) || code <= 0 || !Number.isFinite(power_kva) || !Number.isFinite(z_ohm)) {
+                alert('Укажите код и числовые P, Z');
+                return;
+            }
+            try {
+                let res;
+                if (editId) {
+                    res = await fetch('/api/admin/transformers/' + editId, {
+                        method: 'PUT',
+                        headers: adminAuthHeaders(),
+                        body: JSON.stringify({ power_kva, z_ohm }),
+                    });
+                } else {
+                    res = await fetch('/api/admin/transformers', {
+                        method: 'POST',
+                        headers: adminAuthHeaders(),
+                        body: JSON.stringify({ transformer_code: code, power_kva, z_ohm }),
+                    });
+                }
+                const j = await res.json();
+                if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
+                resetAdminTransformerForm();
+                loadAdminTransformers();
+                loadTransformers();
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+
+        async function loadAdminRelays() {
+            const token = localStorage.getItem('rza_token');
+            if (!token) return;
+            try {
+                const res = await fetch('/api/admin/relays', { headers: adminAuthHeaders() });
+                const j = await res.json();
+                const tb = document.getElementById('admin-relays-tbody');
+                if (!tb || !j.success) return;
+                tb.innerHTML = (j.data || []).map((r) => {
+                    const te = r.time_char_e != null && r.time_char_e !== '' ? escHtml(r.time_char_e) : '—';
+                    return `<tr>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.relay_code}</td>
+                        <td style="padding:6px;border:1px solid #ddd;">${escHtml(r.relay_name)}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.coef_l20}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.coef_l19}</td>
+                        <td style="padding:6px;border:1px solid #ddd;font-size:12px;">${te}</td>
+                        <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
+                            <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="editAdminRelay(${r.id}, ${r.relay_code})">Изменить</button>
+                        </td>
+                    </tr>`;
+                }).join('');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function editAdminRelay(id, relayCode) {
+            document.getElementById('admin_rel_edit_id').value = String(id);
+            document.getElementById('admin_rel_code').value = String(relayCode);
+            document.getElementById('admin_rel_code').disabled = true;
+            document.getElementById('admin-rel-form-title').textContent = 'Редактирование реле (id=' + id + ')';
+            fetch('/api/admin/relays', { headers: adminAuthHeaders() })
+                .then((r) => r.json())
+                .then((j) => {
+                    const item = (j.data || []).find((x) => x.id === id);
+                    if (!item) return;
+                    document.getElementById('admin_rel_name').value = item.relay_name || '';
+                    document.getElementById('admin_rel_l20').value = item.coef_l20 ?? '';
+                    document.getElementById('admin_rel_l19').value = item.coef_l19 ?? '';
+                    document.getElementById('admin_rel_time_e').value = item.time_char_e || '';
+                });
+        }
+
+        function resetAdminRelayForm() {
+            document.getElementById('admin_rel_edit_id').value = '';
+            document.getElementById('admin_rel_code').value = '';
+            document.getElementById('admin_rel_code').disabled = false;
+            document.getElementById('admin-rel-form-title').textContent = 'Новое реле';
+            document.getElementById('admin_rel_name').value = '';
+            document.getElementById('admin_rel_l20').value = '';
+            document.getElementById('admin_rel_l19').value = '';
+            document.getElementById('admin_rel_time_e').value = '';
+        }
+
+        async function submitAdminRelay() {
+            const editId = document.getElementById('admin_rel_edit_id').value;
+            const relay_code = parseInt(document.getElementById('admin_rel_code').value, 10);
+            const relay_name = document.getElementById('admin_rel_name').value.trim();
+            const coef_l20 = parseFloat(document.getElementById('admin_rel_l20').value);
+            const coef_l19 = parseFloat(document.getElementById('admin_rel_l19').value);
+            const timeRaw = document.getElementById('admin_rel_time_e').value.trim();
+            const time_char_e = timeRaw === '' ? null : timeRaw;
+            if (!relay_name || !Number.isInteger(relay_code) || relay_code <= 0 || !Number.isFinite(coef_l20) || !Number.isFinite(coef_l19)) {
+                alert('Укажите код, наименование и коэффициенты');
+                return;
+            }
+            try {
+                let res;
+                if (editId) {
+                    const body = { relay_name, coef_l20, coef_l19, time_char_e };
+                    res = await fetch('/api/admin/relays/' + editId, {
+                        method: 'PUT',
+                        headers: adminAuthHeaders(),
+                        body: JSON.stringify(body),
+                    });
+                } else {
+                    res = await fetch('/api/admin/relays', {
+                        method: 'POST',
+                        headers: adminAuthHeaders(),
+                        body: JSON.stringify({ relay_code, relay_name, coef_l20, coef_l19, time_char_e }),
+                    });
+                }
+                const j = await res.json();
+                if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
+                resetAdminRelayForm();
+                loadAdminRelays();
+                loadRelays();
             } catch (e) {
                 alert(e.message);
             }
@@ -614,10 +1064,13 @@
                     lineTypes.cables = cablesData.data;
                     document.getElementById('cables-count').textContent = lineTypes.cables.length;
                 }
-                
-                // Добавляем первый участок
-                addSection();
-                renderAfterSections();
+
+                if (sections.length === 0) {
+                    addSection();
+                } else {
+                    renderSections();
+                    renderAfterSections();
+                }
             } catch (e) {
                 console.error('Ошибка загрузки типов линий:', e);
             }
@@ -644,6 +1097,17 @@
             }
         }
 
+        function reactanceOptionSuffix(r) {
+            const parts = [];
+            if (r.z_max_ohm != null && r.z_min_ohm != null) {
+                parts.push(`Н:${r.z_max_ohm}/${r.z_min_ohm}`);
+            }
+            if (r.z_a_max_ohm != null && r.z_a_min_ohm != null) {
+                parts.push(`А:${r.z_a_max_ohm}/${r.z_a_min_ohm}`);
+            }
+            return parts.length ? ` (${parts.join('; ')})` : '';
+        }
+
         async function loadReactances() {
             try {
                 const res = await fetch('/api/reactances');
@@ -657,7 +1121,7 @@
                             reactances
                                 .map(
                                     (r) =>
-                                        `<option value="${r.id}">${r.code} — ${r.name} (Zmax=${r.z_max_ohm}, Zmin=${r.z_min_ohm})</option>`
+                                        `<option value="${r.id}">${r.code} — ${r.name}${reactanceOptionSuffix(r)}</option>`
                                 )
                                 .join('');
                     }
@@ -942,9 +1406,12 @@
                 
                 if (result.success) {
                     const calc = result.calculation;
+                    const ec = calc.emergency;
                     window.__lastIkzEnd = calc.i_kz_end;
+                    window.__lastIkzEndA = ec && ec.i_kz_end != null ? ec.i_kz_end : null;
 
                     const orient = calc.orient || {};
+                    const orientA = (ec && ec.orient) || {};
                     const setText = (id, v) => {
                         const el = document.getElementById(id);
                         if (el) el.textContent = (v === null || v === undefined || v === '') ? '—' : String(v);
@@ -954,55 +1421,92 @@
                     setText('mtz_iraschet_hint', orient.k31_i_raschet);
                     setText('mtz_ireal_hint', orient.k32_i_real);
                     setText('mtz_dop_hint', orient.k35_mtz_dop != null ? orient.k35_mtz_dop : calc.i_mtz_dop);
+                    setText('mtz_dop_hint_a', ec && ec.i_mtz_dop != null ? ec.i_mtz_dop : (orientA.k35_mtz_dop != null ? orientA.k35_mtz_dop : '—'));
                     setText('mtz_vtk_hint', orient.k34_vtx_mtz);
 
                     const mtoStatus = calc.mto_ok_manual ? '✅ OK' : '❌ Не проходит';
                     const mtoClass = calc.mto_ok_manual ? 'ok' : 'error';
                     const mtzStatus = calc.mtz_ok_manual ? '✅ OK' : '❌ Не проходит';
                     const mtzClass = calc.mtz_ok_manual ? 'ok' : 'error';
+
+                    const mtoM = parseFloat(document.getElementById('manual_mto')?.value || '0');
+                    const mtzM = parseFloat(document.getElementById('manual_mtz')?.value || '0');
+                    const kchMtoA =
+                        ec && mtoM > 0 && ec.i_kz_end ? (ec.i_kz_end / mtoM).toFixed(3) : '—';
+                    const kchMtzA =
+                        ec && mtzM > 0 && ec.i_kz_end ? (ec.i_kz_end / mtzM).toFixed(3) : '—';
+
+                    const blockN = (c) => `
+                            <div>
+                                <strong>Нормальный режим (Н):</strong><br>
+                                Iкз (2) в конце линии до КЛ = ${c.i_kz2_kl_end_min != null ? c.i_kz2_kl_end_min : c.i_kz_end} А<br>
+                                Iкз (3) за тр-ром (K24) = ${c.i_kz3_tr != null ? c.i_kz3_tr : c.i_mto_setting} А<br>
+                                Уставка МТО = ${c.i_mto_setting} А<br>
+                                Уставка МТЗ = ${c.i_mtz_setting} А<br>
+                                МТЗ доп. (K35) = ${c.i_mtz_dop != null ? c.i_mtz_dop : '—'} А<br>
+                                Кч МТО (авто) = ${c.sensitivity_mto}; Кч МТЗ (авто) = ${c.sensitivity_mtz}
+                            </div>`;
+                    const blockA = (c) => `
+                            <div style="border-left:3px solid #1d4ed8;padding-left:10px;">
+                                <strong>Аварийный режим (А):</strong><br>
+                                Iкз (2) в конце линии до КЛ (L37) = ${c.i_kz2_kl_end_min != null ? c.i_kz2_kl_end_min : c.i_kz_end} А<br>
+                                Iкз (3) за тр-ром (L24) = ${c.i_kz3_tr != null ? c.i_kz3_tr : c.i_mto_setting} А<br>
+                                Уставка МТО = ${c.i_mto_setting} А<br>
+                                Уставка МТЗ = ${c.i_mtz_setting} А<br>
+                                МТЗ доп. (L35 = R30) = ${c.i_mtz_dop != null ? c.i_mtz_dop : '—'} А<br>
+                                Кч МТО (авто) = ${c.sensitivity_mto}; Кч МТЗ (авто) = ${c.sensitivity_mtz}
+                            </div>`;
+
+                    let regimeHtml = '';
+                    if (calc.regime_normal_available && calc.regime_emergency_available && ec) {
+                        regimeHtml = `<div class="grid-2" style="align-items:start;">${blockN(calc)}${blockA(ec)}</div>`;
+                    } else if (calc.regime_normal_available) {
+                        regimeHtml = `<div class="grid-2">${blockN(calc)}</div>`;
+                    } else if (calc.regime_emergency_available && ec) {
+                        regimeHtml = `<div class="info-box" style="margin-bottom:10px;">Расчёт по справочнику только в <strong>аварийном режиме</strong> (нет C/D).</div><div class="grid-2">${blockA(ec)}</div>`;
+                    } else {
+                        regimeHtml = `<div class="grid-2">${blockN(calc)}</div>`;
+                    }
                     
                     document.getElementById('result').innerHTML = `
                         <h3>📊 Результаты расчёта:</h3>
                         ${calc.object_description ? `<div class="info-box" style="margin: 8px 0 10px 0;"><strong>Объект:</strong> ${String(calc.object_description).replaceAll('<','&lt;').replaceAll('>','&gt;')}</div>` : ``}
                         <div class="grid-2">
                             <div>
-                                <strong>Полное сопротивление:</strong><br>
+                                <strong>Полное сопротивление линии:</strong><br>
                                 R = ${calc.impedance.r_total.toFixed(3)} Ом<br>
                                 X = ${calc.impedance.x_total.toFixed(3)} Ом<br>
                                 Z = ${calc.impedance.z_total.toFixed(3)} Ом<br>
                                 Длина = ${calc.impedance.length_total.toFixed(2)} км
                             </div>
                             <div>
-                                <strong>Токи:</strong><br>
-                                Iкз (2) min в конце линии до КЛ = ${calc.i_kz2_kl_end_min != null ? calc.i_kz2_kl_end_min : calc.i_kz_end} А<br>
-                                Iкз (3) за тр-ром = ${calc.i_kz3_tr != null ? calc.i_kz3_tr : calc.i_mto_setting} А<br>
-                                Уставка МТО = ${calc.i_mto_setting} А<br>
-                                Уставка МТЗ = ${calc.i_mtz_setting} А<br>
-                                МТЗ доп. (Расчет K35 = '1'!D30 = B30/1,5) = ${calc.i_mtz_dop != null ? calc.i_mtz_dop : '—'} А
+                                <strong>Сводка по режимам:</strong><br>
+                                Норм. режим в справочнике: ${calc.regime_normal_available ? 'да' : 'нет'}<br>
+                                Авар. режим (J,K &gt; 0): ${calc.regime_emergency_available ? 'да' : 'нет'}
                             </div>
                         </div>
+                        ${regimeHtml}
                         <div class="info-box" style="margin-top:10px;">
-                            <strong>Как в ЭТАЛОН:</strong><br>
-                            2ф в конце линии до КЛ (B30, MIN реакт., только до КЛ) = ${calc.i_kz2_kl_end_min != null ? calc.i_kz2_kl_end_min : calc.i_kz_end} А;
-                            |Z| для B44/K24 (до КЛ + до ТР + E5 + Zтр, КЗ за ТР) ≈ ${calc.j118_ohm != null ? Number(calc.j118_ohm).toFixed(4) : '—'} Ом;
-                            при полной трассе |Z| конца линии ≈ ${calc.j118_feeder_end_ohm != null ? Number(calc.j118_feeder_end_ohm).toFixed(4) : '—'} Ом;
-                            B44 (U/(√3·|Z|)) ≈ ${calc.i_kz3_b44 != null ? calc.i_kz3_b44 : '—'} А;
-                            K24 (B44·L20) = Iкз (3) за тр-ром = ${calc.i_kz3_tr != null ? calc.i_kz3_tr : calc.i_mto_setting} А;
-                            МТЗ доп.: B30/1,5 = ${calc.i_mtz_dop != null ? calc.i_mtz_dop : '—'} А (лист «Расчет» K35 = '1'!D30);
-                            J11 = ${calc.j11 != null ? calc.j11 : '—'} А
+                            <strong>Эталон, лист «1»:</strong><br>
+                            Н: B30 / K24 / K35; А: P30→L37, P44·L20→L24, R30→L35 (при наличии J,K).<br>
+                            Z головы (Н): ${calc.reactance && calc.reactance.z_ohm != null ? calc.reactance.z_ohm : '—'} Ом (MAX/MIN по C/D).
+                            ${ec ? ` Z головы (А): ${ec.reactance_z_head_ohm} Ом (MAX/MIN по J/K).` : ''}
                         </div>
                         <div class="info-box" style="margin-top:10px;">
-                            <strong>График:</strong> 11 точек по X = k/10·D20; «С коэф.чувств.Н» — D20:D30 = B20:B30 / 1,5 (та же точка по X).
+                            <strong>График:</strong> общая ось X = k/10·D20; МТО/МТЗ — общие визиры; при наличии А — кривые Реал.А / С коэф.чувств.А (P20:P30 / R20:R30).
                         </div>
                         <hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
-                        <p><strong>МТО:</strong> Чувствительность (по K26) = <span id="kch_mto_manual">${calc.sensitivity_mto_manual}</span> ${mtoStatus}</p>
+                        <p><strong>МТО:</strong> Чувствительность (по K26, Iкз2ф конца до КЛ <strong>Н</strong>) = <span id="kch_mto_manual">${calc.sensitivity_mto_manual}</span> ${mtoStatus}</p>
                         <p class="${mtoClass}">${calc.mto_ok_manual ? 'Критерий ≥1.2 выполнен' : `Недостаточная чувствительность (${calc.sensitivity_mto_manual} < 1.2)`}</p>
                         <hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
-                        <p><strong>МТЗ:</strong> Чувствительность (по K33) = <span id="kch_mtz_manual">${calc.sensitivity_mtz_manual}</span> ${mtzStatus}</p>
+                        <p><strong>МТЗ:</strong> Чувствительность (по K33, Iкз2ф <strong>Н</strong>) = <span id="kch_mtz_manual">${calc.sensitivity_mtz_manual}</span> ${mtzStatus}</p>
                         <p class="${mtzClass}">${calc.mtz_ok_manual ? 'Критерий ≥1.5 выполнен' : `Недостаточная чувствительность (${calc.sensitivity_mtz_manual} < 1.5)`}</p>
+                        ${ec ? `<hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
+                        <p><strong>МТО (А):</strong> Кч (ручн. K26, ток конца до КЛ по А) = <span id="kch_mto_manual_a">${kchMtoA}</span></p>
+                        <p><strong>МТЗ (А):</strong> Кч (ручн. K33) = <span id="kch_mtz_manual_a">${kchMtzA}</span></p>` : ''}
                     `;
                     
-                    // Сначала вкладка с canvas, затем график (корректный размер)
+                    window.__lastChartData = result.chart;
                     showTab(3);
                     requestAnimationFrame(() => drawChart(result.chart));
                 } else {
@@ -1041,11 +1545,13 @@
             const xEnd = xMax > 0 ? xMax : 0.5;
             const zoneTotal =
                 Number(chartData.length_kl_km) > 0 ? Number(chartData.length_kl_km) : xEnd;
-            if (chart.data.datasets[2]) {
-                chart.data.datasets[2].data = [{ x: 0, y: mto }, { x: xEnd, y: mto }];
+            const mtoIdx = chartData.vizor_mto_dataset_index ?? 2;
+            const mtzIdx = chartData.vizor_mtz_dataset_index ?? 3;
+            if (chart.data.datasets[mtoIdx]) {
+                chart.data.datasets[mtoIdx].data = [{ x: 0, y: mto }, { x: xEnd, y: mto }];
             }
-            if (chart.data.datasets[3]) {
-                chart.data.datasets[3].data = [{ x: 0, y: mtz }, { x: xEnd, y: mtz }];
+            if (chart.data.datasets[mtzIdx]) {
+                chart.data.datasets[mtzIdx].data = [{ x: 0, y: mtz }, { x: xEnd, y: mtz }];
             }
 
             const zMto = computeZoneByIntersection(lenKl, curveIkz, mto, zoneTotal);
@@ -1057,13 +1563,17 @@
             setText('zone_mtz_len', zMtz.length.toFixed(2));
             setText('zone_mtz_pct', zMtz.percent.toFixed(1));
 
-            // Update Kч display for manual settings (based on I_kz_end from last calc)
             const ikzEnd = parseFloat(window.__lastIkzEnd || '0');
             if (ikzEnd > 0) {
                 const kchMto = mto > 0 ? (ikzEnd / mto) : 0;
                 const kchMtz = mtz > 0 ? (ikzEnd / mtz) : 0;
                 setText('kch_mto_manual', kchMto.toFixed(3));
                 setText('kch_mtz_manual', kchMtz.toFixed(3));
+            }
+            const ikzA = parseFloat(window.__lastIkzEndA || '0');
+            if (ikzA > 0) {
+                setText('kch_mto_manual_a', mto > 0 ? (ikzA / mto).toFixed(3) : '—');
+                setText('kch_mtz_manual_a', mtz > 0 ? (ikzA / mtz).toFixed(3) : '—');
             }
 
             chart.update();
@@ -1083,6 +1593,9 @@
             const ctx = document.getElementById('sensitivityChart').getContext('2d');
             const realN = chartData.ikz2_real_n ?? chartData.ikz2_feeder_only;
             const sensN = chartData.ikz2_sens_n;
+            const realA = chartData.ikz2_real_a;
+            const sensA = chartData.ikz2_sens_a;
+            const showA = !!chartData.has_emergency_chart;
             const xKl = chartData.lengths_kl ?? chartData.lengths;
             const xMax = Number(chartData.x_max) || 0;
             const mtoVal = parseFloat(document.getElementById('manual_mto')?.value || chartData.i_mto_setting);
@@ -1095,59 +1608,74 @@
             const sensFallback = Array.isArray(realN)
                 ? realN.map((v) => (v != null && !Number.isNaN(Number(v)) ? Number(v) / 1.5 : null))
                 : [];
+
+            const curveLine = (label, ys, color, bg, dash, pr) => ({
+                label,
+                data: toXY(xKl, ys),
+                borderColor: color,
+                backgroundColor: bg,
+                fill: false,
+                tension: 0.2,
+                borderDash: dash || [],
+                spanGaps: false,
+                pointRadius: pr,
+                pointHoverRadius: 6,
+                pointHitRadius: 14
+            });
+
+            const datasets = [
+                curveLine(
+                    'Реал.Н (B20:B30), А',
+                    realN,
+                    '#dc2626',
+                    'rgba(220, 38, 38, 0.06)',
+                    [],
+                    4
+                ),
+                curveLine(
+                    'С коэф.чувств.Н (D20:D30)',
+                    sensN != null && sensN.length ? sensN : sensFallback,
+                    '#ea580c',
+                    'rgba(234, 88, 12, 0.04)',
+                    [7, 5],
+                    3
+                ),
+            ];
+            if (showA && Array.isArray(realA)) {
+                datasets.push(
+                    curveLine('Реал.А (P20:P30), А', realA, '#1d4ed8', 'rgba(29, 78, 216, 0.08)', [], 4),
+                    curveLine('С коэф.чувств.А (R20:R30)', sensA, '#0369a1', 'rgba(3, 105, 161, 0.06)', [7, 5], 3)
+                );
+            }
+            datasets.push(
+                {
+                    label: 'МТО (уставка), А',
+                    data: [
+                        { x: 0, y: mtoVal },
+                        { x: xMax > 0 ? xMax : 0.5, y: mtoVal }
+                    ],
+                    borderColor: '#111827',
+                    borderDash: [6, 4],
+                    fill: false,
+                    pointRadius: 0
+                },
+                {
+                    label: 'МТЗ (уставка), А',
+                    data: [
+                        { x: 0, y: mtzVal },
+                        { x: xMax > 0 ? xMax : 0.5, y: mtzVal }
+                    ],
+                    borderColor: '#374151',
+                    borderDash: [2, 4],
+                    fill: false,
+                    pointRadius: 0
+                }
+            );
             
             chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    datasets: [
-                        {
-                            label: 'Реал.Н (лист «1» B20:B30, X=B8:B18=D20·k/10), А',
-                            data: toXY(xKl, realN),
-                            borderColor: '#dc2626',
-                            backgroundColor: 'rgba(220, 38, 38, 0.06)',
-                            fill: false,
-                            tension: 0.2,
-                            spanGaps: false,
-                            pointRadius: 4,
-                            pointHoverRadius: 6,
-                            pointHitRadius: 14
-                        },
-                        {
-                            label: 'С коэф.чувств.Н (D20:D30 = B20:B30 / 1,5), А',
-                            data: toXY(xKl, sensN != null && sensN.length ? sensN : sensFallback),
-                            borderColor: '#ea580c',
-                            backgroundColor: 'rgba(234, 88, 12, 0.04)',
-                            fill: false,
-                            tension: 0.2,
-                            borderDash: [7, 5],
-                            spanGaps: false,
-                            pointRadius: 3,
-                            pointHoverRadius: 6,
-                            pointHitRadius: 14
-                        },
-                        {
-                            label: 'МТО (уставка), А',
-                            data: [
-                                { x: 0, y: mtoVal },
-                                { x: xMax > 0 ? xMax : 0.5, y: mtoVal }
-                            ],
-                            borderColor: '#111827',
-                            borderDash: [6, 4],
-                            fill: false,
-                            pointRadius: 0
-                        },
-                        {
-                            label: 'МТЗ (уставка), А',
-                            data: [
-                                { x: 0, y: mtzVal },
-                                { x: xMax > 0 ? xMax : 0.5, y: mtzVal }
-                            ],
-                            borderColor: '#374151',
-                            borderDash: [2, 4],
-                            fill: false,
-                            pointRadius: 0
-                        }
-                    ]
+                    datasets
                 },
                 options: {
                     responsive: true,

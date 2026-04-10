@@ -120,8 +120,8 @@ class Reactance(Base):
     Reactances list from ЭКСПЕРТ.xlsx sheet 'Реактансы':
     - A: порядковый номер
     - B: ПС/РУ
-    - C: Zmax (Ом)
-    - D: Zmin (Ом)
+    - C: Zmax норм. (Ом), D: Zmin норм. — могут быть NULL (только аварийный режим)
+    - J: Zmax авар., K: Zmin авар. — NULL если режим А недоступен
     """
 
     __tablename__ = "reactances"
@@ -129,8 +129,10 @@ class Reactance(Base):
     id = Column(Integer, primary_key=True)
     reactance_code = Column(Integer, nullable=False, unique=True)
     name = Column(String(255), nullable=False)
-    z_max_ohm = Column(Float, nullable=False)
-    z_min_ohm = Column(Float, nullable=False)
+    z_max_ohm = Column(Float, nullable=True)
+    z_min_ohm = Column(Float, nullable=True)
+    z_a_max_ohm = Column(Float, nullable=True)
+    z_a_min_ohm = Column(Float, nullable=True)
     is_active = Column(Boolean, nullable=False, default=True)
     updated_at = Column(DateTime, nullable=True)
     updated_by = Column(String(100), nullable=True)

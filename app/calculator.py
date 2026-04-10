@@ -85,19 +85,49 @@ def get_relay_time_char(db: Session, relay_code: int) -> Optional[str]:
         return None
     return str(row.time_char_e) if row.time_char_e is not None else None
 
+def _reactance_by_id(db: Session, reactance_id: Optional[int]) -> Optional[Reactance]:
+    if not reactance_id:
+        return None
+    return db.query(Reactance).filter(Reactance.id == reactance_id).first()
+
+
+def regime_normal_available(rx: Optional[Reactance]) -> bool:
+    if not rx:
+        return False
+    return rx.z_max_ohm is not None and rx.z_min_ohm is not None
+
+
+def regime_emergency_available(rx: Optional[Reactance]) -> bool:
+    if not rx or rx.z_a_max_ohm is None or rx.z_a_min_ohm is None:
+        return False
+    try:
+        return float(rx.z_a_max_ohm) > 0.0 and float(rx.z_a_min_ohm) > 0.0
+    except (TypeError, ValueError):
+        return False
+
+
+def head_z_normal(rx: Reactance, mode: str) -> float:
+    m = (mode or "MAX").upper()
+    if m == "MIN":
+        return float(rx.z_min_ohm or 0.0)
+    return float(rx.z_max_ohm or 0.0)
+
+
+def head_z_emergency(rx: Reactance, mode: str) -> float:
+    m = (mode or "MAX").upper()
+    if m == "MIN":
+        return float(rx.z_a_min_ohm or 0.0)
+    return float(rx.z_a_max_ohm or 0.0)
+
+
 def get_reactance_z(db: Session, reactance_id: Optional[int], mode: str = "MAX") -> float:
     """
-    Returns Z of network reactance (as a single equivalent impedance in Ohms),
-    taken from ЭКСПЕРТ.xlsx sheet "Реактансы".
-    mode: "MAX" -> Zmax, "MIN" -> Zmin
+    Нормальный режим: Zmax/Zmin из C/D. Если строка без C/D — 0.
     """
-    if not reactance_id:
+    rx = _reactance_by_id(db, reactance_id)
+    if not rx or not regime_normal_available(rx):
         return 0.0
-    rx = db.query(Reactance).filter(Reactance.id == reactance_id).first()
-    if not rx:
-        return 0.0
-    m = (mode or "MAX").upper()
-    return float(rx.z_min_ohm) if m == "MIN" else float(rx.z_max_ohm)
+    return head_z_normal(rx, mode)
 
 def get_transformer_z(db: Session, transformer_code: Optional[int]) -> float:
     """
@@ -322,6 +352,7 @@ def j118_at_feeder_end(
     reactance_id: Optional[int],
     reactance_mode: str,
     transformer_code: Optional[int],
+    z_react_override: Optional[float] = None,
 ) -> float:
     """
     |Z| в конце электрической трассы по вкладкам UI: L_доКЛ + L_доТР, с E5 и Zтр в конце
@@ -331,7 +362,10 @@ def j118_at_feeder_end(
     """
     after_sections = after_sections or []
     r_b, x_b, L_b, r_a, x_a, L_a = _feeder_r_x_lengths(db, sections, after_sections)
-    z_react = get_reactance_z(db, reactance_id, reactance_mode)
+    if z_react_override is not None:
+        z_react = float(z_react_override)
+    else:
+        z_react = get_reactance_z(db, reactance_id, reactance_mode)
     z_tr = get_transformer_z(db, transformer_code)
     L_full = L_b + L_a
     if L_full <= 1e-9:
@@ -350,6 +384,7 @@ def j118_for_k24_b44(
     reactance_id: Optional[int],
     reactance_mode: str,
     transformer_code: Optional[int],
+    z_react_override: Optional[float] = None,
 ) -> float:
     """
     |Z| для '1'!B44 и K24: трёхфазное КЗ «за трансформатором».
@@ -362,7 +397,10 @@ def j118_for_k24_b44(
     `_section_etalon_ef_per_km`, а не `calculate_total_impedance` (которая суммирует L*R отдельно).
     """
     after_sections = after_sections or []
-    z_react = get_reactance_z(db, reactance_id, reactance_mode)  # E5
+    if z_react_override is not None:
+        z_react = float(z_react_override)
+    else:
+        z_react = get_reactance_z(db, reactance_id, reactance_mode)
     z_tr = get_transformer_z(db, transformer_code)  # E26
 
     # J118 uses only the "до ТР" part (after_sections), up to 4 slots.
@@ -390,96 +428,93 @@ def j118_for_k24_b44(
     return max(math.sqrt(R_sum * R_sum + X_sum * X_sum), 1e-9)
 
 
-def calculate_rza_settings(
+def _ikz2_chart_series(
+    u_nom: float,
+    L_kl: float,
+    slot_rows_kl: List[List[Tuple[float, float, float]]],
+    z_head: float,
+) -> Tuple[List[Optional[float]], List[Optional[float]]]:
+    """Лист «1»: B20:B30 / D20:D30 или P20:P30 / R20:R30 — одна «головная» реактивность z_head."""
+    eps = 1e-9
+    zh = max(float(z_head), 1e-9)
+    real: List[Optional[float]] = []
+    for i in range(11):
+        if i == 0:
+            real.append(round(calculate_short_circuit_current_2ph(u_nom, zh), 2))
+        elif L_kl <= eps:
+            real.append(None)
+        else:
+            d_kl = (i / 10.0) * L_kl
+            z_eq = _etalon_z_kl_sumsq(d_kl, slot_rows_kl, zh)
+            real.append(round(calculate_short_circuit_current_2ph(u_nom, z_eq), 2))
+    sens = [round(float(v) / 1.5, 2) if v is not None else None for v in real]
+    return real, sens
+
+
+def _calculate_rza_branch(
     db: Session,
     sections: List[LineSection],
-    u_nom: float = 6300.0,
-    relay_code: int = 6,
-    reactance_id: Optional[int] = None,
-    reactance_mode: str = "MAX",
-    total_power_kw: float = 0.0,
-    i_work: float = 0.0,
-    manual_mto: float = 0.0,
-    manual_mtz: float = 0.0,
-    transformer_code: Optional[int] = None,
-    after_sections: Optional[List[LineSection]] = None,
+    after_sections: List[LineSection],
+    u_nom: float,
+    relay_code: int,
+    z_head: float,
+    reactance_id: Optional[int],
+    reactance_mode: str,
+    transformer_code: Optional[int],
+    total_power_kw: float,
+    i_work: float,
+    manual_mto: float,
+    manual_mtz: float,
 ) -> Dict[str, Any]:
-    """Основной расчёт уставок РЗА"""
-    
-    # Суммарная линия: вкладка «до КЛ» + вкладка «до ТР» (без Zтр в этом словаре)
-    after_sections = after_sections or []
+    """Расчёт уставок для одной ветки (Н или А) при заданной эквивалентной Z «головы»."""
     imp_kl = calculate_total_impedance(db, sections)
-    imp_tr = calculate_total_impedance(db, after_sections)
-    r_sum = float(imp_kl["r_total"]) + float(imp_tr["r_total"])
-    x_sum = float(imp_kl["x_total"]) + float(imp_tr["x_total"])
-    len_sum = float(imp_kl["length_total"]) + float(imp_tr["length_total"])
-    impedance = {
-        "r_total": r_sum,
-        "x_total": x_sum,
-        "z_total": math.sqrt(r_sum * r_sum + x_sum * x_sum),
-        "length_total": len_sum,
-    }
-
-    z_react = get_reactance_z(db, reactance_id, reactance_mode)
-    z_tr = get_transformer_z(db, transformer_code)
-    z_react_min = get_reactance_z(db, reactance_id, "MIN")
-
-    # 2ф в конце линии до КЛ (как '1'!B30 = 6300/(2·J115)): только вкладка «до КЛ», F5 = MIN
     slot_rows_kl = _kl_four_slot_rows(db, sections)
     L_kl_only = float(imp_kl["length_total"])
     eps_l = 1e-9
+    zh = max(float(z_head), 0.0)
     if L_kl_only <= eps_l:
-        z_kl_end_min = max(z_react_min, 1e-9)
+        z_kl_end = max(zh, 1e-9) if zh > 1e-15 else 1e-9
     else:
-        z_kl_end_min = _etalon_z_kl_sumsq(L_kl_only, slot_rows_kl, z_react_min)
-    i_kz2_kl_end_min = calculate_short_circuit_current_2ph(u_nom, z_kl_end_min)
+        z_kl_end = _etalon_z_kl_sumsq(L_kl_only, slot_rows_kl, zh)
+    i_kz2_kl_end_min = calculate_short_circuit_current_2ph(u_nom, z_kl_end)
 
-    # B44/K24: |Z| «за ТР» — только линия до ТР + E5 + Zтр (без длины после ТР в контуре КЗ)
     j118_k24 = j118_for_k24_b44(
-        db, sections, after_sections, reactance_id, reactance_mode, transformer_code
+        db,
+        sections,
+        after_sections,
+        reactance_id,
+        reactance_mode,
+        transformer_code,
+        z_react_override=zh,
     )
-    # Конец полной трассы (до КЛ + после ТР) — для сравнения / 2ф по тому же концу линии
     j118_feeder_end = j118_at_feeder_end(
-        db, sections, after_sections, reactance_id, reactance_mode, transformer_code
+        db,
+        sections,
+        after_sections,
+        reactance_id,
+        reactance_mode,
+        transformer_code,
+        z_react_override=zh,
     )
 
-    # '1'!B44 = U/(√3·J118); K24 = B44 * L20 (L20 из ЭКСПЕРТ, таблица Реле)
     i_kz3_b44 = calculate_short_circuit_current(u_nom, j118_k24)
     i_kz2_feeder_j118 = calculate_short_circuit_current_2ph(u_nom, j118_feeder_end)
     i_kz_end = i_kz2_kl_end_min
-    
-    # Excel-like: coefficients depend on relay type (K16)
-    coef_l20, coef_l19 = get_relay_coeffs(db, relay_code)
 
-    # Excel base currents on sheet "Расчет":
-    # J10 = L9 / 10.38  (Iном)
+    coef_l20, coef_l19 = get_relay_coeffs(db, relay_code)
     i_nom = (float(total_power_kw) / 10.38) if total_power_kw > 0 else 0.0
-    # J11 = 0.7 * J10
     j11 = 0.7 * i_nom
-    # J12 is taken from user input Iреал (real working current)
     j12 = float(i_work) if i_work and i_work > 0 else 0.0
 
-    # Orienting values as in ЭТАЛОН:
-    # МТО:
-    #  K24 = '1'!B44 * L20
-    #  K25 = J10 * L19      -> Iнам
     i_kz3_tr = i_kz3_b44 * coef_l20 if i_kz3_b44 > 0 else 0.0
     i_nam = i_nom * coef_l19 if i_nom > 0 else 0.0
-
-    # МТЗ:
-    #  K31 = J11 * 1.5  -> Iрасчет
-    #  K32 = J12 * 1.5  -> Iреал
     i_raschet = j11 * 1.5 if j11 > 0 else 0.0
     i_real = j12 * 1.5 if j12 > 0 else 0.0
-    # Лист «Расчет» K35 «МТЗ доп.»: ='1'!D30, а D30 лист «1» = B30/1.5;
-    # B30 — 2ф КЗ в конце линии до КЛ (как i_kz2_kl_end_min).
     i_mtz_dop = float(i_kz2_kl_end_min) / 1.5 if i_kz2_kl_end_min > 0 else 0.0
 
-    # These are used for automatic (not manual) criteria checks in our simplified engine.
     i_mto_setting = i_kz3_tr
     i_mtz_setting = i_real
-    
-    # Sensitivity (Kч)
+
     sensitivity_mto = i_kz_end / i_mto_setting if i_mto_setting > 0 else 0
     sensitivity_mtz = i_kz_end / i_mtz_setting if i_mtz_setting > 0 else 0
 
@@ -487,17 +522,17 @@ def calculate_rza_settings(
     manual_mtz_f = float(manual_mtz or 0.0)
     sensitivity_mto_manual = i_kz_end / manual_mto_f if manual_mto_f > 0 else 0.0
     sensitivity_mtz_manual = i_kz_end / manual_mtz_f if manual_mtz_f > 0 else 0.0
-    
-    # Проверка критериев
+
     kch_mto_min = 1.2
     kch_mtz_min = 1.5
     mto_ok = sensitivity_mto >= kch_mto_min
     mtz_ok = sensitivity_mtz >= kch_mtz_min
     mto_ok_manual = sensitivity_mto_manual >= kch_mto_min if manual_mto_f > 0 else False
     mtz_ok_manual = sensitivity_mtz_manual >= kch_mtz_min if manual_mtz_f > 0 else False
-    
+
+    z_tr = get_transformer_z(db, transformer_code)
+
     return {
-        "impedance": impedance,
         "j118_ohm": round(float(j118_k24), 5),
         "j118_k24_ohm": round(float(j118_k24), 5),
         "j118_feeder_end_ohm": round(float(j118_feeder_end), 5),
@@ -507,9 +542,9 @@ def calculate_rza_settings(
         "i_kz_end": round(float(i_kz_end), 2),
         "i_kz2_feeder_j118": round(float(i_kz2_feeder_j118), 2),
         "i_kz3_tr": round(float(i_kz3_tr), 2),
-        "i_mto_setting": round(i_mto_setting, 2),  # K24
-        "i_mtz_setting": round(i_mtz_setting, 2),  # K32
-        "i_mtz_dop": round(float(i_mtz_dop), 2),  # Расчет K35 = '1'!D30 = B30/1.5
+        "i_mto_setting": round(i_mto_setting, 2),
+        "i_mtz_setting": round(i_mtz_setting, 2),
+        "i_mtz_dop": round(float(i_mtz_dop), 2),
         "sensitivity_mto": round(sensitivity_mto, 3),
         "sensitivity_mtz": round(sensitivity_mtz, 3),
         "sensitivity_mto_manual": round(sensitivity_mto_manual, 3),
@@ -518,8 +553,6 @@ def calculate_rza_settings(
         "mtz_ok": mtz_ok,
         "mto_ok_manual": mto_ok_manual,
         "mtz_ok_manual": mtz_ok_manual,
-        "u_nom": u_nom,
-        "relay_code": relay_code,
         "coef_l20": coef_l20,
         "coef_l19": coef_l19,
         "kch_mto_min": kch_mto_min,
@@ -536,11 +569,7 @@ def calculate_rza_settings(
             "j118_ohm": round(float(j118_k24), 5),
             "j118_feeder_end_ohm": round(float(j118_feeder_end), 5),
         },
-        "reactance": {
-            "id": reactance_id,
-            "mode": reactance_mode,
-            "z_ohm": round(z_react, 5),
-        },
+        "reactance_z_head_ohm": round(zh, 5),
         "transformer": {
             "code": transformer_code,
             "z_ohm": round(z_tr, 5),
@@ -551,6 +580,151 @@ def calculate_rza_settings(
         "manual_mto": round(manual_mto_f, 3),
         "manual_mtz": round(manual_mtz_f, 3),
     }
+
+
+def _empty_branch() -> Dict[str, Any]:
+    return {
+        "j118_ohm": 0.0,
+        "j118_k24_ohm": 0.0,
+        "j118_feeder_end_ohm": 0.0,
+        "i_kz3_b44": 0.0,
+        "j11": 0.0,
+        "i_kz2_kl_end_min": 0.0,
+        "i_kz_end": 0.0,
+        "i_kz2_feeder_j118": 0.0,
+        "i_kz3_tr": 0.0,
+        "i_mto_setting": 0.0,
+        "i_mtz_setting": 0.0,
+        "i_mtz_dop": 0.0,
+        "sensitivity_mto": 0.0,
+        "sensitivity_mtz": 0.0,
+        "sensitivity_mto_manual": 0.0,
+        "sensitivity_mtz_manual": 0.0,
+        "mto_ok": False,
+        "mtz_ok": False,
+        "mto_ok_manual": False,
+        "mtz_ok_manual": False,
+        "coef_l20": 1.2,
+        "coef_l19": 1.5,
+        "kch_mto_min": 1.2,
+        "kch_mtz_min": 1.5,
+        "orient": {
+            "j11": 0.0,
+            "b44_i_kz3": 0.0,
+            "k24_i_kz3_tr": 0.0,
+            "k25_i_nam": 0.0,
+            "k31_i_raschet": 0.0,
+            "k32_i_real": 0.0,
+            "k35_mtz_dop": 0.0,
+            "k34_vtx_mtz": None,
+            "j118_ohm": 0.0,
+            "j118_feeder_end_ohm": 0.0,
+        },
+        "reactance_z_head_ohm": 0.0,
+        "transformer": {"code": None, "z_ohm": 0.0},
+        "total_power_kw": 0.0,
+        "i_nom": 0.0,
+        "i_work": 0.0,
+        "manual_mto": 0.0,
+        "manual_mtz": 0.0,
+    }
+
+
+def calculate_rza_settings(
+    db: Session,
+    sections: List[LineSection],
+    u_nom: float = 6300.0,
+    relay_code: int = 6,
+    reactance_id: Optional[int] = None,
+    reactance_mode: str = "MAX",
+    total_power_kw: float = 0.0,
+    i_work: float = 0.0,
+    manual_mto: float = 0.0,
+    manual_mtz: float = 0.0,
+    transformer_code: Optional[int] = None,
+    after_sections: Optional[List[LineSection]] = None,
+) -> Dict[str, Any]:
+    """Основной расчёт уставок РЗА: нормальный и (при наличии J,K) аварийный режим."""
+    after_sections = after_sections or []
+    imp_kl = calculate_total_impedance(db, sections)
+    imp_tr = calculate_total_impedance(db, after_sections)
+    r_sum = float(imp_kl["r_total"]) + float(imp_tr["r_total"])
+    x_sum = float(imp_kl["x_total"]) + float(imp_tr["x_total"])
+    len_sum = float(imp_kl["length_total"]) + float(imp_tr["length_total"])
+    impedance = {
+        "r_total": r_sum,
+        "x_total": x_sum,
+        "z_total": math.sqrt(r_sum * r_sum + x_sum * x_sum),
+        "length_total": len_sum,
+    }
+
+    rx = _reactance_by_id(db, reactance_id)
+    has_n = bool(rx and regime_normal_available(rx))
+    has_a = bool(rx and regime_emergency_available(rx))
+
+    branch_n: Dict[str, Any]
+    if has_n:
+        zn = head_z_normal(rx, reactance_mode)
+        branch_n = _calculate_rza_branch(
+            db,
+            sections,
+            after_sections,
+            u_nom,
+            relay_code,
+            zn,
+            reactance_id,
+            reactance_mode,
+            transformer_code,
+            total_power_kw,
+            i_work,
+            manual_mto,
+            manual_mtz,
+        )
+    else:
+        branch_n = _empty_branch()
+
+    branch_a: Optional[Dict[str, Any]] = None
+    if has_a:
+        za = head_z_emergency(rx, reactance_mode)
+        branch_a = _calculate_rza_branch(
+            db,
+            sections,
+            after_sections,
+            u_nom,
+            relay_code,
+            za,
+            reactance_id,
+            reactance_mode,
+            transformer_code,
+            total_power_kw,
+            i_work,
+            manual_mto,
+            manual_mtz,
+        )
+
+    # Верхний уровень — нормальный режим; при отсутствии Н подставляем А (только аварийный справочник).
+    primary = branch_n if has_n else (branch_a if has_a else branch_n)
+    z_tr = get_transformer_z(db, transformer_code)
+
+    out: Dict[str, Any] = {
+        "impedance": impedance,
+        "regime_normal_available": has_n,
+        "regime_emergency_available": has_a,
+        "u_nom": u_nom,
+        "relay_code": relay_code,
+        **primary,
+        "emergency": branch_a,
+        "reactance": {
+            "id": reactance_id,
+            "mode": reactance_mode,
+            "z_ohm": round(float(primary.get("reactance_z_head_ohm") or 0), 5),
+        },
+        "transformer": {
+            "code": transformer_code,
+            "z_ohm": round(z_tr, 5),
+        },
+    }
+    return out
 
 def generate_chart_data(
     db: Session,
@@ -575,13 +749,16 @@ def generate_chart_data(
       • |J| = √(R_Σ²+X_Σ²), R_Σ/X_Σ — суммы L·(E+E') и F5+L·(F+F') по слотам; >4 участков —
         цепочка сегментов в слоте (не среднее удельное на слот).
       • D20:D30 = B20:B30/1.5 — та же точка по X, Y чувствительности = соответствующий B/1,5.
-      • На графике только эти две кривые; ось X — длина до КЛ (D20), без отдельной серии по Lкл+LдоТР+Zтр.
+      • При наличии J,K в справочнике — ещё P20:P30 / R20:R30 (Реал.А / С коэф.чувств.А), та же ось X.
     """
     after_sections = after_sections or []
     _, _, L_kl, _, _, L_tr = _feeder_r_x_lengths(db, sections, after_sections)
-    z_react = get_reactance_z(db, reactance_id, reactance_mode)
     z_tr = get_transformer_z(db, transformer_code)
-    z_react_min = get_reactance_z(db, reactance_id, "MIN")
+    rx = _reactance_by_id(db, reactance_id)
+    has_n = bool(rx and regime_normal_available(rx))
+    has_a = bool(rx and regime_emergency_available(rx))
+    zn = head_z_normal(rx, reactance_mode) if rx and has_n else None
+    za = head_z_emergency(rx, reactance_mode) if rx and has_a else None
 
     slot_rows_kl = _kl_four_slot_rows(db, sections)
 
@@ -598,30 +775,23 @@ def generate_chart_data(
         t = i / 10.0
         lengths_kl.append(round(t * L_kl, 6) if L_kl > eps else 0.0)
 
-    ikz2_real_n: List[Optional[float]] = []
-    for i in range(11):
-        if i == 0:
-            z0 = max(z_react_min, 1e-9)
-            ikz2_real_n.append(round(calculate_short_circuit_current_2ph(u_nom, z0), 2))
-        elif L_kl <= eps:
-            ikz2_real_n.append(None)
-        else:
-            d_kl = (i / 10.0) * L_kl
-            z_eq = _etalon_z_kl_sumsq(d_kl, slot_rows_kl, z_react_min)
-            ikz2_real_n.append(round(calculate_short_circuit_current_2ph(u_nom, z_eq), 2))
+    if zn is not None:
+        ikz2_real_n, ikz2_sens_n = _ikz2_chart_series(u_nom, L_kl, slot_rows_kl, zn)
+    else:
+        ikz2_real_n = [None] * 11
+        ikz2_sens_n = [None] * 11
 
-    ikz2_sens_n: List[Optional[float]] = []
-    for i in range(11):
-        src = ikz2_real_n[i]
-        ikz2_sens_n.append(round(float(src) / 1.5, 2) if src is not None else None)
+    if za is not None:
+        ikz2_real_a, ikz2_sens_a = _ikz2_chart_series(u_nom, L_kl, slot_rows_kl, za)
+    else:
+        ikz2_real_a = [None] * 11
+        ikz2_sens_a = [None] * 11
 
     y_candidates: List[float] = []
-    for v in ikz2_real_n:
-        if v is not None:
-            y_candidates.append(float(v))
-    for v in ikz2_sens_n:
-        if v is not None:
-            y_candidates.append(float(v))
+    for series in (ikz2_real_n, ikz2_sens_n, ikz2_real_a, ikz2_sens_a):
+        for v in series:
+            if v is not None:
+                y_candidates.append(float(v))
     if i_mto_setting > 0:
         y_candidates.append(float(i_mto_setting))
     if i_mtz_setting > 0:
@@ -629,13 +799,22 @@ def generate_chart_data(
     y_max = max(y_candidates) * 1.15 if y_candidates else 1000.0
     y_max = max(10.0, y_max)
 
+    has_emergency_chart = has_a
+    viz_mto_idx = 2 + (2 if has_emergency_chart else 0)
+    viz_mtz_idx = viz_mto_idx + 1
+
     return {
         "lengths": lengths_kl,
         "lengths_kl": lengths_kl,
         "ikz2_real_n": ikz2_real_n,
         "ikz2_sens_n": ikz2_sens_n,
+        "ikz2_real_a": ikz2_real_a,
+        "ikz2_sens_a": ikz2_sens_a,
         "ikz2_values": ikz2_real_n,
         "ikz2_feeder_only": ikz2_real_n,
+        "has_emergency_chart": has_emergency_chart,
+        "vizor_mto_dataset_index": viz_mto_idx,
+        "vizor_mtz_dataset_index": viz_mtz_idx,
         "length_kl_km": round(L_kl, 3),
         "length_tr_km": round(L_tr, 3),
         "length_before_tr_km": round(L_kl, 3),
@@ -648,7 +827,12 @@ def generate_chart_data(
         "step": 0.1,
         "chart_points": 11,
         "chart_xy_mode": True,
-        "reactance": {"id": reactance_id, "mode": reactance_mode, "z_ohm": round(z_react, 5)},
-        "reactance_chart_min_ohm": round(z_react_min, 5),
+        "reactance": {
+            "id": reactance_id,
+            "mode": reactance_mode,
+            "z_ohm": round(float(zn or 0.0), 5),
+        },
+        "reactance_chart_min_ohm": round(float(zn or 0.0), 5),
+        "reactance_emergency_z_ohm": round(float(za or 0.0), 5) if za is not None else None,
         "transformer": {"code": transformer_code, "z_ohm": round(z_tr, 5)},
     }

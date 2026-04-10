@@ -15,8 +15,6 @@ ENGINE = create_engine(DATABASE_URL)
 
 
 def _find_expert_workbook_path() -> Path:
-    # In this workspace the filename may be garbled by console encoding,
-    # so we pick the smallest non-lock xlsx in data/input (this is ЭКСПЕРТ.xlsx).
     p = Path("data/input")
     files = [f for f in p.glob("*.xlsx") if not f.name.startswith("~$")]
     if not files:
@@ -25,18 +23,14 @@ def _find_expert_workbook_path() -> Path:
 
 
 def _find_reactances_sheet(wb):
-    # Prefer exact sheet name
     if "Реактансы" in wb.sheetnames:
         return wb["Реактансы"]
-
-    # Fallback: find sheet whose row1 contains "MAX" and "MIN" in columns C/D.
     for name in wb.sheetnames:
         ws = wb[name]
         c1 = ws.cell(1, 3).value
         d1 = ws.cell(1, 4).value
         if isinstance(c1, str) and isinstance(d1, str) and "MAX" in c1.upper() and "MIN" in d1.upper():
             return ws
-
     raise RuntimeError("Reactances sheet not found (Реактансы / MAX/MIN)")
 
 
@@ -49,7 +43,6 @@ def upsert_reactances_from_expert() -> int:
 
     count = 0
     with Session(ENGINE) as session:
-        # Replace fully to avoid stale data.
         session.query(Reactance).delete()
         session.commit()
 
@@ -58,20 +51,32 @@ def upsert_reactances_from_expert() -> int:
             name = ws.cell(r, 2).value
             zmax = ws.cell(r, 3).value
             zmin = ws.cell(r, 4).value
+            z_a_max = ws.cell(r, 10).value
+            z_a_min = ws.cell(r, 11).value
 
             if code is None and name is None:
                 break
             if not isinstance(code, (int, float)) or not name:
                 continue
-            if not isinstance(zmax, (int, float)) or not isinstance(zmin, (int, float)):
+
+            has_n = isinstance(zmax, (int, float)) and isinstance(zmin, (int, float))
+            has_a = (
+                isinstance(z_a_max, (int, float))
+                and isinstance(z_a_min, (int, float))
+                and float(z_a_max) > 0
+                and float(z_a_min) > 0
+            )
+            if not has_n and not has_a:
                 continue
 
             session.add(
                 Reactance(
                     reactance_code=int(code),
                     name=str(name),
-                    z_max_ohm=float(zmax),
-                    z_min_ohm=float(zmin),
+                    z_max_ohm=float(zmax) if has_n else None,
+                    z_min_ohm=float(zmin) if has_n else None,
+                    z_a_max_ohm=float(z_a_max) if has_a else None,
+                    z_a_min_ohm=float(z_a_min) if has_a else None,
                     is_active=True,
                 )
             )
@@ -89,4 +94,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
