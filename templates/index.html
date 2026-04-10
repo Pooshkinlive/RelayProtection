@@ -134,10 +134,16 @@
         <!-- Форма: три вкладки фидер → ТР/после → уставки и график -->
         <div class="card">
             <h2>⚡ Конфигурация фидера</h2>
+            <p style="text-align:right; font-size:13px; margin:0 0 8px 0;">
+                <a href="#" id="staff-open-ref" onclick="openStaffEntry(); return false;" style="color:#5568d6;">Вход Инженер / Админ</a>
+                <span id="staff-badge" style="margin-left:8px; color:#15803d; font-weight:600;"></span>
+                <a href="#" id="staff-logout-header" onclick="doLogout(); return false;" style="display:none; margin-left:12px; color:#b45309; font-weight:600;">Выйти → режим Мастер</a>
+            </p>
             <div class="tabs-nav" role="tablist" aria-label="Разделы ввода">
                 <button type="button" class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-panel-1" id="tab-btn-1" data-tab="1">1. Линия до КЛ</button>
                 <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-2" id="tab-btn-2" data-tab="2">2. Линия до ТР и ТР</button>
                 <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-3" id="tab-btn-3" data-tab="3">3. Параметры РЗА</button>
+                <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-4" id="tab-btn-4" data-tab="4" style="display:none;">4. Справочники</button>
             </div>
 
             <div id="tab-panel-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-btn-1">
@@ -162,6 +168,10 @@
             </div>
 
             <div id="tab-panel-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-3">
+                <div class="form-group">
+                    <label>Описание объекта / присоединения</label>
+                    <input type="text" id="object_description" value="" placeholder="Например: ф. 6кВ №20, ПС 35/6кВ …">
+                </div>
                 <div class="form-group">
                     <label>Номинальное напряжение, В</label>
                     <input type="number" id="u_nom" value="6300" step="100">
@@ -252,6 +262,79 @@
                     <canvas id="sensitivityChart"></canvas>
                 </div>
             </div>
+
+            <div id="tab-panel-4" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-4">
+                <p class="info-box" style="margin-top:0;">
+                    <strong>Инженер / Админ:</strong> вход по паролю из <code>.env</code> (<code>ENGINEER_PASSWORD</code>, <code>ADMIN_PASSWORD</code>).
+                    Доступ к дополнению справочника реактансов в БД. Удаление записей не выполняется — только скрытие (<strong>неактивна</strong>).
+                </p>
+                <div id="staff-login-box" class="card" style="background:#fefce8; margin-bottom:12px;">
+                    <h3 style="margin:0 0 10px 0;">Вход</h3>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Роль</label>
+                            <select id="auth_role">
+                                <option value="engineer">Инженер</option>
+                                <option value="admin">Админ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Пароль</label>
+                            <input type="password" id="auth_password" autocomplete="current-password" placeholder="Пароль из .env">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success" onclick="doLogin()">Войти</button>
+                    <button type="button" class="btn" onclick="doLogout()" id="btn_logout" style="display:none;">Выйти</button>
+                    <span id="auth_status" style="margin-left:12px; color:#555;"></span>
+                </div>
+                <div id="admin-reactances-panel" style="display:none;">
+                    <h3>Реактансы (лист ЭКСПЕРТ «Реактансы»)</h3>
+                    <label style="display:inline-flex; align-items:center; gap:8px; margin-bottom:10px;">
+                        <input type="checkbox" id="admin_show_inactive" checked onchange="loadAdminReactances()">
+                        Показывать скрытые (неактивные)
+                    </label>
+                    <div style="overflow-x:auto; margin-bottom:16px;">
+                        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                            <thead>
+                                <tr style="background:#f3f4f6;">
+                                    <th style="text-align:left; padding:8px; border:1px solid #ddd;">Код</th>
+                                    <th style="text-align:left; padding:8px; border:1px solid #ddd;">Наименование</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Zmax</th>
+                                    <th style="text-align:right; padding:8px; border:1px solid #ddd;">Zmin</th>
+                                    <th style="text-align:center; padding:8px; border:1px solid #ddd;">Активен</th>
+                                    <th style="text-align:left; padding:8px; border:1px solid #ddd;">Обновлено</th>
+                                    <th style="padding:8px; border:1px solid #ddd;">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-reactances-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div class="card" style="background:#f0fdf4;">
+                        <h4 style="margin:0 0 10px 0;" id="admin-form-title">Новая запись</h4>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Код (как в ЭКСПЕРТ, столбец A)</label>
+                                <input type="number" id="admin_rx_code" step="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Наименование</label>
+                                <input type="text" id="admin_rx_name" style="max-width:100%">
+                            </div>
+                            <div class="form-group">
+                                <label>Zmax, Ом</label>
+                                <input type="number" id="admin_rx_zmax" step="0.000001">
+                            </div>
+                            <div class="form-group">
+                                <label>Zmin, Ом</label>
+                                <input type="number" id="admin_rx_zmin" step="0.000001">
+                            </div>
+                        </div>
+                        <input type="hidden" id="admin_rx_edit_id" value="">
+                        <button type="button" class="btn btn-success" onclick="submitAdminReactance()">Сохранить</button>
+                        <button type="button" class="btn" onclick="resetAdminReactanceForm()">Очистить форму</button>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- Данные из Excel -->
@@ -279,6 +362,214 @@
         let afterSections = [];
         let chart = null;
 
+        function openStaffEntry() {
+            const b = document.getElementById('tab-btn-4');
+            if (b) b.style.display = '';
+            showTab(4);
+        }
+
+        function adminAuthHeaders() {
+            const token = localStorage.getItem('rza_token');
+            const h = { 'Content-Type': 'application/json' };
+            if (token) h['Authorization'] = 'Bearer ' + token;
+            return h;
+        }
+
+        async function updateAuthUI() {
+            const token = localStorage.getItem('rza_token');
+            const tabBtn = document.getElementById('tab-btn-4');
+            const panel = document.getElementById('admin-reactances-panel');
+            const loginBox = document.getElementById('staff-login-box');
+            const badge = document.getElementById('staff-badge');
+            const btnOut = document.getElementById('btn_logout');
+            const openRef = document.getElementById('staff-open-ref');
+            const logoutHdr = document.getElementById('staff-logout-header');
+            if (!tabBtn) return;
+            if (!token) {
+                tabBtn.style.display = 'none';
+                if (panel) panel.style.display = 'none';
+                if (btnOut) btnOut.style.display = 'none';
+                if (badge) badge.textContent = '';
+                if (openRef) openRef.textContent = 'Вход Инженер / Админ';
+                if (logoutHdr) logoutHdr.style.display = 'none';
+                return;
+            }
+            try {
+                const res = await fetch('/api/auth/me', { headers: adminAuthHeaders() });
+                const j = await res.json();
+                if (j.success && j.role) {
+                    tabBtn.style.display = '';
+                    if (panel) panel.style.display = '';
+                    if (btnOut) btnOut.style.display = '';
+                    if (badge) badge.textContent = '(вошли: ' + j.role + ')';
+                    if (openRef) openRef.textContent = 'Справочники (вкладка 4)';
+                    if (logoutHdr) logoutHdr.style.display = 'inline';
+                    if (loginBox) loginBox.style.display = 'none';
+                    loadAdminReactances();
+                } else {
+                    localStorage.removeItem('rza_token');
+                    tabBtn.style.display = 'none';
+                    if (panel) panel.style.display = 'none';
+                    if (btnOut) btnOut.style.display = 'none';
+                    if (badge) badge.textContent = '';
+                    if (openRef) openRef.textContent = 'Вход Инженер / Админ';
+                    if (logoutHdr) logoutHdr.style.display = 'none';
+                    if (loginBox) loginBox.style.display = '';
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function doLogin() {
+            const role = document.getElementById('auth_role')?.value || 'engineer';
+            const password = document.getElementById('auth_password')?.value || '';
+            const st = document.getElementById('auth_status');
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ role, password })
+                });
+                const j = await res.json();
+                if (res.ok && j.success && j.token) {
+                    localStorage.setItem('rza_token', j.token);
+                    if (st) st.textContent = 'Успешный вход';
+                    document.getElementById('auth_password').value = '';
+                    await updateAuthUI();
+                } else {
+                    if (st) st.textContent = (j.detail || j.error) ? String(j.detail || j.error) : 'Ошибка входа';
+                }
+            } catch (e) {
+                if (st) st.textContent = e.message || 'Ошибка сети';
+            }
+        }
+
+        function doLogout() {
+            localStorage.removeItem('rza_token');
+            const st = document.getElementById('auth_status');
+            if (st) st.textContent = '';
+            const loginBox = document.getElementById('staff-login-box');
+            if (loginBox) loginBox.style.display = '';
+            updateAuthUI();
+            showTab(1);
+        }
+
+        async function loadAdminReactances() {
+            const token = localStorage.getItem('rza_token');
+            if (!token) return;
+            const inc = document.getElementById('admin_show_inactive')?.checked !== false;
+            const url = '/api/admin/reactances' + (inc ? '?include_inactive=true' : '?include_inactive=false');
+            try {
+                const res = await fetch(url, { headers: adminAuthHeaders() });
+                const j = await res.json();
+                const tb = document.getElementById('admin-reactances-tbody');
+                if (!tb || !j.success) return;
+                tb.innerHTML = j.data.map((r) => {
+                    const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+                    const dt = r.updated_at ? esc(r.updated_at) : '—';
+                    const act = r.is_active ? 'да' : '<span style="color:#b45309">нет</span>';
+                    return `<tr>
+                        <td style="padding:6px;border:1px solid #ddd;">${r.code}</td>
+                        <td style="padding:6px;border:1px solid #ddd;">${esc(r.name)}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.z_max_ohm}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.z_min_ohm}</td>
+                        <td style="padding:6px;border:1px solid #ddd;text-align:center;">${act}</td>
+                        <td style="padding:6px;border:1px solid #ddd;font-size:11px;">${dt}<br><span style="color:#666">${esc(r.updated_by || '')}</span></td>
+                        <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
+                            <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="editAdminRx(${r.id}, ${r.code})">Изменить</button>
+                            <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="toggleAdminRxActive(${r.id}, ${r.is_active ? 'false' : 'true'})">${r.is_active ? 'Скрыть' : 'Показать'}</button>
+                        </td>
+                    </tr>`;
+                }).join('');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function editAdminRx(id, code) {
+            document.getElementById('admin_rx_edit_id').value = String(id);
+            document.getElementById('admin_rx_code').value = String(code);
+            document.getElementById('admin_rx_code').disabled = true;
+            document.getElementById('admin-form-title').textContent = 'Редактирование (id=' + id + ')';
+            fetch('/api/admin/reactances?include_inactive=true', { headers: adminAuthHeaders() })
+                .then((r) => r.json())
+                .then((j) => {
+                    const item = (j.data || []).find((x) => x.id === id);
+                    if (!item) return;
+                    document.getElementById('admin_rx_name').value = item.name || '';
+                    document.getElementById('admin_rx_zmax').value = item.z_max_ohm;
+                    document.getElementById('admin_rx_zmin').value = item.z_min_ohm;
+                });
+        }
+
+        function resetAdminReactanceForm() {
+            document.getElementById('admin_rx_edit_id').value = '';
+            document.getElementById('admin_rx_code').value = '';
+            document.getElementById('admin_rx_code').disabled = false;
+            document.getElementById('admin_rx_name').value = '';
+            document.getElementById('admin_rx_zmax').value = '';
+            document.getElementById('admin_rx_zmin').value = '';
+            document.getElementById('admin-form-title').textContent = 'Новая запись';
+        }
+
+        async function submitAdminReactance() {
+            const editId = document.getElementById('admin_rx_edit_id').value;
+            const code = parseInt(document.getElementById('admin_rx_code').value, 10);
+            const name = document.getElementById('admin_rx_name').value.trim();
+            const zmax = parseFloat(document.getElementById('admin_rx_zmax').value);
+            const zmin = parseFloat(document.getElementById('admin_rx_zmin').value);
+            if (!name || !Number.isFinite(zmax) || !Number.isFinite(zmin)) {
+                alert('Заполните наименование и сопротивления');
+                return;
+            }
+            try {
+                if (editId) {
+                    const res = await fetch('/api/admin/reactances/' + editId, {
+                        method: 'PUT',
+                        headers: adminAuthHeaders(),
+                        body: JSON.stringify({ name, z_max_ohm: zmax, z_min_ohm: zmin })
+                    });
+                    const j = await res.json();
+                    if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
+                } else {
+                    if (!Number.isInteger(code) || code <= 0) {
+                        alert('Укажите целый положительный код');
+                        return;
+                    }
+                    const res = await fetch('/api/admin/reactances', {
+                        method: 'POST',
+                        headers: adminAuthHeaders(),
+                        body: JSON.stringify({ reactance_code: code, name, z_max_ohm: zmax, z_min_ohm: zmin })
+                    });
+                    const j = await res.json();
+                    if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
+                }
+                resetAdminReactanceForm();
+                loadAdminReactances();
+                loadReactances();
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+
+        async function toggleAdminRxActive(id, toActive) {
+            const is_active = toActive === true || toActive === 'true';
+            try {
+                const res = await fetch('/api/admin/reactances/' + id, {
+                    method: 'PUT',
+                    headers: adminAuthHeaders(),
+                    body: JSON.stringify({ is_active })
+                });
+                const j = await res.json();
+                if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
+                loadAdminReactances();
+                loadReactances();
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+
         function showTab(num) {
             const n = String(num);
             document.querySelectorAll('.tab-btn').forEach((btn) => {
@@ -300,6 +591,7 @@
             document.querySelectorAll('.tab-btn').forEach((btn) => {
                 btn.addEventListener('click', () => showTab(btn.dataset.tab));
             });
+            updateAuthUI();
         });
 
         // Загрузка типов линий из БД
@@ -625,6 +917,7 @@
                     cable_type: s.cable_type || null,
                     cable_length: s.cable_length || 0
                 })),
+                object_description: document.getElementById('object_description')?.value || '',
                 u_nom: parseFloat(document.getElementById('u_nom').value),
                 relay_code: parseInt(document.getElementById('relay_code').value || '6'),
                 reactance_id: document.getElementById('reactance_id').value ? parseInt(document.getElementById('reactance_id').value) : null,
@@ -670,6 +963,7 @@
                     
                     document.getElementById('result').innerHTML = `
                         <h3>📊 Результаты расчёта:</h3>
+                        ${calc.object_description ? `<div class="info-box" style="margin: 8px 0 10px 0;"><strong>Объект:</strong> ${String(calc.object_description).replaceAll('<','&lt;').replaceAll('>','&gt;')}</div>` : ``}
                         <div class="grid-2">
                             <div>
                                 <strong>Полное сопротивление:</strong><br>

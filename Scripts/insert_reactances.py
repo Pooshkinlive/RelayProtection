@@ -72,6 +72,7 @@ def upsert_reactances_from_expert() -> int:
                     name=str(name),
                     z_max_ohm=float(zmax),
                     z_min_ohm=float(zmin),
+                    is_active=True,
                 )
             )
             count += 1

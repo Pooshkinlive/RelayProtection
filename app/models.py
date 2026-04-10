@@ -131,6 +131,9 @@ class Reactance(Base):
     name = Column(String(255), nullable=False)
     z_max_ohm = Column(Float, nullable=False)
     z_min_ohm = Column(Float, nullable=False)
+    is_active = Column(Boolean, nullable=False, default=True)
+    updated_at = Column(DateTime, nullable=True)
+    updated_by = Column(String(100), nullable=True)
 
 class Transformer(Base):
     """
