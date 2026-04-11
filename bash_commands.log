@@ -112,3 +112,16 @@
 2026-04-10 23:25:43 - [200~netstat -ano | findstr :8000
 2026-04-10 23:27:46 - netstat -ano | findstr :8000
 2026-04-10 23:27:57 - netstat -ano | findstr :8000
+2026-04-10 23:29:25 - git add .
+2026-04-10 23:30:52 - git commit -m "Аварийный режим + Расширен Справочник"
+2026-04-10 23:31:08 - git push -u origin main
+2026-04-10 23:48:49 - cd rza_calculator
+2026-04-10 23:48:52 - Git Graph
+2026-04-10 23:49:47 - source rza_env/Scripts/activate
+2026-04-11 16:06:23 - cd rza_calculator
+2026-04-11 16:06:26 - source rza_env/Scripts/activate
+2026-04-11 17:15:15 - python run.py
+2026-04-11 17:21:30 - python run.py
+2026-04-11 17:24:50 - python run.py
+2026-04-11 18:13:28 - python run.py
+2026-04-11 18:22:51 - git add .

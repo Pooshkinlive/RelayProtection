@@ -145,6 +145,16 @@ async def health():
     return {"status": "ok", "templates": str(TEMPLATES_DIR)}
 
 
+@app.get("/api/health/db")
+async def health_db(db: Session = Depends(get_db)):
+    """Лёгкая проверка доступности SQL Server / БД."""
+    try:
+        db.query(LineType).limit(1).first()
+        return {"success": True, "connected": True}
+    except Exception as e:
+        return {"success": True, "connected": False, "error": str(e)}
+
+
 @app.post("/api/auth/login")
 async def auth_login(body: LoginInput):
     if not verify_password(body.role, body.password):
