@@ -183,6 +183,38 @@ def calculate_total_impedance(db: Session, sections: List[LineSection]) -> Dict[
     }
 
 
+def compute_ozz_capacitive_currents(
+    u_nom: float,
+    sections: List[LineSection],
+    after_sections: Optional[List[LineSection]] = None,
+) -> Dict[str, Any]:
+    """
+    Оценка собственного ёмкостного тока линии (ОЗЗ, 6–10 кВ, изол./компенс. нейтраль):
+    КЛ: Ic ≈ UкВ·L/300; ВЛ: Ic ≈ UкВ·L/1000 (L в км, UкВ = Uном/1000 линейное).
+    Не использует R/X из справочника — только длины и Uном.
+    """
+    after_sections = after_sections or []
+    u_kv = max(float(u_nom or 0.0), 0.0) / 1000.0
+    len_kl = 0.0
+    len_vl = 0.0
+    for s in list(sections or []) + list(after_sections):
+        len_kl += float(getattr(s, "cable_length", 0) or 0.0)
+        len_vl += float(getattr(s, "conductor_length", 0) or 0.0)
+    ic_kl = (u_kv * len_kl / 300.0) if len_kl > 0.0 else 0.0
+    ic_vl = (u_kv * len_vl / 1000.0) if len_vl > 0.0 else 0.0
+    ic_own = ic_kl + ic_vl
+    return {
+        "u_kv": round(u_kv, 4),
+        "length_cable_km": round(len_kl, 4),
+        "length_vl_km": round(len_vl, 4),
+        "ic_cable_a": round(ic_kl, 3),
+        "ic_vl_a": round(ic_vl, 3),
+        "ic_own_a": round(ic_own, 3),
+        "i_calc_ozz_a": round(ic_own, 3),
+        "method_note": "Оценка: Ic_КЛ≈UкВ·L/300, Ic_ВЛ≈UкВ·L/1000 (упрощённо).",
+    }
+
+
 def _section_etalon_ef_per_km(db: Session, section: LineSection) -> Tuple[float, float, float]:
     """
     Как строка «Расчет» для одного участка UI: длина L = D9+D10,
@@ -457,7 +489,8 @@ def _calculate_rza_branch(
     after_sections: List[LineSection],
     u_nom: float,
     relay_code: int,
-    z_head: float,
+    z_head_min: float,
+    z_head_max: float,
     reactance_id: Optional[int],
     reactance_mode: str,
     transformer_code: Optional[int],
@@ -465,18 +498,25 @@ def _calculate_rza_branch(
     i_work: float,
     manual_mto: float,
     manual_mtz: float,
+    mto_kch_mode: str = "backup",
 ) -> Dict[str, Any]:
-    """Расчёт уставок для одной ветки (Н или А) при заданной эквивалентной Z «головы»."""
+    """
+    Одна ветка (Н или А).
+    z_head_min — как F5 MIN: 2ф по КЛ, конец КЛ, график B20:B30, j118 конца фидера.
+    z_head_max — как E5 MAX для J118 → B44 / K24 (3ф за трансформатором).
+    """
     imp_kl = calculate_total_impedance(db, sections)
     slot_rows_kl = _kl_four_slot_rows(db, sections)
     L_kl_only = float(imp_kl["length_total"])
     eps_l = 1e-9
-    zh = max(float(z_head), 0.0)
+    zh_min = max(float(z_head_min), 0.0)
+    zh_max = max(float(z_head_max), 0.0)
     if L_kl_only <= eps_l:
-        z_kl_end = max(zh, 1e-9) if zh > 1e-15 else 1e-9
+        z_kl_end = max(zh_min, 1e-9) if zh_min > 1e-15 else 1e-9
     else:
-        z_kl_end = _etalon_z_kl_sumsq(L_kl_only, slot_rows_kl, zh)
+        z_kl_end = _etalon_z_kl_sumsq(L_kl_only, slot_rows_kl, zh_min)
     i_kz2_kl_end_min = calculate_short_circuit_current_2ph(u_nom, z_kl_end)
+    i_kz2_kl_start_a = calculate_short_circuit_current_2ph(u_nom, max(zh_min, 1e-9))
 
     j118_k24 = j118_for_k24_b44(
         db,
@@ -485,7 +525,7 @@ def _calculate_rza_branch(
         reactance_id,
         reactance_mode,
         transformer_code,
-        z_react_override=zh,
+        z_react_override=zh_max,
     )
     j118_feeder_end = j118_at_feeder_end(
         db,
@@ -494,7 +534,7 @@ def _calculate_rza_branch(
         reactance_id,
         reactance_mode,
         transformer_code,
-        z_react_override=zh,
+        z_react_override=zh_min,
     )
 
     i_kz3_b44 = calculate_short_circuit_current(u_nom, j118_k24)
@@ -520,7 +560,11 @@ def _calculate_rza_branch(
 
     manual_mto_f = float(manual_mto or 0.0)
     manual_mtz_f = float(manual_mtz or 0.0)
-    sensitivity_mto_manual = i_kz_end / manual_mto_f if manual_mto_f > 0 else 0.0
+    mk = (mto_kch_mode or "backup").strip().lower()
+    if mk not in ("main", "backup"):
+        mk = "backup"
+    mto_manual_num = i_kz_end if mk == "main" else i_kz2_kl_start_a
+    sensitivity_mto_manual = mto_manual_num / manual_mto_f if manual_mto_f > 0 else 0.0
     sensitivity_mtz_manual = i_kz_end / manual_mtz_f if manual_mtz_f > 0 else 0.0
 
     kch_mto_min = 1.2
@@ -539,6 +583,7 @@ def _calculate_rza_branch(
         "i_kz3_b44": round(float(i_kz3_b44), 3),
         "j11": round(float(j11), 3),
         "i_kz2_kl_end_min": round(float(i_kz2_kl_end_min), 2),
+        "i_kz2_kl_start_a": round(float(i_kz2_kl_start_a), 2),
         "i_kz_end": round(float(i_kz_end), 2),
         "i_kz2_feeder_j118": round(float(i_kz2_feeder_j118), 2),
         "i_kz3_tr": round(float(i_kz3_tr), 2),
@@ -569,7 +614,9 @@ def _calculate_rza_branch(
             "j118_ohm": round(float(j118_k24), 5),
             "j118_feeder_end_ohm": round(float(j118_feeder_end), 5),
         },
-        "reactance_z_head_ohm": round(zh, 5),
+        "reactance_z_head_ohm": round(zh_min, 5),
+        "reactance_z_head_max_ohm": round(zh_max, 5),
+        "mto_kch_mode": mk,
         "transformer": {
             "code": transformer_code,
             "z_ohm": round(z_tr, 5),
@@ -590,6 +637,7 @@ def _empty_branch() -> Dict[str, Any]:
         "i_kz3_b44": 0.0,
         "j11": 0.0,
         "i_kz2_kl_end_min": 0.0,
+        "i_kz2_kl_start_a": 0.0,
         "i_kz_end": 0.0,
         "i_kz2_feeder_j118": 0.0,
         "i_kz3_tr": 0.0,
@@ -621,6 +669,8 @@ def _empty_branch() -> Dict[str, Any]:
             "j118_feeder_end_ohm": 0.0,
         },
         "reactance_z_head_ohm": 0.0,
+        "reactance_z_head_max_ohm": 0.0,
+        "mto_kch_mode": "backup",
         "transformer": {"code": None, "z_ohm": 0.0},
         "total_power_kw": 0.0,
         "i_nom": 0.0,
@@ -643,6 +693,7 @@ def calculate_rza_settings(
     manual_mtz: float = 0.0,
     transformer_code: Optional[int] = None,
     after_sections: Optional[List[LineSection]] = None,
+    mto_kch_mode: str = "backup",
 ) -> Dict[str, Any]:
     """Основной расчёт уставок РЗА: нормальный и (при наличии J,K) аварийный режим."""
     after_sections = after_sections or []
@@ -664,14 +715,16 @@ def calculate_rza_settings(
 
     branch_n: Dict[str, Any]
     if has_n:
-        zn = head_z_normal(rx, reactance_mode)
+        zn_min = head_z_normal(rx, "MIN")
+        zn_max = head_z_normal(rx, "MAX")
         branch_n = _calculate_rza_branch(
             db,
             sections,
             after_sections,
             u_nom,
             relay_code,
-            zn,
+            zn_min,
+            zn_max,
             reactance_id,
             reactance_mode,
             transformer_code,
@@ -679,20 +732,23 @@ def calculate_rza_settings(
             i_work,
             manual_mto,
             manual_mtz,
+            mto_kch_mode=mto_kch_mode,
         )
     else:
         branch_n = _empty_branch()
 
     branch_a: Optional[Dict[str, Any]] = None
     if has_a:
-        za = head_z_emergency(rx, reactance_mode)
+        za_min = head_z_emergency(rx, "MIN")
+        za_max = head_z_emergency(rx, "MAX")
         branch_a = _calculate_rza_branch(
             db,
             sections,
             after_sections,
             u_nom,
             relay_code,
-            za,
+            za_min,
+            za_max,
             reactance_id,
             reactance_mode,
             transformer_code,
@@ -700,6 +756,7 @@ def calculate_rza_settings(
             i_work,
             manual_mto,
             manual_mtz,
+            mto_kch_mode=mto_kch_mode,
         )
 
     # Верхний уровень — нормальный режим; при отсутствии Н подставляем А (только аварийный справочник).
@@ -716,14 +773,17 @@ def calculate_rza_settings(
         "emergency": branch_a,
         "reactance": {
             "id": reactance_id,
-            "mode": reactance_mode,
+            "mode": "MIN_line_MAX_k24",
             "z_ohm": round(float(primary.get("reactance_z_head_ohm") or 0), 5),
+            "z_ohm_min": round(float(primary.get("reactance_z_head_ohm") or 0), 5),
+            "z_ohm_max_k24": round(float(primary.get("reactance_z_head_max_ohm") or 0), 5),
         },
         "transformer": {
             "code": transformer_code,
             "z_ohm": round(z_tr, 5),
         },
     }
+    out["ozz"] = compute_ozz_capacitive_currents(u_nom, sections, after_sections)
     return out
 
 def generate_chart_data(
@@ -757,8 +817,9 @@ def generate_chart_data(
     rx = _reactance_by_id(db, reactance_id)
     has_n = bool(rx and regime_normal_available(rx))
     has_a = bool(rx and regime_emergency_available(rx))
-    zn = head_z_normal(rx, reactance_mode) if rx and has_n else None
-    za = head_z_emergency(rx, reactance_mode) if rx and has_a else None
+    # Кривые 2ф по КЛ — всегда MIN головы (F5 / авар. мин.), независимо от reactance_mode.
+    zn = head_z_normal(rx, "MIN") if rx and has_n else None
+    za = head_z_emergency(rx, "MIN") if rx and has_a else None
 
     slot_rows_kl = _kl_four_slot_rows(db, sections)
 
@@ -829,7 +890,7 @@ def generate_chart_data(
         "chart_xy_mode": True,
         "reactance": {
             "id": reactance_id,
-            "mode": reactance_mode,
+            "mode": "MIN",
             "z_ohm": round(float(zn or 0.0), 5),
         },
         "reactance_chart_min_ohm": round(float(zn or 0.0), 5),

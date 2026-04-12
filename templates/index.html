@@ -194,10 +194,10 @@
                         <select id="reactance_id"></select>
                     </div>
                     <div class="form-group">
-                        <label>MAX/MIN (единый переключатель: норм. C↔D, авар. J↔K)</label>
-                        <select id="reactance_mode">
-                            <option value="MAX" selected>MAX</option>
-                            <option value="MIN">MIN</option>
+                        <label>Кч МТО по K26 (числитель)</label>
+                        <select id="mto_kch_mode">
+                            <option value="backup" selected>Доп. защита: Iкз2ф на с.ш. (B20 / P20)</option>
+                            <option value="main">Основная: Iкз2ф в конце линии до КЛ</option>
                         </select>
                     </div>
                 </div>
@@ -252,10 +252,70 @@
                             </div>
                         </div>
                     </div>
+                    <div class="grid-2" style="margin-top:10px;">
+                        <div class="form-group">
+                            <label>Время срабатывания МТО, с</label>
+                            <input type="number" id="manual_t_mto" value="" step="0.01" min="0" placeholder="вручную">
+                        </div>
+                        <div class="form-group">
+                            <label>Время срабатывания МТЗ, с</label>
+                            <input type="number" id="manual_t_mtz" value="" step="0.01" min="0" placeholder="вручную">
+                        </div>
+                    </div>
                     <div class="info-box" style="margin-top:10px;">
                         <strong>Зона покрытия (по пересечению Iкз2ф(L) с уставкой):</strong><br>
                         МТО: <span id="zone_mto_pct">—</span>% (до <span id="zone_mto_len">—</span> км)<br>
                         МТЗ: <span id="zone_mtz_pct">—</span>% (до <span id="zone_mtz_len">—</span> км)
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top:12px; background:#f0fdf4;">
+                    <h3 style="margin:0 0 10px 0;">Трансформатор тока (для телефонограммы / вторичных величин)</h3>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Первичный ток, А</label>
+                            <input type="number" id="ct_primary_a" value="" step="1" min="0" placeholder="например 300">
+                        </div>
+                        <div class="form-group">
+                            <label>Вторичный ток, А</label>
+                            <input type="number" id="ct_secondary_a" value="" step="1" min="0" placeholder="например 5">
+                        </div>
+                    </div>
+                    <div class="grid-2" style="margin-top:10px;">
+                        <div class="form-group">
+                            <label>Время срабатывания АПВ, с</label>
+                            <input type="number" id="apv_time_s" value="" step="0.1" min="0" placeholder="вручную">
+                        </div>
+                        <div class="form-group">
+                            <label>Количество циклов АПВ</label>
+                            <input type="number" id="apv_cycles" value="" step="1" min="0" placeholder="целое, вручную">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top:12px; background:#eef2ff;">
+                    <h3 style="margin:0 0 10px 0;">ЗОЗЗ (защита от ОЗЗ)</h3>
+                    <p class="info-box" style="margin-top:0;">
+                        После расчёта выводится <strong>оценка собственного ёмкостного тока</strong> линии (кабель U·L/300, ВЛ U·L/1000, Uном→кВ).
+                        Уставку, время и действие задаёте вручную (как в эталоне).
+                    </p>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Уставка ЗОЗЗ (первичный ток), А</label>
+                            <input type="number" id="manual_izzz_a" value="" step="0.1" min="0" placeholder="вручную">
+                        </div>
+                        <div class="form-group">
+                            <label>Время срабатывания ЗОЗЗ, с</label>
+                            <input type="number" id="manual_t_izzz_s" value="" step="0.01" min="0" placeholder="вручную">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top:8px;">
+                        <label>Действие защиты</label>
+                        <select id="ozz_action">
+                            <option value="">— не выбрано —</option>
+                            <option value="signal">На сигнал</option>
+                            <option value="trip">На отключение</option>
+                        </select>
                     </div>
                 </div>
 
@@ -1039,6 +1099,14 @@
                 if (document.visibilityState === 'visible') refreshDbHud();
             });
             setInterval(refreshDbHud, 60000);
+            const mkSel = document.getElementById('mto_kch_mode');
+            if (mkSel) {
+                mkSel.addEventListener('change', () => {
+                    window.__mtoKchMode = mkSel.value || 'backup';
+                    if (window.__lastChartData) updateManualVizors(window.__lastChartData);
+                    applyKchManualADisplay();
+                });
+            }
         });
 
         // Загрузка типов линий из БД
@@ -1222,7 +1290,11 @@
         /** Единообразное отображение Кч МТО/МТЗ для режима А (ручные K26/K33). */
         function applyKchManualADisplay() {
             if (!document.getElementById('kch_mto_a_badge')) return;
-            const ikzA = parseFloat(window.__lastIkzEndA || '0');
+            const mode = window.__mtoKchMode || 'backup';
+            const ikzA =
+                mode === 'main'
+                    ? parseFloat(window.__lastIkzEndA || '0')
+                    : parseFloat(window.__lastIk2StartA || '0');
             const mtoM = parseFloat(document.getElementById('manual_mto')?.value || '0');
             const mtzM = parseFloat(document.getElementById('manual_mtz')?.value || '0');
             const minMto = (window.__kchMin && Number(window.__kchMin.mto)) || 1.2;
@@ -1395,6 +1467,24 @@
             `).join('');
         }
 
+        function parsePayloadOptNum(id) {
+            const el = document.getElementById(id);
+            if (!el) return null;
+            const t = String(el.value ?? '').trim();
+            if (t === '') return null;
+            const x = parseFloat(t.replace(',', '.'));
+            return Number.isFinite(x) ? x : null;
+        }
+
+        function parsePayloadOptInt(id) {
+            const el = document.getElementById(id);
+            if (!el) return null;
+            const t = String(el.value ?? '').trim();
+            if (t === '') return null;
+            const x = parseInt(t, 10);
+            return Number.isFinite(x) && x >= 0 ? x : null;
+        }
+
         // Расчёт
         async function calculate() {
             const btn = event.target;
@@ -1420,14 +1510,27 @@
                 u_nom: parseFloat(document.getElementById('u_nom').value),
                 relay_code: parseInt(document.getElementById('relay_code').value || '6'),
                 reactance_id: document.getElementById('reactance_id').value ? parseInt(document.getElementById('reactance_id').value) : null,
-                reactance_mode: document.getElementById('reactance_mode').value,
+                mto_kch_mode: document.getElementById('mto_kch_mode')?.value || 'backup',
                 transformer_code: document.getElementById('transformer_code')?.value
                     ? parseInt(document.getElementById('transformer_code').value)
                     : null,
                 total_power_kw: getTotalPowerKw(),
                 i_work: parseFloat(document.getElementById('i_work').value || '0'),
                 manual_mto: parseFloat(document.getElementById('manual_mto').value || '0'),
-                manual_mtz: parseFloat(document.getElementById('manual_mtz').value || '0')
+                manual_mtz: parseFloat(document.getElementById('manual_mtz').value || '0'),
+                manual_t_mto: parsePayloadOptNum('manual_t_mto'),
+                manual_t_mtz: parsePayloadOptNum('manual_t_mtz'),
+                ct_primary_a: parsePayloadOptNum('ct_primary_a'),
+                ct_secondary_a: parsePayloadOptNum('ct_secondary_a'),
+                manual_izzz_a: parsePayloadOptNum('manual_izzz_a'),
+                manual_t_izzz_s: parsePayloadOptNum('manual_t_izzz_s'),
+                ozz_action: (() => {
+                    const s = document.getElementById('ozz_action');
+                    const v = s && s.value ? String(s.value) : '';
+                    return v || null;
+                })(),
+                apv_time_s: parsePayloadOptNum('apv_time_s'),
+                apv_cycles: parsePayloadOptInt('apv_cycles'),
             };
             
             try {
@@ -1445,6 +1548,9 @@
                     window.__kchMin = { mto: calc.kch_mto_min ?? 1.2, mtz: calc.kch_mtz_min ?? 1.5 };
                     window.__lastIkzEnd = calc.i_kz_end;
                     window.__lastIkzEndA = ec && ec.i_kz_end != null ? ec.i_kz_end : null;
+                    window.__mtoKchMode = calc.mto_kch_mode || 'backup';
+                    window.__lastIk2StartN = calc.i_kz2_kl_start_a;
+                    window.__lastIk2StartA = ec && ec.i_kz2_kl_start_a != null ? ec.i_kz2_kl_start_a : null;
 
                     const orient = calc.orient || {};
                     const orientA = (ec && ec.orient) || {};
@@ -1459,6 +1565,16 @@
                     setText('mtz_dop_hint', orient.k35_mtz_dop != null ? orient.k35_mtz_dop : calc.i_mtz_dop);
                     setText('mtz_dop_hint_a', ec && ec.i_mtz_dop != null ? ec.i_mtz_dop : (orientA.k35_mtz_dop != null ? orientA.k35_mtz_dop : '—'));
                     setText('mtz_vtk_hint', orient.k34_vtx_mtz);
+
+                    const mtoKchMode = calc.mto_kch_mode || 'backup';
+                    const mtoNumLabelN =
+                        mtoKchMode === 'main'
+                            ? 'Iкз2ф в конце линии до КЛ (Н)'
+                            : 'Iкз2ф на с.ш., начало линии (Н, B20)';
+                    const mtoNumLabelA =
+                        mtoKchMode === 'main'
+                            ? 'Iкз2ф в конце линии до КЛ (А)'
+                            : 'Iкз2ф на с.ш., начало (А, P20)';
 
                     const mtoStatus = calc.mto_ok_manual ? '✅ OK' : '❌ Не проходит';
                     const mtoClass = calc.mto_ok_manual ? 'ok' : 'error';
@@ -1496,6 +1612,28 @@
                     } else {
                         regimeHtml = `<div class="grid-2">${blockN(calc)}</div>`;
                     }
+
+                    const oz = calc.ozz;
+                    const rf = calc.relay_form || {};
+                    const fmtRf = (v) => (v === null || v === undefined || v === '' ? '—' : String(v));
+                    const actRf = rf.ozz_action === 'trip' ? 'на отключение' : rf.ozz_action === 'signal' ? 'на сигнал' : '—';
+                    const relayOzzHtml = oz
+                        ? `
+                        <div class="info-box" style="margin-top:10px;">
+                            <strong>ОЗЗ — оценка собственного ёмкостного тока:</strong><br>
+                            Uном = ${calc.u_nom} В (${oz.u_kv} кВ); суммарно кабель <strong>${oz.length_cable_km}</strong> км → Ic<sub>КЛ</sub> ≈ <strong>${oz.ic_cable_a}</strong> А;
+                            ВЛ <strong>${oz.length_vl_km}</strong> км → Ic<sub>ВЛ</sub> ≈ <strong>${oz.ic_vl_a}</strong> А.<br>
+                            <strong>Расчётный ток ОЗЗ (Ic собств.):</strong> <strong>${oz.i_calc_ozz_a}</strong> А.<br>
+                            <span style="font-size:11px;color:#666;">Упрощённо: КЛ U·L/300, ВЛ U·L/1000 (не из R/X справочника).</span>
+                        </div>
+                        <div class="info-box" style="margin-top:8px;">
+                            <strong>Реквизиты МТО/МТЗ / ТТ / АПВ / ЗОЗЗ (ввод):</strong><br>
+                            Время срабатывания МТО / МТЗ: ${fmtRf(rf.t_mto_s)} / ${fmtRf(rf.t_mtz_s)} с<br>
+                            ТТ первичн./вторичн.: ${fmtRf(rf.ct_primary_a)} / ${fmtRf(rf.ct_secondary_a)} А<br>
+                            Время срабатывания АПВ: ${fmtRf(rf.apv_time_s)} с; количество циклов АПВ: ${fmtRf(rf.apv_cycles)}<br>
+                            Уставка ЗОЗЗ: ${fmtRf(rf.izzz_pickup_a)} А; время: ${fmtRf(rf.t_izzz_s)} с; действие: ${actRf}
+                        </div>`
+                        : '';
                     
                     document.getElementById('result').innerHTML = `
                         <h3>📊 Результаты расчёта:</h3>
@@ -1515,23 +1653,25 @@
                             </div>
                         </div>
                         ${regimeHtml}
+                        ${relayOzzHtml}
                         <div class="info-box" style="margin-top:10px;">
                             <strong>Эталон, лист «1»:</strong><br>
                             Н: B30 / K24 / K35; А: P30→L37, P44·L20→L24, R30→L35 (при наличии J,K).<br>
-                            Z головы (Н): ${calc.reactance && calc.reactance.z_ohm != null ? calc.reactance.z_ohm : '—'} Ом (MAX/MIN по C/D).
-                            ${ec ? ` Z головы (А): ${ec.reactance_z_head_ohm} Ом (MAX/MIN по J/K).` : ''}
+                            Z головы MIN (Н, 2ф/график): ${calc.reactance && calc.reactance.z_ohm_min != null ? calc.reactance.z_ohm_min : (calc.reactance && calc.reactance.z_ohm != null ? calc.reactance.z_ohm : '—')} Ом;
+                            Z MAX для K24 (Н): ${calc.reactance && calc.reactance.z_ohm_max_k24 != null ? calc.reactance.z_ohm_max_k24 : '—'} Ом.
+                            ${ec ? ` А: MIN ${ec.reactance_z_head_ohm} Ом; MAX K24 ${ec.reactance_z_head_max_ohm != null ? ec.reactance_z_head_max_ohm : '—'} Ом.` : ''}
                         </div>
                         <div class="info-box" style="margin-top:10px;">
                             <strong>График:</strong> общая ось X = k/10·D20; МТО/МТЗ — общие визиры; при наличии А — кривые Реал.А / С коэф.чувств.А (P20:P30 / R20:R30).
                         </div>
                         <hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
-                        <p><strong>МТО:</strong> Чувствительность (по K26, Iкз2ф конца до КЛ <strong>Н</strong>) = <span id="kch_mto_manual">${calc.sensitivity_mto_manual}</span> ${mtoStatus}</p>
+                        <p><strong>МТО:</strong> Чувствительность (по K26, <strong>${mtoNumLabelN}</strong>) = <span id="kch_mto_manual">${calc.sensitivity_mto_manual}</span> ${mtoStatus}</p>
                         <p class="${mtoClass}">${calc.mto_ok_manual ? ('Критерий ≥' + calc.kch_mto_min + ' выполнен') : ('Недостаточная чувствительность (' + calc.sensitivity_mto_manual + ' < ' + calc.kch_mto_min + ')')}</p>
                         <hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
                         <p><strong>МТЗ:</strong> Чувствительность (по K33, Iкз2ф <strong>Н</strong>) = <span id="kch_mtz_manual">${calc.sensitivity_mtz_manual}</span> ${mtzStatus}</p>
                         <p class="${mtzClass}">${calc.mtz_ok_manual ? ('Критерий ≥' + calc.kch_mtz_min + ' выполнен') : ('Недостаточная чувствительность (' + calc.sensitivity_mtz_manual + ' < ' + calc.kch_mtz_min + ')')}</p>
                         ${ec ? `<hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
-                        <p><strong>МТО (А):</strong> Чувствительность (ручн. K26, Iкз2ф конца до КЛ <strong>А</strong>) = <span id="kch_mto_manual_a">—</span> <span id="kch_mto_a_badge"></span></p>
+                        <p><strong>МТО (А):</strong> Чувствительность (ручн. K26, <strong>${mtoNumLabelA}</strong>) = <span id="kch_mto_manual_a">—</span> <span id="kch_mto_a_badge"></span></p>
                         <p id="kch_mto_a_detail" class="error"></p>
                         <hr style="margin: 15px 0; border: none; border-top: 1px solid #ccc;">
                         <p><strong>МТЗ (А):</strong> Чувствительность (ручн. K33, Iкз2ф <strong>А</strong>) = <span id="kch_mtz_manual_a">—</span> <span id="kch_mtz_a_badge"></span></p>
@@ -1596,11 +1736,18 @@
             setText('zone_mtz_len', zMtz.length.toFixed(2));
             setText('zone_mtz_pct', zMtz.percent.toFixed(1));
 
+            const mode = window.__mtoKchMode || 'backup';
+            const ikzMtoNum =
+                mode === 'main'
+                    ? parseFloat(window.__lastIkzEnd || '0')
+                    : parseFloat(window.__lastIk2StartN || '0');
             const ikzEnd = parseFloat(window.__lastIkzEnd || '0');
-            if (ikzEnd > 0) {
-                const kchMto = mto > 0 ? (ikzEnd / mto) : 0;
-                const kchMtz = mtz > 0 ? (ikzEnd / mtz) : 0;
+            if (ikzMtoNum > 0) {
+                const kchMto = mto > 0 ? (ikzMtoNum / mto) : 0;
                 setText('kch_mto_manual', kchMto.toFixed(3));
+            }
+            if (ikzEnd > 0) {
+                const kchMtz = mtz > 0 ? (ikzEnd / mtz) : 0;
                 setText('kch_mtz_manual', kchMtz.toFixed(3));
             }
             applyKchManualADisplay();

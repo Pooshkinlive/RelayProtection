@@ -77,12 +77,23 @@ class CalculationInput(BaseModel):
     u_nom: float = 6300.0
     relay_code: int = 6
     reactance_id: int | None = None
-    reactance_mode: str = "MAX"
+    reactance_mode: str = "MAX"  # устарело: расчёт КЗ не зависит от режима; оставлено для совместимости API
+    mto_kch_mode: Literal["backup", "main"] = "backup"  # backup = доп. защита (I2ф на с.ш.); main = основная (конец КЛ)
     transformer_code: int | None = None
     total_power_kw: float = 0.0
     i_work: float = 0.0
     manual_mto: float = 0.0  # K26
     manual_mtz: float = 0.0  # K33
+    # Реквизиты для телефонограммы / ЗОЗЗ (не участвуют в расчёте КЗ и графика)
+    manual_t_mto: Optional[float] = None
+    manual_t_mtz: Optional[float] = None
+    ct_primary_a: Optional[float] = None
+    ct_secondary_a: Optional[float] = None
+    manual_izzz_a: Optional[float] = None
+    manual_t_izzz_s: Optional[float] = None
+    ozz_action: Optional[str] = None  # "signal" | "trip"
+    apv_time_s: Optional[float] = None
+    apv_cycles: Optional[int] = None
 
 
 class LoginInput(BaseModel):
@@ -722,9 +733,21 @@ async def calculate(inputs: CalculationInput, db: Session = Depends(get_db)):
             manual_mtz=inputs.manual_mtz,
             transformer_code=inputs.transformer_code,
             after_sections=after_sections,
+            mto_kch_mode=inputs.mto_kch_mode,
         )
         # Metadata for printing/telephonegram
         result["object_description"] = (inputs.object_description or "").strip()
+        result["relay_form"] = {
+            "t_mto_s": inputs.manual_t_mto,
+            "t_mtz_s": inputs.manual_t_mtz,
+            "ct_primary_a": inputs.ct_primary_a,
+            "ct_secondary_a": inputs.ct_secondary_a,
+            "izzz_pickup_a": inputs.manual_izzz_a,
+            "t_izzz_s": inputs.manual_t_izzz_s,
+            "ozz_action": (inputs.ozz_action or "").strip() or None,
+            "apv_time_s": inputs.apv_time_s,
+            "apv_cycles": inputs.apv_cycles,
+        }
         chart_data = generate_chart_data(
             db,
             sections,
@@ -735,7 +758,6 @@ async def calculate(inputs: CalculationInput, db: Session = Depends(get_db)):
             kch_mto_min=float(result["kch_mto_min"]),
             kch_mtz_min=float(result["kch_mtz_min"]),
             reactance_id=inputs.reactance_id,
-            reactance_mode=inputs.reactance_mode,
             transformer_code=inputs.transformer_code,
         )
         

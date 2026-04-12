@@ -125,3 +125,12 @@
 2026-04-11 17:24:50 - python run.py
 2026-04-11 18:13:28 - python run.py
 2026-04-11 18:22:51 - git add .
+2026-04-11 18:23:13 - git add .
+2026-04-11 18:23:54 - git commit -m "init DB conn status bar"
+2026-04-11 18:24:09 - git push -u origin main
+2026-04-11 18:49:56 - python run.py
+2026-04-12 13:22:35 - cd rza_calculator
+2026-04-12 13:22:37 - source rza_env/Scripts/activate
+2026-04-12 16:11:00 - python run.py
+2026-04-12 16:19:47 - python run.py
+2026-04-12 16:20:06 - git add .
