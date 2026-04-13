@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, BigInteger, DateTime, Boolean, Numeric, ForeignKey, Text, Float
+from sqlalchemy import Column, Integer, String, BigInteger, DateTime, Boolean, Numeric, ForeignKey, Text, Float, Date
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
@@ -227,3 +227,29 @@ class CalculationResult(Base):
     result_unit = Column(String(20))
     calculated_at = Column(DateTime, default=datetime.utcnow)
     calculated_by = Column(String(100))
+
+
+class TelephonegramDailyCounter(Base):
+    """Счётчик последнего выданного номера телефонограммы в пределах календарной даты «от:»."""
+
+    __tablename__ = "telephonegram_daily_counters"
+
+    telegram_date = Column(Date, primary_key=True)
+    last_no = Column(Integer, nullable=False, default=0)
+
+
+class Telephonegram(Base):
+    """Сохранённая телефонограмма (снимок расчёта + ручные реквизиты)."""
+
+    __tablename__ = "telephonegrams"
+
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=True, onupdate=datetime.utcnow)
+    created_by_role = Column(String(20), nullable=False)
+    telegram_no = Column(Integer, nullable=False)
+    telegram_date = Column(Date, nullable=False)
+    manual_fields_json = Column(Text, nullable=True)
+    calc_input_json = Column(Text, nullable=True)
+    calc_snapshot_json = Column(Text, nullable=False)
+    status = Column(String(20), nullable=False, default="draft")

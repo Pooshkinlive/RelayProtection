@@ -1,16 +1,18 @@
-from datetime import datetime
+import json
+from datetime import datetime, date
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from pathlib import Path
 from typing import Dict, Any, List, Literal, Optional
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
 from app.database import get_db, engine
-from app.db_migrate import ensure_reactance_crud_columns
+from app.db_migrate import ensure_reactance_crud_columns, ensure_telephonegram_tables
 from app.auth_utils import mint_token, require_staff_token, verify_password
 from app.calculator import calculate_rza_settings, generate_chart_data, get_line_type, get_cell_value
 from app.models import (
@@ -21,6 +23,8 @@ from app.models import (
     RelayTimeCharacteristic,
     Reactance,
     Transformer,
+    Telephonegram,
+    TelephonegramDailyCounter,
 )
 
 app = FastAPI(title="RZA Calculator", description="Расчёт уставок релейной защиты")
@@ -60,6 +64,10 @@ def _startup_migrate() -> None:
         ensure_reactance_crud_columns(engine)
     except Exception as e:
         print(f"DB migrate warning (reactances CRUD columns): {e}")
+    try:
+        ensure_telephonegram_tables(engine)
+    except Exception as e:
+        print(f"DB migrate warning (telephonegrams): {e}")
 
 
 # === Pydantic модели для API ===
@@ -94,6 +102,23 @@ class CalculationInput(BaseModel):
     ozz_action: Optional[str] = None  # "signal" | "trip"
     apv_time_s: Optional[float] = None
     apv_cycles: Optional[int] = None
+
+
+class TelephonegramCreateInput(BaseModel):
+    """Создание записи телефонограммы (номер авто по дате «от:», если telegram_no не задан)."""
+
+    telegram_date: str = Field(..., min_length=1, description="Дата «от:», формат YYYY-MM-DD")
+    telegram_no: Optional[int] = None
+    manual_fields: Dict[str, Any] = Field(default_factory=dict)
+    calc_input: Dict[str, Any] = Field(default_factory=dict)
+    calc_snapshot: Dict[str, Any]
+
+
+class TelephonegramUpdateInput(BaseModel):
+    telegram_date: Optional[str] = Field(default=None)
+    telegram_no: Optional[int] = Field(default=None)
+    manual_fields: Optional[Dict[str, Any]] = Field(default=None)
+    status: Optional[str] = Field(default=None)
 
 
 class LoginInput(BaseModel):
@@ -143,6 +168,78 @@ def _reactance_to_dict(r: Reactance, include_inactive_fields: bool = True) -> di
     return d
 
 
+def _parse_telegram_date(s: Optional[str]) -> date:
+    raw = (s or "").strip()
+    if not raw:
+        raise HTTPException(status_code=400, detail="заполните дату в поле от:  ")
+    try:
+        return date.fromisoformat(raw[:10])
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Неверный формат даты «от:», ожидается YYYY-MM-DD")
+
+
+def _allocate_next_telegram_no(db: Session, d: date) -> int:
+    """Номер внутри календарной даты «от:»; допускаются одинаковые номера в разные даты."""
+    counter = (
+        db.query(TelephonegramDailyCounter)
+        .filter(TelephonegramDailyCounter.telegram_date == d)
+        .with_for_update()
+        .first()
+    )
+    if counter is None:
+        try:
+            with db.begin_nested():
+                db.add(TelephonegramDailyCounter(telegram_date=d, last_no=0))
+                db.flush()
+        except IntegrityError:
+            pass
+        counter = (
+            db.query(TelephonegramDailyCounter)
+            .filter(TelephonegramDailyCounter.telegram_date == d)
+            .with_for_update()
+            .first()
+        )
+    if counter is None:
+        raise HTTPException(status_code=500, detail="Не удалось создать счётчик номера телефонограммы")
+    counter.last_no = int(counter.last_no or 0) + 1
+    db.flush()
+    return int(counter.last_no)
+
+
+def _telephonegram_to_api_dict(r: Telephonegram) -> Dict[str, Any]:
+    mf: Dict[str, Any] = {}
+    if r.manual_fields_json:
+        try:
+            mf = json.loads(r.manual_fields_json)
+        except Exception:
+            mf = {}
+    snap: Dict[str, Any] = {}
+    if r.calc_snapshot_json:
+        try:
+            snap = json.loads(r.calc_snapshot_json)
+        except Exception:
+            snap = {}
+    cin: Dict[str, Any] = {}
+    if r.calc_input_json:
+        try:
+            cin = json.loads(r.calc_input_json)
+        except Exception:
+            cin = {}
+    return {
+        "id": int(r.id),
+        "created_at": r.created_at.isoformat() if r.created_at else None,
+        "updated_at": r.updated_at.isoformat() if r.updated_at else None,
+        "created_by_role": r.created_by_role,
+        "telegram_no": int(r.telegram_no),
+        "telegram_date": r.telegram_date.isoformat() if r.telegram_date else None,
+        "manual_fields": mf,
+        "calc_input": cin,
+        "calc_snapshot": snap,
+        "status": r.status,
+        "object_description": snap.get("object_description"),
+    }
+
+
 # === API Endpoints ===
 
 @app.get("/")
@@ -177,6 +274,111 @@ async def auth_login(body: LoginInput):
 @app.get("/api/auth/me")
 async def auth_me(staff: dict = Depends(_staff_from_credentials)):
     return {"success": True, "role": staff.get("role")}
+
+
+@app.post("/api/telephonegrams")
+async def telephonegram_create(
+    body: TelephonegramCreateInput,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    dd = _parse_telegram_date(body.telegram_date)
+    if not body.calc_snapshot:
+        raise HTTPException(status_code=400, detail="Нет данных расчёта (calc_snapshot пустой)")
+    role = str(staff.get("role") or "engineer")
+    if body.telegram_no is None:
+        no = _allocate_next_telegram_no(db, dd)
+    else:
+        no = int(body.telegram_no)
+    row = Telephonegram(
+        created_by_role=role,
+        telegram_no=no,
+        telegram_date=dd,
+        manual_fields_json=json.dumps(body.manual_fields or {}, ensure_ascii=False),
+        calc_input_json=json.dumps(body.calc_input or {}, ensure_ascii=False),
+        calc_snapshot_json=json.dumps(body.calc_snapshot or {}, ensure_ascii=False),
+        status="draft",
+    )
+    db.add(row)
+    db.commit()
+    db.refresh(row)
+    return {"success": True, "data": _telephonegram_to_api_dict(row)}
+
+
+@app.get("/api/telephonegrams")
+async def telephonegram_list(
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+    limit: int = 50,
+    offset: int = 0,
+):
+    lim = max(1, min(int(limit or 50), 200))
+    off = max(0, int(offset or 0))
+    q = (
+        db.query(Telephonegram)
+        .order_by(
+            Telephonegram.telegram_date.desc(),
+            Telephonegram.telegram_no.desc(),
+            Telephonegram.id.desc(),
+        )
+        .offset(off)
+        .limit(lim)
+    )
+    rows = q.all()
+    return {"success": True, "data": [_telephonegram_to_api_dict(r) for r in rows]}
+
+
+@app.get("/api/telephonegrams/{row_id}")
+async def telephonegram_get(
+    row_id: int,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    row = db.query(Telephonegram).filter(Telephonegram.id == row_id).first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Запись не найдена")
+    return {"success": True, "data": _telephonegram_to_api_dict(row)}
+
+
+@app.put("/api/telephonegrams/{row_id}")
+async def telephonegram_update(
+    row_id: int,
+    body: TelephonegramUpdateInput,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    row = db.query(Telephonegram).filter(Telephonegram.id == row_id).first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Запись не найдена")
+    upd = body.model_dump(exclude_unset=True)
+    if "telegram_date" in upd and upd["telegram_date"] is not None:
+        row.telegram_date = _parse_telegram_date(str(upd["telegram_date"]))
+    if "telegram_no" in upd and upd["telegram_no"] is not None:
+        row.telegram_no = int(upd["telegram_no"])
+    if "manual_fields" in upd and upd["manual_fields"] is not None:
+        row.manual_fields_json = json.dumps(upd["manual_fields"], ensure_ascii=False)
+    if "status" in upd and upd["status"] is not None:
+        row.status = str(upd["status"]).strip()[:20] or row.status
+    row.updated_at = datetime.utcnow()
+    db.commit()
+    db.refresh(row)
+    return {"success": True, "data": _telephonegram_to_api_dict(row)}
+
+
+@app.delete("/api/telephonegrams/{row_id}")
+async def telephonegram_delete(
+    row_id: int,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    if str(staff.get("role") or "") != "admin":
+        raise HTTPException(status_code=403, detail="Удаление доступно только роли admin")
+    row = db.query(Telephonegram).filter(Telephonegram.id == row_id).first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Запись не найдена")
+    db.delete(row)
+    db.commit()
+    return {"success": True}
 
 
 @app.get("/api/admin/reactances")

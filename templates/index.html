@@ -127,6 +127,20 @@
         .tab-panel { display: none; animation: fadeIn 0.2s ease; }
         .tab-panel.active { display: block; }
         @keyframes fadeIn { from { opacity: 0.85; } to { opacity: 1; } }
+        .tg-print { font-family: 'Times New Roman', Times, serif; font-size: 12pt; color: #000; background: #fff; padding: 16px 20px; max-width: 820px; margin: 0 auto; border: 1px solid #333; }
+        .tg-print h1 { text-align: center; font-size: 14pt; margin: 0 0 12px 0; }
+        .tg-print .tg-center { text-align: center; text-decoration: underline; margin: 14px 0 8px 0; font-weight: 700; }
+        .tg-print table.tg-tbl { width: 100%; border-collapse: collapse; margin: 6px 0; }
+        .tg-print table.tg-tbl td { padding: 4px 6px; vertical-align: top; }
+        .tg-print table.tg-tbl td.lbl { width: 62%; }
+        .tg-print table.tg-tbl td.val { text-align: right; white-space: nowrap; }
+        .tg-print .tg-note { margin-top: 14px; }
+        .tg-print .tg-fixed { margin-top: 16px; font-weight: 700; text-align: center; }
+        @media print {
+            body { background: #fff !important; }
+            .container { display: none !important; }
+            #tg-print-root { display: block !important; position: absolute; left: 0; top: 0; width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -150,6 +164,7 @@
                 <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-2" id="tab-btn-2" data-tab="2">2. Линия до ТР и ТР</button>
                 <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-3" id="tab-btn-3" data-tab="3">3. Параметры РЗА</button>
                 <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-4" id="tab-btn-4" data-tab="4" style="display:none;">4. Справочники</button>
+                <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-5" id="tab-btn-5" data-tab="5" style="display:none;">5. Телефонограмма</button>
             </div>
 
             <div id="tab-panel-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-btn-1">
@@ -544,9 +559,94 @@
                     </div>
                 </div>
             </div>
+
+            <div id="tab-panel-5" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-5">
+                <p class="info-box" style="margin-top:0;">
+                    Заполните дату в поле <strong>«от:»</strong> — без неё сохранение в БД невозможно. Номер телефонограммы присваивается автоматически по этой дате (можно изменить вручную).
+                    Данные защит подставляются из последнего расчёта (вкладка 3 → «Рассчитать»).
+                </p>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>ТЕЛЕФОНОГРАММА №</label>
+                        <input type="number" id="tg_no" step="1" min="0" placeholder="авто после сохранения">
+                    </div>
+                    <div class="form-group">
+                        <label>от: (дата, обязательно)</label>
+                        <input type="date" id="tg_date" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Начальнику сетевого района №</label>
+                    <input type="text" id="tg_to_region" placeholder="например: 8 Баркову А.А.">
+                </div>
+                <div class="form-group">
+                    <label>от начальника службы РЗА</label>
+                    <input type="text" id="tg_from_rza" placeholder="ФИО / должность">
+                </div>
+                <div class="form-group">
+                    <label>Подстанция/РУ (из расчёта, можно править)</label>
+                    <input type="text" id="tg_substation" placeholder="подставится из «Описание объекта»">
+                </div>
+                <div class="form-group">
+                    <label>Присоединение (из расчёта, можно править)</label>
+                    <input type="text" id="tg_feeder" placeholder="подставится из «Описание объекта»">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Начальник РЗА</label>
+                        <input type="text" id="tg_head_rza" placeholder="ФИО">
+                    </div>
+                    <div class="form-group">
+                        <label>Выполнил расчёт</label>
+                        <input type="text" id="tg_calc_by" placeholder="ФИО">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Примечание</label>
+                    <input type="text" id="tg_note" placeholder="текст примечания">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Исполнитель</label>
+                        <input type="text" id="tg_executor" placeholder="ФИО">
+                    </div>
+                    <div class="form-group">
+                        <label>Дата выполнения</label>
+                        <input type="date" id="tg_done_date">
+                    </div>
+                </div>
+                <input type="hidden" id="tg_record_id" value="">
+                <div style="display:flex; flex-wrap:wrap; gap:8px; margin:12px 0;">
+                    <button type="button" class="btn" onclick="tgFillFromLastCalc()">Подставить из последнего расчёта</button>
+                    <button type="button" class="btn btn-success" onclick="tgSave()">Сохранить в БД</button>
+                    <button type="button" class="btn" onclick="tgPrint()">Печать / PDF</button>
+                    <button type="button" class="btn" onclick="tgNewForm()">Новая форма</button>
+                    <button type="button" class="btn" onclick="tgLoadList()">Обновить список</button>
+                </div>
+                <p id="tg_status" style="font-size:13px; color:#555; min-height:1.2em;"></p>
+                <h3 style="margin-top:20px;">Предпросмотр (как при печати)</h3>
+                <div id="tg-preview" class="tg-print" style="border-color:#ccc;"></div>
+                <h3 style="margin-top:24px;">Сохранённые телефонограммы</h3>
+                <div style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                        <thead>
+                            <tr style="background:#f3f4f6;">
+                                <th style="padding:6px;border:1px solid #ddd;">id</th>
+                                <th style="padding:6px;border:1px solid #ddd;">№</th>
+                                <th style="padding:6px;border:1px solid #ddd;">от</th>
+                                <th style="padding:6px;border:1px solid #ddd;">Объект</th>
+                                <th style="padding:6px;border:1px solid #ddd;">Роль</th>
+                                <th style="padding:6px;border:1px solid #ddd;">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tg_list_tbody"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         
     </div>
+    <div id="tg-print-root" class="tg-print" style="display:none;" aria-hidden="true"></div>
 
     <script>
         let lineTypes = { conductors: [], cables: [] };
@@ -587,6 +687,7 @@
         async function updateAuthUI() {
             const token = localStorage.getItem('rza_token');
             const tabBtn = document.getElementById('tab-btn-4');
+            const tabBtn5 = document.getElementById('tab-btn-5');
             const loginBox = document.getElementById('staff-login-box');
             const badge = document.getElementById('staff-badge');
             const btnOut = document.getElementById('btn_logout');
@@ -595,6 +696,7 @@
             if (!tabBtn) return;
             if (!token) {
                 tabBtn.style.display = 'none';
+                if (tabBtn5) tabBtn5.style.display = 'none';
                 setStaffAdminPanelsVisible(false);
                 if (btnOut) btnOut.style.display = 'none';
                 if (badge) badge.textContent = '';
@@ -607,6 +709,7 @@
                 const j = await res.json();
                 if (j.success && j.role) {
                     tabBtn.style.display = '';
+                    if (tabBtn5) tabBtn5.style.display = '';
                     setStaffAdminPanelsVisible(true);
                     if (btnOut) btnOut.style.display = '';
                     if (badge) badge.textContent = '(вошли: ' + j.role + ')';
@@ -620,6 +723,7 @@
                 } else {
                     localStorage.removeItem('rza_token');
                     tabBtn.style.display = 'none';
+                    if (tabBtn5) tabBtn5.style.display = 'none';
                     setStaffAdminPanelsVisible(false);
                     if (btnOut) btnOut.style.display = 'none';
                     if (badge) badge.textContent = '';
@@ -1087,6 +1191,9 @@
                     try { chart.resize(); } catch (e) { /* ignore */ }
                 });
             }
+            if (n === '5') {
+                try { tgLoadList(); } catch (e) { /* ignore */ }
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -1543,6 +1650,8 @@
                 const result = await response.json();
                 
                 if (result.success) {
+                    window.__lastCalcPayload = data;
+                    window.__lastCalcResult = result.calculation;
                     const calc = result.calculation;
                     const ec = calc.emergency;
                     window.__kchMin = { mto: calc.kch_mto_min ?? 1.2, mtz: calc.kch_mtz_min ?? 1.5 };
@@ -1588,8 +1697,7 @@
                                 Iкз (3) за тр-ром (K24) = ${c.i_kz3_tr != null ? c.i_kz3_tr : c.i_mto_setting} А<br>
                                 Уставка МТО = ${c.i_mto_setting} А<br>
                                 Уставка МТЗ = ${c.i_mtz_setting} А<br>
-                                МТЗ доп. (K35) = ${c.i_mtz_dop != null ? c.i_mtz_dop : '—'} А<br>
-                                Кч МТО (авто) = ${c.sensitivity_mto}; Кч МТЗ (авто) = ${c.sensitivity_mtz}
+                                МТЗ доп. (K35) = ${c.i_mtz_dop != null ? c.i_mtz_dop : '—'} А
                             </div>`;
                     const blockA = (c) => `
                             <div style="border-left:3px solid #1d4ed8;padding-left:10px;">
@@ -1598,8 +1706,7 @@
                                 Iкз (3) за тр-ром (L24) = ${c.i_kz3_tr != null ? c.i_kz3_tr : c.i_mto_setting} А<br>
                                 Уставка МТО = ${c.i_mto_setting} А<br>
                                 Уставка МТЗ = ${c.i_mtz_setting} А<br>
-                                МТЗ доп. (L35 = R30) = ${c.i_mtz_dop != null ? c.i_mtz_dop : '—'} А<br>
-                                Кч МТО (авто) = ${c.sensitivity_mto}; Кч МТЗ (авто) = ${c.sensitivity_mtz}
+                                МТЗ доп. (L35 = R30) = ${c.i_mtz_dop != null ? c.i_mtz_dop : '—'} А
                             </div>`;
 
                     let regimeHtml = '';
@@ -1693,6 +1800,304 @@
                 btn.textContent = '📊 Рассчитать';
             }
         }
+
+        // --- Телефонограмма (CRUD + печать/PDF) ---
+        function tgEsc(s) {
+            return String(s ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+        function tgFormatRuDate(iso) {
+            if (!iso) return '—';
+            const p = String(iso).slice(0, 10).split('-');
+            if (p.length !== 3) return tgEsc(iso);
+            return `${p[2]}.${p[1]}.${p[0]}`;
+        }
+        function tgRelayName(code) {
+            const c = parseInt(code, 10);
+            const r = (relays || []).find((x) => Number(x.relay_code) === c);
+            return r && r.relay_name ? String(r.relay_name) : (Number.isFinite(c) ? 'реле ' + c : '—');
+        }
+        function tgSecPickup(primaryA, ctP, ctS) {
+            const p = Number(primaryA);
+            const cp = Number(ctP);
+            const cs = Number(ctS);
+            if (!Number.isFinite(p) || !Number.isFinite(cp) || !Number.isFinite(cs) || cp <= 0 || cs <= 0) return '—';
+            const v = (p * cs) / cp;
+            return v.toFixed(2).replace('.', ',');
+        }
+        function tgOzzActionText(act) {
+            if (act === 'trip') return 'на отключение';
+            if (act === 'signal') return 'на сигнал';
+            return '—';
+        }
+        function tgCollectManualFields() {
+            return {
+                to_region_no: document.getElementById('tg_to_region')?.value?.trim() || '',
+                from_rza_service: document.getElementById('tg_from_rza')?.value?.trim() || '',
+                substation_text: document.getElementById('tg_substation')?.value?.trim() || '',
+                feeder_text: document.getElementById('tg_feeder')?.value?.trim() || '',
+                head_of_rza: document.getElementById('tg_head_rza')?.value?.trim() || '',
+                calc_done_by: document.getElementById('tg_calc_by')?.value?.trim() || '',
+                note: document.getElementById('tg_note')?.value?.trim() || '',
+                executor: document.getElementById('tg_executor')?.value?.trim() || '',
+                done_date: document.getElementById('tg_done_date')?.value?.trim() || '',
+            };
+        }
+        function tgMtoPrimary(snap) {
+            const m = Number(snap.manual_mto);
+            if (Number.isFinite(m) && m > 0) return m;
+            return Number(snap.i_mto_setting) || 0;
+        }
+        function tgMtzPrimary(snap) {
+            const m = Number(snap.manual_mtz);
+            if (Number.isFinite(m) && m > 0) return m;
+            return Number(snap.i_mtz_setting) || 0;
+        }
+        function tgBuildHtml(snap, mf, telegramNo, telegramDateIso) {
+            const rf = snap.relay_form || {};
+            const ctP = rf.ct_primary_a;
+            const ctS = rf.ct_secondary_a;
+            const ruDate = tgFormatRuDate(telegramDateIso);
+            const mtoPri = tgMtoPrimary(snap);
+            const mtzPri = tgMtzPrimary(snap);
+            const vtk = snap.orient && snap.orient.k34_vtx_mtz != null ? String(snap.orient.k34_vtx_mtz) : '';
+            const mtzTimeNote = vtk ? ` (${tgEsc(vtk)})` : '';
+            return `
+<div class="tg-print">
+  <h1>ТЕЛЕФОНОГРАММА</h1>
+  <p style="text-align:center;margin:4px 0;">№ ${tgEsc(telegramNo)} &nbsp;&nbsp; от ${tgEsc(ruDate)}</p>
+  <p>Начальнику сетевого района № ${tgEsc(mf.to_region_no || '—')}</p>
+  <p>от начальника службы РЗА ${tgEsc(mf.from_rza_service || '—')}</p>
+  <p><strong>Подстанция/РУ:</strong> ${tgEsc(mf.substation_text || snap.object_description || '—')}</p>
+  <p><strong>Присоединение:</strong> ${tgEsc(mf.feeder_text || snap.object_description || '—')}</p>
+  <table class="tg-tbl">
+    <tr><td class="lbl">Первичный номинальный ток трансформаторов тока (А):</td><td class="val">${tgEsc(ctP != null ? ctP : '—')}</td></tr>
+    <tr><td class="lbl">Вторичный номинальный ток трансформаторов тока (А):</td><td class="val">${tgEsc(ctS != null ? ctS : '—')}</td></tr>
+    <tr><td class="lbl">АПВ (с):</td><td class="val">${tgEsc(rf.apv_time_s != null ? rf.apv_time_s : '—')}</td></tr>
+  </table>
+  <div class="tg-center">Максимальная токовая отсечка</div>
+  <table class="tg-tbl">
+    <tr><td class="lbl">Тип реле защиты:</td><td class="val">${tgEsc(tgRelayName(snap.relay_code))}</td></tr>
+    <tr><td class="lbl">Ток срабатывания защиты (А):</td><td class="val">${tgEsc(mtoPri)}</td></tr>
+    <tr><td class="lbl">Ток срабатывания реле (А):</td><td class="val">${tgEsc(tgSecPickup(mtoPri, ctP, ctS))}</td></tr>
+    <tr><td class="lbl">Время срабатывания (с):</td><td class="val">${tgEsc(rf.t_mto_s != null ? rf.t_mto_s : '—')}</td></tr>
+  </table>
+  <div class="tg-center">Максимальная токовая защита</div>
+  <table class="tg-tbl">
+    <tr><td class="lbl">Тип реле защиты:</td><td class="val">${tgEsc(tgRelayName(snap.relay_code))}</td></tr>
+    <tr><td class="lbl">Ток срабатывания защиты (А):</td><td class="val">${tgEsc(mtzPri)}</td></tr>
+    <tr><td class="lbl">Ток срабатывания реле (А):</td><td class="val">${tgEsc(tgSecPickup(mtzPri, ctP, ctS))}</td></tr>
+    <tr><td class="lbl">Время срабатывания (с):</td><td class="val">${tgEsc(rf.t_mtz_s != null ? rf.t_mtz_s : '—')}${mtzTimeNote}</td></tr>
+  </table>
+  <div class="tg-center">Защита от однофазных замыканий на землю (ЗОЗЗ)</div>
+  <table class="tg-tbl">
+    <tr><td class="lbl">Ток срабатывания защиты (А):</td><td class="val">${tgEsc(rf.izzz_pickup_a != null ? rf.izzz_pickup_a : '—')}</td></tr>
+    <tr><td class="lbl">Время срабатывания (с):</td><td class="val">${tgEsc(rf.t_izzz_s != null ? rf.t_izzz_s : '—')}</td></tr>
+    <tr><td class="lbl">Действие защиты:</td><td class="val">${tgEsc(tgOzzActionText(rf.ozz_action))}</td></tr>
+  </table>
+  <div class="tg-note"><strong>Примечание:</strong> ${tgEsc(mf.note || '—')}</div>
+  <table class="tg-tbl" style="margin-top:16px;">
+    <tr><td class="lbl">Начальник РЗА</td><td class="val">${tgEsc(mf.head_of_rza || '—')}</td></tr>
+    <tr><td class="lbl">Выполнил расчёт</td><td class="val">${tgEsc(mf.calc_done_by || '—')}</td></tr>
+    <tr><td class="lbl">Исполнитель</td><td class="val">${tgEsc(mf.executor || '—')}</td></tr>
+    <tr><td class="lbl">Дата выполнения</td><td class="val">${tgEsc(mf.done_date ? tgFormatRuDate(mf.done_date) : '—')}</td></tr>
+  </table>
+  <p class="tg-fixed">После изменения уставок отправить факсом подписанное исполнителем задание в службу РЗА</p>
+</div>`;
+        }
+        function tgUpdatePreview() {
+            const snap = window.__tgCalcSnapshot || window.__lastCalcResult;
+            const pr = document.getElementById('tg-preview');
+            if (!pr) return;
+            if (!snap) {
+                pr.innerHTML = '<p style="color:#666;">Нет данных расчёта — выполните расчёт на вкладке 3 и нажмите «Подставить из последнего расчёта».</p>';
+                return;
+            }
+            const no = document.getElementById('tg_no')?.value?.trim() || '—';
+            const d = document.getElementById('tg_date')?.value?.trim() || '';
+            pr.innerHTML = tgBuildHtml(snap, tgCollectManualFields(), no, d || null);
+        }
+        function tgFillFromLastCalc() {
+            const st = document.getElementById('tg_status');
+            if (!window.__lastCalcResult) {
+                if (st) st.textContent = 'Сначала выполните расчёт на вкладке 3.';
+                return;
+            }
+            window.__tgCalcSnapshot = JSON.parse(JSON.stringify(window.__lastCalcResult));
+            const od = String(window.__lastCalcResult.object_description || '').trim();
+            const sub = document.getElementById('tg_substation');
+            const fed = document.getElementById('tg_feeder');
+            if (sub && !sub.value.trim() && od) sub.value = od;
+            if (fed && !fed.value.trim() && od) fed.value = od;
+            if (st) st.textContent = 'Подставлены данные из последнего расчёта.';
+            tgUpdatePreview();
+        }
+        async function tgSave() {
+            const st = document.getElementById('tg_status');
+            const d = document.getElementById('tg_date')?.value?.trim() || '';
+            if (!d) {
+                if (st) st.textContent = 'заполните дату в поле от:  ';
+                alert('заполните дату в поле от:  ');
+                return;
+            }
+            if (!window.__lastCalcPayload || !window.__lastCalcResult) {
+                if (st) st.textContent = 'Нет сохранённого расчёта: выполните «Рассчитать» на вкладке 3.';
+                return;
+            }
+            const snap = window.__tgCalcSnapshot || window.__lastCalcResult;
+            const manual = tgCollectManualFields();
+            const id = document.getElementById('tg_record_id')?.value?.trim();
+            const noRaw = document.getElementById('tg_no')?.value?.trim();
+            const telegramNo = noRaw === '' || noRaw === undefined ? null : parseInt(noRaw, 10);
+            if (telegramNo !== null && (!Number.isFinite(telegramNo) || telegramNo < 0)) {
+                if (st) st.textContent = 'Некорректный номер телефонограммы.';
+                return;
+            }
+            try {
+                if (id) {
+                    const body = { telegram_date: d, manual_fields: manual };
+                    if (noRaw !== '' && noRaw !== undefined && Number.isFinite(telegramNo))
+                        body.telegram_no = telegramNo;
+                    const res = await fetch('/api/telephonegrams/' + encodeURIComponent(id), {
+                        method: 'PUT',
+                        headers: adminAuthHeaders(),
+                        body: JSON.stringify(body),
+                    });
+                    const j = await res.json();
+                    if (!res.ok) throw new Error(typeof j.detail === 'string' ? j.detail : JSON.stringify(j.detail || j));
+                    if (st) st.textContent = 'Сохранено (обновление id=' + id + ').';
+                    document.getElementById('tg_no').value = String(j.data.telegram_no);
+                    window.__tgCalcSnapshot = j.data.calc_snapshot;
+                    tgUpdatePreview();
+                } else {
+                    const body = {
+                        telegram_date: d,
+                        telegram_no: telegramNo,
+                        manual_fields: manual,
+                        calc_input: window.__lastCalcPayload,
+                        calc_snapshot: snap,
+                    };
+                    const res = await fetch('/api/telephonegrams', {
+                        method: 'POST',
+                        headers: adminAuthHeaders(),
+                        body: JSON.stringify(body),
+                    });
+                    const j = await res.json();
+                    if (!res.ok) throw new Error(typeof j.detail === 'string' ? j.detail : JSON.stringify(j.detail || j));
+                    if (st) st.textContent = 'Сохранено в БД, id=' + j.data.id + '.';
+                    document.getElementById('tg_record_id').value = String(j.data.id);
+                    document.getElementById('tg_no').value = String(j.data.telegram_no);
+                    window.__tgCalcSnapshot = j.data.calc_snapshot;
+                    tgUpdatePreview();
+                }
+                tgLoadList();
+            } catch (e) {
+                if (st) st.textContent = e.message || String(e);
+                alert(e.message || String(e));
+            }
+        }
+        async function tgLoadList() {
+            const tb = document.getElementById('tg_list_tbody');
+            if (!tb) return;
+            const token = localStorage.getItem('rza_token');
+            if (!token) {
+                tb.innerHTML = '';
+                return;
+            }
+            try {
+                const res = await fetch('/api/telephonegrams?limit=80', { headers: adminAuthHeaders() });
+                const j = await res.json();
+                if (!j.success) return;
+                tb.innerHTML = (j.data || []).map((row) => {
+                    const obj = tgEsc((row.object_description || '').slice(0, 60));
+                    return `<tr>
+                        <td style="padding:6px;border:1px solid #ddd;">${row.id}</td>
+                        <td style="padding:6px;border:1px solid #ddd;">${row.telegram_no}</td>
+                        <td style="padding:6px;border:1px solid #ddd;">${tgEsc(row.telegram_date)}</td>
+                        <td style="padding:6px;border:1px solid #ddd;">${obj}</td>
+                        <td style="padding:6px;border:1px solid #ddd;">${tgEsc(row.created_by_role)}</td>
+                        <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
+                            <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="tgLoadOne(${row.id})">Открыть</button>
+                        </td>
+                    </tr>`;
+                }).join('');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        async function tgLoadOne(id) {
+            const st = document.getElementById('tg_status');
+            try {
+                const res = await fetch('/api/telephonegrams/' + encodeURIComponent(id), { headers: adminAuthHeaders() });
+                const j = await res.json();
+                if (!res.ok) throw new Error(typeof j.detail === 'string' ? j.detail : JSON.stringify(j.detail || j));
+                const d = j.data;
+                document.getElementById('tg_record_id').value = String(d.id);
+                document.getElementById('tg_no').value = String(d.telegram_no);
+                document.getElementById('tg_date').value = String(d.telegram_date || '').slice(0, 10);
+                const mf = d.manual_fields || {};
+                document.getElementById('tg_to_region').value = mf.to_region_no || '';
+                document.getElementById('tg_from_rza').value = mf.from_rza_service || '';
+                document.getElementById('tg_substation').value = mf.substation_text || '';
+                document.getElementById('tg_feeder').value = mf.feeder_text || '';
+                document.getElementById('tg_head_rza').value = mf.head_of_rza || '';
+                document.getElementById('tg_calc_by').value = mf.calc_done_by || '';
+                document.getElementById('tg_note').value = mf.note || '';
+                document.getElementById('tg_executor').value = mf.executor || '';
+                document.getElementById('tg_done_date').value = mf.done_date ? String(mf.done_date).slice(0, 10) : '';
+                window.__tgCalcSnapshot = d.calc_snapshot;
+                if (st) st.textContent = 'Загружена запись id=' + id + '.';
+                tgUpdatePreview();
+            } catch (e) {
+                if (st) st.textContent = e.message || String(e);
+                alert(e.message || String(e));
+            }
+        }
+        function tgNewForm() {
+            document.getElementById('tg_record_id').value = '';
+            document.getElementById('tg_no').value = '';
+            document.getElementById('tg_date').value = '';
+            document.getElementById('tg_to_region').value = '';
+            document.getElementById('tg_from_rza').value = '';
+            document.getElementById('tg_substation').value = '';
+            document.getElementById('tg_feeder').value = '';
+            document.getElementById('tg_head_rza').value = '';
+            document.getElementById('tg_calc_by').value = '';
+            document.getElementById('tg_note').value = '';
+            document.getElementById('tg_executor').value = '';
+            document.getElementById('tg_done_date').value = '';
+            window.__tgCalcSnapshot = null;
+            const st = document.getElementById('tg_status');
+            if (st) st.textContent = 'Новая форма.';
+            tgUpdatePreview();
+        }
+        function tgPrint() {
+            const snap = window.__tgCalcSnapshot || window.__lastCalcResult;
+            if (!snap) {
+                alert('Нет данных для печати.');
+                return;
+            }
+            const d = document.getElementById('tg_date')?.value?.trim() || '';
+            if (!d) {
+                alert('заполните дату в поле от:  ');
+                return;
+            }
+            const no = document.getElementById('tg_no')?.value?.trim() || '—';
+            const root = document.getElementById('tg-print-root');
+            if (!root) return;
+            root.innerHTML = tgBuildHtml(snap, tgCollectManualFields(), no, d);
+            root.style.display = 'block';
+            window.print();
+            root.style.display = 'none';
+        }
+        ['tg_no', 'tg_date', 'tg_to_region', 'tg_from_rza', 'tg_substation', 'tg_feeder', 'tg_head_rza', 'tg_calc_by', 'tg_note', 'tg_executor', 'tg_done_date'].forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', () => tgUpdatePreview());
+            if (el) el.addEventListener('change', () => tgUpdatePreview());
+        });
 
         // Отрисовка графика
         function computeZoneByIntersection(lengths, ikz2, setting, totalLen) {
