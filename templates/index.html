@@ -134,6 +134,7 @@
         .tg-print table.tg-tbl td { padding: 4px 6px; vertical-align: top; }
         .tg-print table.tg-tbl td.lbl { width: 62%; }
         .tg-print table.tg-tbl td.val { text-align: right; white-space: nowrap; }
+        .tg-print .tg-sign { display: inline-block; width: 140px; border-bottom: 1px solid #000; transform: translateY(-2px); margin-left: 6px; }
         .tg-print .tg-note { margin-top: 14px; }
         .tg-print .tg-fixed { margin-top: 16px; font-weight: 700; text-align: center; }
         @media print {
@@ -695,6 +696,7 @@
             const logoutHdr = document.getElementById('staff-logout-header');
             if (!tabBtn) return;
             if (!token) {
+                window.__staffRole = null;
                 tabBtn.style.display = 'none';
                 if (tabBtn5) tabBtn5.style.display = 'none';
                 setStaffAdminPanelsVisible(false);
@@ -708,6 +710,7 @@
                 const res = await fetch('/api/auth/me', { headers: adminAuthHeaders() });
                 const j = await res.json();
                 if (j.success && j.role) {
+                    window.__staffRole = String(j.role);
                     tabBtn.style.display = '';
                     if (tabBtn5) tabBtn5.style.display = '';
                     setStaffAdminPanelsVisible(true);
@@ -722,6 +725,7 @@
                     loadAdminRelays();
                 } else {
                     localStorage.removeItem('rza_token');
+                    window.__staffRole = null;
                     tabBtn.style.display = 'none';
                     if (tabBtn5) tabBtn5.style.display = 'none';
                     setStaffAdminPanelsVisible(false);
@@ -762,6 +766,7 @@
 
         function doLogout() {
             localStorage.removeItem('rza_token');
+            window.__staffRole = null;
             const st = document.getElementById('auth_status');
             if (st) st.textContent = '';
             const loginBox = document.getElementById('staff-login-box');
@@ -780,6 +785,7 @@
                 const j = await res.json();
                 const tb = document.getElementById('admin-reactances-tbody');
                 if (!tb || !j.success) return;
+                const canDelete = String(window.__staffRole || '') === 'admin';
                 tb.innerHTML = j.data.map((r) => {
                     const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
                     const dt = r.updated_at ? esc(r.updated_at) : '—';
@@ -797,11 +803,29 @@
                         <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
                             <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="editAdminRx(${r.id}, ${r.code})">Изменить</button>
                             <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="toggleAdminRxActive(${r.id}, ${r.is_active ? 'false' : 'true'})">${r.is_active ? 'Скрыть' : 'Показать'}</button>
+                            ${canDelete ? `<button type="button" class="btn btn-danger" style="padding:4px 8px;font-size:12px;margin-left:6px;" onclick="deleteAdminRx(${r.id}, ${r.code})">Удалить</button>` : ``}
                         </td>
                     </tr>`;
                 }).join('');
             } catch (e) {
                 console.error(e);
+            }
+        }
+
+        async function deleteAdminRx(id, code) {
+            if (String(window.__staffRole || '') !== 'admin') {
+                alert('Удаление доступно только роли admin');
+                return;
+            }
+            if (!confirm('Удалить реактанс код=' + code + ' (id=' + id + ')?')) return;
+            try {
+                const res = await fetch('/api/admin/reactances/' + id, { method: 'DELETE', headers: adminAuthHeaders() });
+                const j = await res.json();
+                if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
+                loadAdminReactances();
+                loadReactances();
+            } catch (e) {
+                alert(e.message);
             }
         }
 
@@ -924,6 +948,7 @@
                 const j = await res.json();
                 const tb = document.getElementById('admin-line-types-tbody');
                 if (!tb || !j.success) return;
+                const canDelete = String(window.__staffRole || '') === 'admin';
                 tb.innerHTML = (j.data || []).map((r) => {
                     const desc = r.description != null && r.description !== '' ? escHtml(r.description) : '—';
                     return `<tr>
@@ -934,11 +959,29 @@
                         <td style="padding:6px;border:1px solid #ddd;font-size:12px;">${desc}</td>
                         <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
                             <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="editAdminLineType(${r.id})">Изменить</button>
+                            ${canDelete ? `<button type="button" class="btn btn-danger" style="padding:4px 8px;font-size:12px;margin-left:6px;" onclick="deleteAdminLineType(${r.id})">Удалить</button>` : ``}
                         </td>
                     </tr>`;
                 }).join('');
             } catch (e) {
                 console.error(e);
+            }
+        }
+
+        async function deleteAdminLineType(id) {
+            if (String(window.__staffRole || '') !== 'admin') {
+                alert('Удаление доступно только роли admin');
+                return;
+            }
+            if (!confirm('Удалить тип линии id=' + id + '?')) return;
+            try {
+                const res = await fetch('/api/admin/line-types/' + id, { method: 'DELETE', headers: adminAuthHeaders() });
+                const j = await res.json();
+                if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
+                loadAdminLineTypes();
+                loadLineTypes();
+            } catch (e) {
+                alert(e.message);
             }
         }
 
@@ -1013,16 +1056,36 @@
                 const j = await res.json();
                 const tb = document.getElementById('admin-transformers-tbody');
                 if (!tb || !j.success) return;
+                const canDelete = String(window.__staffRole || '') === 'admin';
                 tb.innerHTML = (j.data || []).map((r) => `<tr>
                     <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.code}</td>
                     <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.power_kva}</td>
                     <td style="padding:6px;border:1px solid #ddd;text-align:right;">${r.z_ohm}</td>
                     <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
                         <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="editAdminTransformer(${r.id}, ${r.code})">Изменить</button>
+                        ${canDelete ? `<button type="button" class="btn btn-danger" style="padding:4px 8px;font-size:12px;margin-left:6px;" onclick="deleteAdminTransformer(${r.id})">Удалить</button>` : ``}
                     </td>
                 </tr>`).join('');
             } catch (e) {
                 console.error(e);
+            }
+        }
+
+        async function deleteAdminTransformer(id) {
+            if (String(window.__staffRole || '') !== 'admin') {
+                alert('Удаление доступно только роли admin');
+                return;
+            }
+            if (!confirm('Удалить трансформатор id=' + id + '?')) return;
+            try {
+                const res = await fetch('/api/admin/transformers/' + id, { method: 'DELETE', headers: adminAuthHeaders() });
+                const j = await res.json();
+                if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
+                resetAdminTransformerForm();
+                loadAdminTransformers();
+                loadTransformers();
+            } catch (e) {
+                alert(e.message);
             }
         }
 
@@ -1092,6 +1155,7 @@
                 const j = await res.json();
                 const tb = document.getElementById('admin-relays-tbody');
                 if (!tb || !j.success) return;
+                const canDelete = String(window.__staffRole || '') === 'admin';
                 tb.innerHTML = (j.data || []).map((r) => {
                     const te = r.time_char_e != null && r.time_char_e !== '' ? escHtml(r.time_char_e) : '—';
                     return `<tr>
@@ -1102,11 +1166,30 @@
                         <td style="padding:6px;border:1px solid #ddd;font-size:12px;">${te}</td>
                         <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
                             <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="editAdminRelay(${r.id}, ${r.relay_code})">Изменить</button>
+                            ${canDelete ? `<button type="button" class="btn btn-danger" style="padding:4px 8px;font-size:12px;margin-left:6px;" onclick="deleteAdminRelay(${r.id})">Удалить</button>` : ``}
                         </td>
                     </tr>`;
                 }).join('');
             } catch (e) {
                 console.error(e);
+            }
+        }
+
+        async function deleteAdminRelay(id) {
+            if (String(window.__staffRole || '') !== 'admin') {
+                alert('Удаление доступно только роли admin');
+                return;
+            }
+            if (!confirm('Удалить реле id=' + id + '?')) return;
+            try {
+                const res = await fetch('/api/admin/relays/' + id, { method: 'DELETE', headers: adminAuthHeaders() });
+                const j = await res.json();
+                if (!res.ok) { alert(j.detail || j.error || 'Ошибка'); return; }
+                resetAdminRelayForm();
+                loadAdminRelays();
+                loadRelays();
+            } catch (e) {
+                alert(e.message);
             }
         }
 
@@ -1877,6 +1960,7 @@
     <tr><td class="lbl">Первичный номинальный ток трансформаторов тока (А):</td><td class="val">${tgEsc(ctP != null ? ctP : '—')}</td></tr>
     <tr><td class="lbl">Вторичный номинальный ток трансформаторов тока (А):</td><td class="val">${tgEsc(ctS != null ? ctS : '—')}</td></tr>
     <tr><td class="lbl">АПВ (с):</td><td class="val">${tgEsc(rf.apv_time_s != null ? rf.apv_time_s : '—')}</td></tr>
+    <tr><td class="lbl">Колич-во циклов АПВ:</td><td class="val">${tgEsc(rf.apv_cycles != null ? rf.apv_cycles : '—')}</td></tr>
   </table>
   <div class="tg-center">Максимальная токовая отсечка</div>
   <table class="tg-tbl">
@@ -1900,10 +1984,26 @@
   </table>
   <div class="tg-note"><strong>Примечание:</strong> ${tgEsc(mf.note || '—')}</div>
   <table class="tg-tbl" style="margin-top:16px;">
-    <tr><td class="lbl">Начальник РЗА</td><td class="val">${tgEsc(mf.head_of_rza || '—')}</td></tr>
-    <tr><td class="lbl">Выполнил расчёт</td><td class="val">${tgEsc(mf.calc_done_by || '—')}</td></tr>
-    <tr><td class="lbl">Исполнитель</td><td class="val">${tgEsc(mf.executor || '—')}</td></tr>
-    <tr><td class="lbl">Дата выполнения</td><td class="val">${tgEsc(mf.done_date ? tgFormatRuDate(mf.done_date) : '—')}</td></tr>
+    <tr>
+      <td class="lbl" style="width:34%;">Начальник РЗА:</td>
+      <td class="val" style="width:36%; text-align:left; white-space:nowrap;">${tgEsc(mf.head_of_rza || '—')}</td>
+      <td class="val" style="width:30%;">Подпись:<span class="tg-sign"></span></td>
+    </tr>
+    <tr>
+      <td class="lbl" style="width:34%;">Выполнил расчёт:</td>
+      <td class="val" style="width:36%; text-align:left; white-space:nowrap;">${tgEsc(mf.calc_done_by || '—')}</td>
+      <td class="val" style="width:30%;">Подпись:<span class="tg-sign"></span></td>
+    </tr>
+    <tr>
+      <td class="lbl" style="width:34%;">Исполнитель:</td>
+      <td class="val" style="width:36%; text-align:left; white-space:nowrap;">${tgEsc(mf.executor || '—')}</td>
+      <td class="val" style="width:30%;">Подпись:<span class="tg-sign"></span></td>
+    </tr>
+    <tr>
+      <td class="lbl" style="width:34%;">Дата выполнения:</td>
+      <td class="val" style="width:36%; text-align:left; white-space:nowrap;">${tgEsc(mf.done_date ? tgFormatRuDate(mf.done_date) : '—')}</td>
+      <td class="val" style="width:30%;"></td>
+    </tr>
   </table>
   <p class="tg-fixed">После изменения уставок отправить факсом подписанное исполнителем задание в службу РЗА</p>
 </div>`;
@@ -2011,6 +2111,7 @@
                 const res = await fetch('/api/telephonegrams?limit=80', { headers: adminAuthHeaders() });
                 const j = await res.json();
                 if (!j.success) return;
+                const canDelete = String(window.__staffRole || '') === 'admin';
                 tb.innerHTML = (j.data || []).map((row) => {
                     const obj = tgEsc((row.object_description || '').slice(0, 60));
                     return `<tr>
@@ -2021,11 +2122,35 @@
                         <td style="padding:6px;border:1px solid #ddd;">${tgEsc(row.created_by_role)}</td>
                         <td style="padding:6px;border:1px solid #ddd;white-space:nowrap;">
                             <button type="button" class="btn" style="padding:4px 8px;font-size:12px;" onclick="tgLoadOne(${row.id})">Открыть</button>
+                            ${canDelete ? `<button type="button" class="btn btn-danger" style="padding:4px 8px;font-size:12px;margin-left:6px;" onclick="tgDelete(${row.id})">Удалить</button>` : ``}
                         </td>
                     </tr>`;
                 }).join('');
             } catch (e) {
                 console.error(e);
+            }
+        }
+        async function tgDelete(id) {
+            const st = document.getElementById('tg_status');
+            if (String(window.__staffRole || '') !== 'admin') {
+                alert('Удаление доступно только роли admin');
+                return;
+            }
+            if (!confirm('Удалить телефонограмму id=' + id + '? Это действие нельзя отменить.')) return;
+            try {
+                const res = await fetch('/api/telephonegrams/' + encodeURIComponent(id), {
+                    method: 'DELETE',
+                    headers: adminAuthHeaders(),
+                });
+                const j = await res.json();
+                if (!res.ok) throw new Error(typeof j.detail === 'string' ? j.detail : JSON.stringify(j.detail || j));
+                if (st) st.textContent = 'Удалено: id=' + id;
+                const curId = document.getElementById('tg_record_id')?.value?.trim();
+                if (curId && String(curId) === String(id)) tgNewForm();
+                tgLoadList();
+            } catch (e) {
+                if (st) st.textContent = e.message || String(e);
+                alert(e.message || String(e));
             }
         }
         async function tgLoadOne(id) {

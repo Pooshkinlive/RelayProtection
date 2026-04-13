@@ -475,6 +475,22 @@ async def admin_update_reactance(
     return {"success": True, "data": _reactance_to_dict(row)}
 
 
+@app.delete("/api/admin/reactances/{reactance_id}")
+async def admin_delete_reactance(
+    reactance_id: int,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    if str(staff.get("role") or "") != "admin":
+        raise HTTPException(status_code=403, detail="Удаление доступно только роли admin")
+    row = db.query(Reactance).filter(Reactance.id == reactance_id).first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Запись не найдена")
+    db.delete(row)
+    db.commit()
+    return {"success": True}
+
+
 # --- Админ: провода/кабели (line_types) ---
 
 
@@ -591,6 +607,22 @@ async def admin_update_line_type(
     return {"success": True, "data": _line_type_to_dict(row)}
 
 
+@app.delete("/api/admin/line-types/{line_type_id}")
+async def admin_delete_line_type(
+    line_type_id: int,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    if str(staff.get("role") or "") != "admin":
+        raise HTTPException(status_code=403, detail="Удаление доступно только роли admin")
+    row = db.query(LineType).filter(LineType.id == line_type_id).first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Запись не найдена")
+    db.delete(row)
+    db.commit()
+    return {"success": True}
+
+
 # --- Админ: трансформаторы ---
 
 
@@ -683,6 +715,22 @@ async def admin_update_transformer(
     db.commit()
     db.refresh(row)
     return {"success": True, "data": _transformer_to_dict(row)}
+
+
+@app.delete("/api/admin/transformers/{transformer_row_id}")
+async def admin_delete_transformer(
+    transformer_row_id: int,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    if str(staff.get("role") or "") != "admin":
+        raise HTTPException(status_code=403, detail="Удаление доступно только роли admin")
+    row = db.query(Transformer).filter(Transformer.id == transformer_row_id).first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Запись не найдена")
+    db.delete(row)
+    db.commit()
+    return {"success": True}
 
 
 # --- Админ: реле ---
@@ -804,6 +852,30 @@ async def admin_update_relay(
     db.refresh(row)
     tm = _get_time_char_map(db)
     return {"success": True, "data": _relay_admin_row_dict(row, tm.get(rc))}
+
+
+@app.delete("/api/admin/relays/{relay_row_id}")
+async def admin_delete_relay(
+    relay_row_id: int,
+    db: Session = Depends(get_db),
+    staff: dict = Depends(_staff_from_credentials),
+):
+    if str(staff.get("role") or "") != "admin":
+        raise HTTPException(status_code=403, detail="Удаление доступно только роли admin")
+    row = db.query(RelayType).filter(RelayType.id == relay_row_id).first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Запись не найдена")
+    rc = row.relay_code
+    tc_row = (
+        db.query(RelayTimeCharacteristic)
+        .filter(RelayTimeCharacteristic.relay_code == rc)
+        .first()
+    )
+    if tc_row:
+        db.delete(tc_row)
+    db.delete(row)
+    db.commit()
+    return {"success": True}
 
 
 @app.get("/api/line-types")
